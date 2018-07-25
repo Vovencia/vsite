@@ -4,13 +4,8 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 
-import styled, {StyledInterface} from 'styled-components';
-import styledMixins from './mixins/styled';
-
-var extendedStyled = {
-	...styled,
-	_: styledMixins
-}
+export {default as styled} from 'styled-components';
+export {default as _styled} from './mixins/styled';
 
 // styled._ = require("./mixins/styled");
 
@@ -28,5 +23,3 @@ ReactDOM.render(
 	</Provider>,
 	document.getElementById("App")
 );
-
-export {extendedStyled as styled}

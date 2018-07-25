@@ -1,13 +1,15 @@
 import * as React from "react";
-import {styled} from "../../";
 
 import "./index.styl";
 
-console.log(styled)
+class App extends React.Component {
+	render() {
+		return <div {...this.props}>123</div>
+	}
+}
 
-var App = styled.div`
-	${ styled._.size(10) }
-`
+var StyledApp = require('./style.ts')(App);
+
 
 export default class Layout extends React.Component {
 	constructor(props){
@@ -15,7 +17,7 @@ export default class Layout extends React.Component {
 	}
 	render() {
 		return (
-			<App>123</App>
+			<StyledApp>123</StyledApp>
 		)
 	}
 }
