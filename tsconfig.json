@@ -1,10 +1,15 @@
 {
-  "compilerOptions": {
-	"target": "es6",
-	"allowSyntheticDefaultImports": true,
-	"sourceMap": true,
-	"allowJs": true
-  },
-  "exclude": ["node_modules"],
-  "files": ["index.ts"]
+	"compilerOptions": {
+        "target": "es5",
+        "lib": ["es2015", "es2017", "dom"],
+		"outDir": "./docs/app",
+		"watch": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"importHelpers": true,
+		"module": "CommonJS"
+	},
+	"files": [
+		"source/index.ts"
+	]
 }
