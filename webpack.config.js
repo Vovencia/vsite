@@ -76,13 +76,27 @@ module.exports = {
 				use : [{
 					loader: 'pug-loader'
 				}]
-			}
+			},
+			{
+				test: /\.(png|jpg|gif|svg)$/,
+				use: [
+					{
+						loader: 'file-loader',
+						options: {
+							outputPath: function(path){
+								return path.replace('source/', '');
+							},
+							name: '[path][name].[ext]?[hash]',
+						}
+					}
+				]
+			},
 		]
 	},
 
 	plugins: [
 		new CheckerPlugin(),
-		new CleanWebpackPlugin([_path('docs', 'app')]),
+		new CleanWebpackPlugin([_path('docs')]),
 		// Generates an `index.html` file with the <script> injected.
 		new HtmlWebpackPlugin({
 			inject: 'body',

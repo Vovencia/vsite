@@ -2,13 +2,12 @@ import * as React from "react";
 
 import "./index.styl";
 
-class App extends React.Component {
-	render() {
-		return <div {...this.props}>123</div>
-	}
-}
 
-var StyledApp = require('./style.ts')(App);
+var Layout_ = require('./style.ts')(function Layout(props, ...args){
+	return (
+		<div {...props}></div>
+	)
+});
 
 
 export default class Layout extends React.Component {
@@ -17,7 +16,9 @@ export default class Layout extends React.Component {
 	}
 	render() {
 		return (
-			<StyledApp>123</StyledApp>
+			<Layout_>
+				<img src={ require('../../assets/images/download.png') } alt="" />
+			</Layout_>
 		)
 	}
 }
