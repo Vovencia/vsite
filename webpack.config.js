@@ -35,17 +35,20 @@ var config = {
 
 		var result = {
 			'app/main': _path("source/index.tsx"),
-			// ...apps,
+			...apps,
 		}
 
 		console.log('result', result);
 
 		return result;
 	},
-	// entry: _path("source/index.tsx"),
+	// entry: {
+	// 	'app/main': _path("source/index.tsx"),
+	// 	'apps/calculator/index': _path("source/apps/calculator/index.tsx"),
+	// },
 	output: {
 		// library: 'MyLibrary',
-		libraryTarget: 'umd',
+		// libraryTarget: 'umd',
 		filename: "[name].js",
 		path: _path("docs"),
 		publicPath: '/',
@@ -58,7 +61,7 @@ var config = {
 	resolve: {
 		extensions: [".ts", ".tsx", ".js", ".json"],
 		alias: {
-			// '@system': _path('source/system'),
+			'@system': _path('source/system'),
 		}
 	},
 
@@ -177,36 +180,36 @@ var config = {
 		splitChunks: {
 			minSize: 1,
 			cacheGroups: {
-				// vendor: {
-				// 	test: /[\\/]node_modules[\\/]/,
-				// 	name: 'app/vendors',
-				// 	chunks: 'all'
-				// },
-				// components: {
-				// 	test: /[\\/]source[\\/]components[\\/]/,
-				// 	name: 'app/components',
-				// 	chunks: 'all'
-				// },
-				// utils: {
-				// 	test: /[\\/]source[\\/]utils[\\/]/,
-				// 	name: 'app/utils',
-				// 	chunks: 'all'
-				// },
-				// system: {
-				// 	test: /[\\/]source[\\/]system[\\/]/,
-				// 	name: 'app/system',
-				// 	chunks: 'all'
-				// },
-				// mixins: {
-				// 	test: /[\\/]source[\\/]mixins[\\/]/,
-				// 	name: 'app/mixins',
-				// 	chunks: 'all'
-				// },
-				// interfaces: {
-				// 	test: /[\\/]source[\\/]interfaces[\\/]/,
-				// 	name: 'app/interfaces',
-				// 	chunks: 'all'
-				// },
+				vendor: {
+					test: /[\\/]node_modules[\\/]/,
+					name: 'app/vendors',
+					chunks: 'all'
+				},
+				components: {
+					test: /[\\/]source[\\/]components[\\/]/,
+					name: 'app/components',
+					chunks: 'all'
+				},
+				utils: {
+					test: /[\\/]source[\\/]utils[\\/]/,
+					name: 'app/utils',
+					chunks: 'all'
+				},
+				system: {
+					test: /[\\/]source[\\/]system[\\/]/,
+					name: 'app/system',
+					chunks: 'all'
+				},
+				mixins: {
+					test: /[\\/]source[\\/]mixins[\\/]/,
+					name: 'app/mixins',
+					chunks: 'all'
+				},
+				interfaces: {
+					test: /[\\/]source[\\/]interfaces[\\/]/,
+					name: 'app/interfaces',
+					chunks: 'all'
+				},
 			}
 		}
 	}
