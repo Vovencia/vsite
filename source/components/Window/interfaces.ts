@@ -1,4 +1,4 @@
-import {IAppInfo} from "../../interfaces";
+import {IAppInfo} from "@interfaces";
 
 export enum windowStates {
 	New 		= 0b0000001,

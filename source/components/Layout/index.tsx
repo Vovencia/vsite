@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 
 import {ILayoutProps, ILayoutDispatchProps, ILayoutState} from "./interfaces";
 
-import {div} from "../../utils";
+import {div} from "@utils";
 
-import Cursor from "../Cursor";
-import WindowsManager, {reducer as WindowsManagerReducer} from "../WindowsManager";
+import Cursor from "@components//Cursor";
+import WindowsManager, {reducer as WindowsManagerReducer} from "@components/WindowsManager";
 
-import ControlBar from "../ControlBar";
-import TaskBar, {reducer as TaskBarReducer} from "../Taskbar";
+import ControlBar from "@components/ControlBar";
+import TaskBar, {reducer as TaskBarReducer} from "@components/Taskbar";
 
 class Layout extends React.Component<ILayoutProps & ILayoutDispatchProps> {
 	private window: React.RefObject<HTMLDivElement>;

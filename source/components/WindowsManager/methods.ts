@@ -1,7 +1,7 @@
-import {getContentState} from "../../system/window";
-import {isMaximized, isOpened} from "../Window/index"
-import {round} from "../../utils";
-import {ISize, IPosition} from	"../../interfaces";
+import {getContentState} from "@system/window";
+import {isMaximized, isOpened} from "@components/Window/index"
+import {round} from "@utils";
+import {ISize, IPosition} from	"@interfaces";
 import {store} from "@system/index";
 
 export function windowFocus(list, windowId){

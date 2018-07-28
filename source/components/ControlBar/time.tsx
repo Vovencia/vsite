@@ -1,5 +1,4 @@
 import * as React from "react";
-import {styled, div} from "../../utils";
 
 export default class Time extends React.Component<null, {
 	formattedTime: string;

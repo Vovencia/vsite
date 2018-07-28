@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import {div} from "../../utils";
+import {div} from "@utils";
 
 class ScrolledContent extends React.PureComponent<{
 

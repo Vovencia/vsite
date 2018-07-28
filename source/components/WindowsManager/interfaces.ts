@@ -1,4 +1,4 @@
-import {IProps as IWindowProps} from "../Window";
+import {IProps as IWindowProps} from "@components/Window";
 
 export interface IWindowsManagerProps {
 	opened: Array<IWindowProps>;

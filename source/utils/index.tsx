@@ -2,7 +2,7 @@ import * as React from "react";
 
 import allowProps from "./allowProps";
 import storage from "./storage";
-import {ISize, IPosition, ISizeStrict, IPositionStrict} from "../interfaces";
+import {ISize, IPosition, ISizeStrict, IPositionStrict} from "@interfaces";
 
 export function el(tagName, name, _props?){
 	var result = function (props){

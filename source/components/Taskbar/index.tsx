@@ -1,9 +1,9 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import ScrolledContent from "../ScrolledContent";
+import ScrolledContent from "@components/ScrolledContent";
 
-import {div, el, attrs} from "../../utils";
+import {div, el, attrs} from "@utils";
 import {store} from "@system/index";
 
 class TaskBar extends React.Component <any> {

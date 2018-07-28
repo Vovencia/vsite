@@ -1,10 +1,11 @@
-import {defaultWindowProps, IPropsNoStrict, IPropsInstanceNoStrict} from "../Window";
+import {defaultWindowProps, IPropsNoStrict, IPropsInstanceNoStrict} from "@components/Window";
 import {store} from "@system/index";
-import {createAction, uid} from "../../utils";
-let _createAction = createAction.bind({}, "WindowsManager");
+import {createAction, uid} from "@utils";
+import {ISize, IPosition} from	"@interfaces";
+
 import {windowCalcState, getList} from "./methods";
 
-import {ISize, IPosition} from	"../../interfaces";
+let _createAction = createAction.bind({}, "WindowsManager");
 
 export {_createAction as createAction};
 export function getActionName(name){

@@ -1,5 +1,5 @@
-import { getActionName as getWindowsManagerActionName, actions as windoactionsActions } from "../components/WindowsManager";
-import { setListInState as taskbarSetListInState, getListFromState as taskbarGetListFromState} from "../components/Taskbar";
+import { getActionName as getWindowsManagerActionName, actions as windoactionsActions } from "@components/WindowsManager";
+import { setListInState as taskbarSetListInState, getListFromState as taskbarGetListFromState} from "@components/Taskbar";
 
 export function reducer(state, action){
 	switch(action.type){

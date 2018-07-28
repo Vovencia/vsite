@@ -1,6 +1,6 @@
 import * as React from "react";
+import {div, el, mapToArray} from "@utils";
 import {windowStates, IProps, windowBorderTypes} from "./interfaces";
-import {div, el, mapToArray} from "../../utils";
 import {isVisible} from "./index";
 
 

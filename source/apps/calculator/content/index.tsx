@@ -1,7 +1,7 @@
 import * as React from "react";
-import WindowContent from "../../../components/WindowContent";
-import {div, el} from "../../../utils";
-import ScrolledContent from "../../../components/ScrolledContent";
+import WindowContent from "@components/WindowContent";
+import {div, el} from "@utils";
+import ScrolledContent from "@components/ScrolledContent";
 
 export class CalculatorContent extends WindowContent<any, {
 	currentValue: Array<string>,

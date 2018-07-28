@@ -1,5 +1,5 @@
 import * as React from "react";
-import {div} from "../../utils";
+import {div} from "@utils";
 
 import Time from "./time";
 

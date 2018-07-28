@@ -38,8 +38,6 @@ var config = {
 			...apps,
 		}
 
-		console.log('result', result);
-
 		return result;
 	},
 	// entry: {
@@ -59,7 +57,7 @@ var config = {
 	devtool: "source-map",
 
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".json"],
+		extensions: [".ts", ".tsx", ".js", ".json", "png", "jpg", "gif", "svg"],
 		alias: {
 			'@system': _path('source/system'),
 			'@utils': _path('source/utils'),

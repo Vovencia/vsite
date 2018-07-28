@@ -1,4 +1,4 @@
-import * as apps from "../apps";
+import * as apps from "@apps";
 // declare  var __Apps: any
 
 // let apps = __Apps;

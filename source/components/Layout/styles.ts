@@ -1,4 +1,4 @@
-import {_styled as _, styled} from "../../utils";
+import {_styled as _, styled} from "@utils";
 
 module.exports = function(obj, {Container, Content, ContainerColumn, ContainerRow,...children}){
 	return {

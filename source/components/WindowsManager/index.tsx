@@ -1,10 +1,10 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {getWindowContent} from "../../utils";
+import {getWindowContent} from "@utils";
 import {actions, getActionName} from "./actions";
 export {actions, getActionName};
 
-import Window, {defaultWindowProps} from "../Window";
+import Window, {defaultWindowProps} from "@components/Window";
 import {IWindowsManagerProps, IWindowsManagerDispatchProps} from "./interfaces";
 import {reducer} from "./reducer";
 export {reducer};

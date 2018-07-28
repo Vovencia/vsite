@@ -1,5 +1,5 @@
 import * as React from "react";
-import {stateLoad, stateRemove, stateSave} from "../../utils";
+import {stateLoad, stateRemove, stateSave} from "@utils";
 
 export interface IWindowContentProps {
 	id: string;

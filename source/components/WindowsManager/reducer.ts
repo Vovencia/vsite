@@ -1,5 +1,5 @@
-import {defaultWindowProps, windowStates} from "../Window";
-import {checkAction, stateLoad, stateSave} from "../../utils";
+import {defaultWindowProps, windowStates} from "@components/Window";
+import {checkAction, stateLoad, stateSave} from "@utils";
 import {IWindowsManagerProps} from "./interfaces";
 import {windowFocus, windowMap} from "./methods";
 

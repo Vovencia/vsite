@@ -1,6 +1,6 @@
 import { createStore as _createStore } from 'redux'
 
-import {reducer as LayoutReducer} from "../components/Layout/index";
+import {reducer as LayoutReducer} from "@components/Layout/index";
 import {reducer as systemReducer} from "./"
 
 export function createStore(){

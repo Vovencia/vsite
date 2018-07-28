@@ -1,8 +1,8 @@
-import {actions as WindowsManagerActions} from "../WindowsManager";
-import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
-import {ISize, IPosition} from	"../../interfaces";
+import {actions as WindowsManagerActions} from "@components/WindowsManager";
+import {ISize, IPosition} from	"@interfaces";
+import {positionToSize, sizeToPosition} from "@utils";
 
-import {positionToSize, sizeToPosition} from "../../utils";
+import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
 
 export * from "./interfaces";
 export * from "./methods";

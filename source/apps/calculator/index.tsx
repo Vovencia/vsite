@@ -1,9 +1,8 @@
 import appInfo from "./appInfo";
 export {appInfo}
 
-import {window} from "../../system";
-
-import {requiredContent} from "../../utils";
+import {window} from "@system";
+import {requiredContent} from "@utils";
 
 const content = requiredContent(appInfo.uid, require("./content/").default);
 

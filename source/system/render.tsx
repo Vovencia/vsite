@@ -2,7 +2,7 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Provider } from 'react-redux'
 
-import Layout from "../components/Layout/index";
+import Layout from "@components/Layout/index";
 import "./index.styl";
 
 export function render(store){
