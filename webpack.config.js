@@ -62,6 +62,12 @@ var config = {
 		extensions: [".ts", ".tsx", ".js", ".json"],
 		alias: {
 			'@system': _path('source/system'),
+			'@utils': _path('source/utils'),
+			'@components': _path('source/components'),
+			'@apps': _path('source/apps'),
+			'@assets': _path('source/assets'),
+			'@interfaces': _path('source/interfaces'),
+			'@mixins': _path('source/mixins'),
 		}
 	},
 
