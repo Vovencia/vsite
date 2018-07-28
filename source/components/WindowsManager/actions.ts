@@ -1,5 +1,5 @@
 import {defaultWindowProps, IPropsNoStrict, IPropsInstanceNoStrict} from "../Window";
-import {store} from "../../index";
+import {store} from "@system/index";
 import {createAction, uid} from "../../utils";
 let _createAction = createAction.bind({}, "WindowsManager");
 import {windowCalcState, getList} from "./methods";

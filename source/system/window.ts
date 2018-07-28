@@ -1,4 +1,4 @@
-import {store} from "../index";
+import {store} from "@system/index";
 import {defaultWindowProps, IProps, IPropsInstanceNoStrict} from "../components/Window";
 import {actions as WindowsManagerActions} from "../components/WindowsManager";
 import {ILayoutStateElements} from "../components/Layout/interfaces";

@@ -1,4 +1,4 @@
-import appInfo from "./info";
+import appInfo from "./appInfo";
 export {appInfo}
 
 import {window} from "../../system";

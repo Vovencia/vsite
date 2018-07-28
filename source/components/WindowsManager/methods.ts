@@ -2,7 +2,7 @@ import {getContentState} from "../../system/window";
 import {isMaximized, isOpened} from "../Window/index"
 import {round} from "../../utils";
 import {ISize, IPosition} from	"../../interfaces";
-import {store} from "../../";
+import {store} from "@system/index";
 
 export function windowFocus(list, windowId){
 	var focusWindow;

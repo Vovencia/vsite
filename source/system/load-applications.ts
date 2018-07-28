@@ -1,9 +1,12 @@
-import * as calculator from "../apps/calculator";
+import * as apps from "../apps";
+// declare  var __Apps: any
 
+// let apps = __Apps;
 
 export default function(){
 	var promise = new Promise(function(resolve, reject){
-		setTimeout( () => resolve([calculator]), 10 );
+		console.log(apps.calculator)
+		setTimeout( () => resolve([apps.calculator]), 10 );
 	});
 
 	return promise;

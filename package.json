@@ -25,6 +25,7 @@
     "express": "^4.16.3",
     "glob": "^7.1.2",
     "moment": "^2.22.2",
+    "pug-include-glob": "^0.3.3",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.0",
@@ -48,6 +49,7 @@
     "css-loader": "^0.28.11",
     "event-emitter": "^0.3.5",
     "file-loader": "^1.1.11",
+    "glob": "^7.1.2",
     "gulp": "^3.9.1",
     "gulp-cached": "^1.1.1",
     "gulp-typescript": "^5.0.0-alpha.2",
@@ -72,5 +74,8 @@
     "url-pattern": "^1.0.3",
     "webpack": "^4.12.1",
     "webpack-serve": "^1.0.4"
+  },
+  "_moduleAliases": {
+    "@system": "source/system"
   }
 }

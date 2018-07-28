@@ -6,22 +6,58 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const { CheckerPlugin } = require('awesome-typescript-loader')
 const path = require('path');
 const webpack = require('webpack');
+const glob = require('glob').sync;
+const pugIncludeGlob = require('pug-include-glob');
 
 function _path(...args) { args.unshift(__dirname); return path.normalize( path.join(...args) ); }
 
-module.exports = {
+var config = {
 	mode: 'development',
-	entry: _path("source/index.tsx"),
+	entry: function(){
+		let appNamePattern = _path("source/apps/").replace(/\\/g, '\/') + '(.+?)/.+';
+		appNamePattern = new RegExp(appNamePattern);
+
+		let apps = glob( _path("source", "apps", "*", "index.+(t|j)s?(x)") );
+
+		apps = apps.map((item) => {
+			item = item.replace(/\\/g, '\/');
+			let parsed = appNamePattern.exec(item);
+			return {
+				name: parsed[1],
+				path: item,
+			}
+		});
+
+		apps = apps.reduce(function(result, item){
+			result[ 'apps/' + item.name + '/index' ] = item.path;
+			return result;
+		}, {});
+
+		var result = {
+			'app/main': _path("source/index.tsx"),
+			...apps,
+		}
+
+		return result;
+	},
+	// entry: _path("source/index.tsx"),
 	output: {
-		filename: "app/[name].js",
-		path: _path("docs/"),
-		// publicPath: '/',
+		// library: 'MyLibrary',
+		libraryTarget: 'umd',
+		filename: "[name].js",
+		path: _path("docs"),
+		publicPath: '/',
 	},
 
-	devtool: "inline-source-map",
+	context: _path('source') + "/",
+
+	devtool: "source-map",
 
 	resolve: {
-		extensions: [".ts", ".tsx", ".js", ".json"]
+		extensions: [".ts", ".tsx", ".js", ".json"],
+		alias: {
+			'@system': _path('source/system'),
+		}
 	},
 
 	node: {
@@ -74,7 +110,10 @@ module.exports = {
 			{
 				test: /\.pug$/,
 				use : [{
-					loader: 'pug-loader'
+					loader: 'pug-loader',
+					options: {
+						plugins: [ pugIncludeGlob({ /* options */ }) ]
+					}
 				}]
 			},
 			{
@@ -96,11 +135,12 @@ module.exports = {
 
 	plugins: [
 		new CheckerPlugin(),
-		new CleanWebpackPlugin([_path('docs')]),
+		new CleanWebpackPlugin([_path('docs', '*')]),
 		// Generates an `index.html` file with the <script> injected.
 		new HtmlWebpackPlugin({
-			inject: 'body',
+			inject: false,
 			template: _path( 'source', 'layout', 'default.pug'),
+			excludeChunks: [ 'apps' ],
 		}),
 		// This is necessary to emit hot updates (currently CSS only):
 		// new webpack.HotModuleReplacementPlugin(),
@@ -127,14 +167,46 @@ module.exports = {
 
 	optimization: {
 		runtimeChunk: 'single',
+		mergeDuplicateChunks: true,
+		removeEmptyChunks: false,
+		flagIncludedChunks: true,
+		occurrenceOrder: true,
+		concatenateModules: false,
 		splitChunks: {
+			minSize: 1,
 			cacheGroups: {
 				vendor: {
 					test: /[\\/]node_modules[\\/]/,
-					name: 'vendors',
+					name: 'app/vendors',
 					chunks: 'all'
-				}
+				},
+				components: {
+					test: /[\\/]source[\\/]components[\\/]/,
+					name: 'app/components',
+					chunks: 'all'
+				},
+				utils: {
+					test: /[\\/]source[\\/]utils[\\/]/,
+					name: 'app/utils',
+					chunks: 'all'
+				},
+				system: {
+					test: /[\\/]source[\\/]system[\\/]/,
+					name: 'app/system',
+					chunks: 'all'
+				},
+				mixins: {
+					test: /[\\/]source[\\/]mixins[\\/]/,
+					name: 'app/mixins',
+					chunks: 'all'
+				},
+				interfaces: {
+					test: /[\\/]source[\\/]interfaces[\\/]/,
+					name: 'app/interfaces',
+					chunks: 'all'
+				},
 			}
 		}
 	}
 }
+module.exports = config;
