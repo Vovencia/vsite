@@ -1,4 +1,8 @@
 import {getContentState} from "../../system/window";
+import {isMaximized, isOpened} from "../Window/index"
+import {round} from "../../utils";
+import {ISize, IPosition} from	"../../interfaces";
+import {store} from "../../";
 
 export function windowFocus(list, windowId){
 	var focusWindow;
@@ -21,16 +25,62 @@ export function windowMap(list, windowId, handler){
 	})
 }
 
-function windowCalcStateProp(values, key, contentState) {
+var isPercent 	= /[0-9.]+\%/;
 
+function parsePercent(val){
+	return (parseFloat(val) || 0)/100;
+}
+
+function _windowCalcState(keyPosition, keySize, windowProps, contentProps) {
+	var result = {};
+	if( isMaximized(windowProps) ){
+		result[keyPosition] = contentProps[keyPosition];
+		result[keySize] = contentProps[keySize];
+		return result;
+	}
+
+	var windowSize = windowClasStateSize(keySize, windowProps, contentProps);
+	var windowPosition = windowProps[keyPosition];
+
+	var contentSize = contentProps[keySize];
+
+	switch(windowPosition){
+		case 'center'	:
+			windowPosition = '50%';
+		break;
+		case 'left'		:
+		case 'top'		:
+			windowPosition = '0%';
+		break;
+		case 'right'	:
+		case 'bottom'	:
+			windowPosition = '100%';
+		break;
+	}
+
+	if( isPercent.test(windowPosition) ){
+		windowPosition = parsePercent( windowPosition )*(contentSize - windowSize) || 0;
+	} else {
+		windowPosition = parseFloat(windowPosition) || 0;
+	}
+
+	windowPosition += contentProps[keyPosition];
+	result[keySize] = round(windowSize, 3);
+	result[keyPosition] = round(windowPosition, 3);
+
+	return result;
+}
+function windowClasStateSize(keySize, windowProps, contentProps) {
+	if( isPercent.test(windowProps[keySize]) ){
+		return parsePercent(windowProps[keySize])*contentProps[keySize];
+	}
+	return parseFloat(windowProps[keySize]) || 0;
 }
 
 export function windowCalcState(windowProps:
 	{ width?: any, height?: any, x?: any, y?: any}
-) : { width?: number, height?: number, x?: number, y?: number } {
+) : ISize & IPosition {
 	var contentState = getContentState();
-	console.log('content', getContentState());
-	console.log('windowProps', windowProps);
 
 	var result = {
 		width: 0,
@@ -38,11 +88,16 @@ export function windowCalcState(windowProps:
 		x: 0,
 		y: 0,
 	}
-	
-	windowProps.width = windowCalcStateProp(windowProps.width, 'width', contentState);
 
-	if( typeof windowProps.width == 'number' ) result.width = windowProps.width;
-	
+	result = {
+		...result,
+		..._windowCalcState('x', 'width', windowProps, contentState),
+		..._windowCalcState('y', 'height', windowProps, contentState),
+	}
 
 	return result;
+}
+
+export function getList(){
+	return store.getState().WindowsManager.opened.filter( window => isOpened(window) );
 }

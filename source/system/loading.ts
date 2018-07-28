@@ -1,6 +1,6 @@
 var loadingComponents = [];
 
-export function reducer(store, state:any = {}, action){
+export function reducer(state:any = {}, action){
 	switch(action.type){
 		case 'loading':
 			loadingComponents.push(action.name);

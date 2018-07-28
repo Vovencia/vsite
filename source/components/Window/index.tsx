@@ -1,96 +1,31 @@
-import * as React from "react";
-import {connect} from "react-redux";
-
 import {actions as WindowsManagerActions} from "../WindowsManager";
-import {div, el} from "../../utils";
+import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
+import {ISize, IPosition} from	"../../interfaces";
 
-export enum windowState {
-	New 		= "NEW",
-	Minimized 	= "MINIMIZED",
-	Normal 		= "NORMAL",
-	Maximized 	= "MAXIMIZED",
-}
+import {positionToSize, sizeToPosition} from "../../utils";
 
-export interface IPropsInstance {
-	inFocus			: boolean;
-	x				: number;
-	y				: number;
-	width			: number;
-	height			: number;
-	state			: windowState;
-	toState			: windowState;
-}
+export * from "./interfaces";
+export * from "./methods";
 
-export interface IProps extends IPropsInstance {
-	id				: any;
-	content			: React.ComponentType;
-}
+import WindowRender from "./render";
 
-export const defaultWindowProps:IPropsInstance = {
-	x				: 100,
-	y				: 100,
-	width			: 400,
-	height			: 400,
-	inFocus			: false,
-	state			: windowState.New,
-	toState			: windowState.Normal,
-}
 
-class Window extends React.Component<IProps & React.HTMLAttributes<HTMLDivElement>> {
-	private boxRef = React.createRef<HTMLDivElement>();
-	private headerRef = React.createRef<HTMLDivElement>();
-	private pressed = false;
-	private lastMousePosition: {x: number, y: number}
+class Window extends WindowRender {
+	protected pressed = windowPressState.None;
+	protected lastMousePosition: IPosition;
+	protected currentBorderType: string;
 
 	constructor(props){
 		super(props);
 		this.handlerMouseMove = this.handlerMouseMove.bind(this);
 		this.handlerMouseUp = this.handlerMouseUp.bind(this);
 	}
-	render(){
-		const Content = this.props.content;
-
-		let style = {
-			left		: this.props.x + 'px',
-			top 		: this.props.y + 'px',
-			width		: this.checkSizeValue(this.props.width),
-			height		: this.checkSizeValue(this.props.height),
-		}
-		return (
-			<Box
-				style={style}
-				elementRef={this.boxRef}
-				style-isVisible={ (this.props.state === windowState.Normal || this.props.state === windowState.Maximized) }
-				style-inFocus={ this.props.inFocus }
-				className={this.props.className}
-				onMouseDown={ this.handlerOnPress.bind(this) }
-			>
-				<Header
-					elementRef	={ this.headerRef }
-
-					onMouseDown	={ this.handlerHeaderOnPress.bind(this) }
-				>
-					<Buttons>
-						<ButtonClose onClick={ this.handlerButtonCloseClick.bind(this) } />
-						<ButtonMinimize />
-					</Buttons>
-				</Header>
-				<Body>
-					<Content />
-				</Body>
-			</Box>
-		)
-	}
 	checkSizeValue(value: number | string){
 		if(typeof value == 'number') return value + 'px';
 		return value;
 	}
-	getSize(){
-		var width = this.props.width;
-		var height = this.props.height;
-	}
 	componentDidMount(){
-		if(this.props.state === windowState.New){
+		if(this.props.state === windowStates.New){
 			setTimeout(() => WindowsManagerActions.show(this.props.id), 10);
 		}
 		document.documentElement.addEventListener('mousemove', this.handlerMouseMove);
@@ -107,17 +42,27 @@ class Window extends React.Component<IProps & React.HTMLAttributes<HTMLDivElemen
 	handlerHeaderOnPress(event){
 		if( event.target != this.headerRef.current ) return;
 		event.preventDefault();
-		this.pressed = true;
+		this.pressed = windowPressState.Header;
 		this.lastMousePosition = {
 			x: event.clientX,
 			y: event.clientY,
 		}
 	}
+	handlerResizeBorderPress(direction: windowBorderTypes, event){
+		event.preventDefault();
+		this.pressed = windowPressState.Border;
+		this.lastMousePosition = {
+			x: event.clientX,
+			y: event.clientY,
+		}
+		this.currentBorderType = direction;
+	}
 	handlerMouseUp(){
-		this.pressed = false;
+		this.pressed = windowPressState.None;
 	}
 	handlerMouseMove(event){
-		if(!this.pressed) return;
+		if(this.pressed == windowPressState.None) return;
+
 		const mouseMove = {
 			x: event.clientX - this.lastMousePosition.x,
 			y: event.clientY - this.lastMousePosition.y,
@@ -127,11 +72,152 @@ class Window extends React.Component<IProps & React.HTMLAttributes<HTMLDivElemen
 			x: event.clientX,
 			y: event.clientY,
 		}
+
+		switch(this.pressed){
+			case windowPressState.Header:
+				this.onHeaderMove(mouseMove);
+			break;
+			case windowPressState.Border:
+				this.onBorderMove(this.lastMousePosition);
+			break;
+		}
+	}
+	handlerButtonControlClick(type, event){
+		event.preventDefault();
+		switch(type){
+			case 'close':
+				WindowsManagerActions.close(this.props.id);
+			break;
+		}
+	}
+
+	onHeaderMove(mouseMove: IPosition){
 		this.addPosition(mouseMove);
 	}
-	handlerButtonCloseClick(event){
-		event.preventDefault();
-		WindowsManagerActions.close(this.props.id);
+	onBorderMove(mousePosition: IPosition){
+		var size = this.getSize();
+		var position = this.getPosition();
+
+		var bounds = {
+			x1: position.x,
+			y1: position.y,
+			x2: position.x + size.width,
+			y2: position.y + size.height,
+		}
+
+		var changed = {x: 0, y: 0}
+
+		switch(this.currentBorderType){
+			case windowBorderTypes.Left:
+				bounds.x1 = mousePosition.x;
+				changed['x'] = 1;
+			break;
+			case windowBorderTypes.Right:
+				bounds.x2 = mousePosition.x;
+				changed['x'] = 2;
+			break;
+			case windowBorderTypes.Top:
+				bounds.y1 = mousePosition.y;
+				changed['y'] = 1;
+			break;
+			case windowBorderTypes.Bottom:
+				bounds.y2 = mousePosition.y;
+				changed['y'] = 2;
+			break;
+			case windowBorderTypes.LeftTop:
+				bounds.x1 = mousePosition.x;
+				bounds.y1 = mousePosition.y;
+				changed['x'] = 1;
+				changed['y'] = 1;
+			break;
+			case windowBorderTypes.LeftBottom:
+				bounds.x1 = mousePosition.x;
+				bounds.y2 = mousePosition.y;
+				changed['x'] = 1;
+				changed['y'] = 2;
+			break;
+			case windowBorderTypes.RightTop:
+				bounds.x2 = mousePosition.x;
+				bounds.y1 = mousePosition.y;
+				changed['x'] = 2;
+				changed['y'] = 1;
+			break;
+			case windowBorderTypes.RightBottom:
+				bounds.x2 = mousePosition.x;
+				bounds.y2 = mousePosition.y;
+				changed['x'] = 2;
+				changed['y'] = 2;
+			break;
+		}
+
+		var minSize = sizeToPosition(this.getMinSize());
+
+		;['x', 'y'].forEach(function(direction){
+			if( changed[direction] ){
+				bounds[direction + changed[direction]] = mousePosition[direction];
+				if( (bounds[direction + 2] - bounds[direction + 1]) < minSize[direction] ){
+					bounds[direction + changed[direction]] = (
+						changed[direction] == 1 ?
+						bounds[direction + 2] - minSize[direction] :
+						bounds[direction + 1] + minSize[direction]
+					)
+				}
+			}
+		});
+
+
+
+		position = {
+			x: bounds.x1,
+			y: bounds.y1,
+		}
+		size = {
+			width: bounds.x2 - bounds.x1,
+			height: bounds.y2 - bounds.y1,
+		}
+
+		this.setSize(size);
+		this.setPosition(position);
+	}
+
+	getMinSize(){
+		return {
+			width: ( this.props.minWidth > 50 ? this.props.minWidth : 50 ),
+			height: ( this.props.minHeight > 50 ? this.props.minHeight : 50 ),
+		}
+	}
+	getMaxSize(){
+		return {
+			width: this.props.maxWidth,
+			height: this.props.maxHeight,
+		}
+	}
+
+	checkSize(_size: ISize){
+		var size = {..._size};
+		var minSize = this.getMinSize();
+
+		if(size.width < minSize.width) size.width = minSize.width;
+		if(size.height < minSize.height) size.height = minSize.height;
+
+		return size;
+	}
+
+	getSize(){
+		return {
+			width: this.props.width,
+			height: this.props.height,
+		}
+	}
+	setSize(size: ISize){
+		size = this.checkSize(size);
+		WindowsManagerActions.resize(this.props.id, size);
+	}
+	addSize(addSize: ISize){
+		let size = this.getSize();
+		if(addSize.width) size.width += addSize.width;
+		if(addSize.height) size.height += addSize.height;
+		this.setSize(size);
 	}
 	getPosition(){
 		let position = {
@@ -148,28 +234,12 @@ class Window extends React.Component<IProps & React.HTMLAttributes<HTMLDivElemen
 	}
 	addPosition(addPosition){
 		let position = this.getPosition();
-		position.x += addPosition.x;
-		position.y += addPosition.y;
+		if(addPosition.x) position.x += addPosition.x;
+		if(addPosition.y) position.y += addPosition.y;
 		this.setPosition(position);
 	}
 }
 
-let {
-	Self: StyledWindow,
-	Box,
-	Header,
-	Body,
-	Buttons,
-	ButtonClose,
-	ButtonMinimize,
-} = require('./styles')(Window, {
-	Box: div("Window_Box"),
-	Header: div("Window_Header"),
-	Body: div("Window_Body"),
-	Buttons: div("Window_Buttons"),
-	ButtonClose: el("button", "Window_ButtonClose"),
-	ButtonMinimize: el("button", "Window_ButtonMinimize"),
-})
 
-
+let StyledWindow = require('./styles')(Window);
 export default StyledWindow;

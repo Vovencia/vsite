@@ -1,3 +1,7 @@
-export let icon = require("./icon.svg");
-export let name = "Калькулятор";
-export let uid  = "calc";
+import {appInfo} from "../../interfaces";
+
+export default appInfo({
+	icon: require("./icon.svg"),
+	name: "Калькулятор",
+	uid: "apps.calculator",
+})

@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 
 import ScrolledContent from "../ScrolledContent";
 
-import {div, el, repeatJoin, attrs} from "../../utils";
+import {div, el, attrs} from "../../utils";
+import {store} from "../../";
 
 class TaskBar extends React.Component <any> {
 	render () {
@@ -14,8 +15,8 @@ class TaskBar extends React.Component <any> {
 						{
 							this.props.apps.map((function(app){
 								return (
-									<Item onClick={ this.handlerItemClick.bind(this, app) } title={app.info.name} key={app.info.uid}>
-										<img src={ app.info.icon } alt=""/>
+									<Item onClick={ this.handlerItemClick.bind(this, app) } title={app.appInfo.name} key={app.id}>
+										<img src={ app.appInfo.icon } alt=""/>
 									</Item>
 								)
 							}).bind(this))
@@ -49,6 +50,7 @@ var ConnectedStyledTaskBar = connect(function mapStateToProps(state: any, ownPro
 	return {}
 })(StyledTaskBar);
 
+
 export default ConnectedStyledTaskBar;
 export function reducer(state: {
 	apps: Array<{}>;
@@ -63,4 +65,18 @@ export function reducer(state: {
 		break;
 	}
 	return state
+}
+
+export function setListInState (list, state){
+	if( !state ) state = {};
+	state = {...state};
+	if( !state.Taskbar ) state.Taskbar = {};
+	state.Taskbar = {...state.Taskbar};
+	state.Taskbar.apps = [].concat(list);
+	return state;
+}
+
+export function getListFromState (state){
+	if( state && state.Taskbar && state.Taskbar.apps ) return [].concat(state.Taskbar.apps);
+	return [];
 }

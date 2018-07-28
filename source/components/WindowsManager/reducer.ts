@@ -1,5 +1,5 @@
-import {defaultWindowProps, windowState} from "../Window";
-import {checkAction, uid, stateLoad, stateSave} from "../../utils";
+import {defaultWindowProps, windowStates} from "../Window";
+import {checkAction, stateLoad, stateSave} from "../../utils";
 import {IWindowsManagerProps} from "./interfaces";
 import {windowFocus, windowMap} from "./methods";
 
@@ -12,16 +12,12 @@ export function reducer(state: IWindowsManagerProps = {
 	switch(type){
 		case 'open':
 			state = {...state};
-			var _uid = uid()
 			state.opened = state.opened.concat({
 				...defaultWindowProps,
-
-				id: _uid,
-
 				...action.options,
 				content: action.content,
 			});
-			action.callback(_uid);
+			action.callback(action.id);
 		break;
 		case 'load':
 			state = stateLoad<IWindowsManagerProps>("WindowsManager", {
@@ -35,7 +31,7 @@ export function reducer(state: IWindowsManagerProps = {
 			state.opened = windowMap(state.opened, action.windowId, function(window){
 				return {
 					...window,
-					state: window.toState || windowState.Normal
+					state: window.toState || windowStates.Normal
 				}
 			})
 		break;
@@ -43,18 +39,33 @@ export function reducer(state: IWindowsManagerProps = {
 			state.opened = windowMap(state.opened, action.windowId, function(window){
 				return {
 					...window,
-					state: windowState.Minimized
+					state: window.state | windowStates.Minimized
 				}
 			})
 		break;
 		case 'close':
 			state.opened = state.opened.filter( window => window.id !== action.windowId );
 		break;
+		case 'closing':
+			state.opened = windowMap(state.opened, action.windowId, function(window){
+				window = {...window};
+				window.state = window.state | windowStates.Closing;
+				return window;
+			});
+		break;
 		case 'move':
 			state.opened = windowMap(state.opened, action.windowId, function(window){
 				return {
 					...window,
 					...action.position,
+				}
+			})
+		break;
+		case 'resize':
+			state.opened = windowMap(state.opened, action.windowId, function(window){
+				return {
+					...window,
+					...action.size,
 				}
 			})
 		break;

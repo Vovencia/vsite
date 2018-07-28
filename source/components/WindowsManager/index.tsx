@@ -1,8 +1,8 @@
 import * as React from "react";
 import {connect} from "react-redux";
-import {checkAction, uid, checkContent, stateLoad, stateSave} from "../../utils";
-import {actions} from "./actions";
-export {actions};
+import {getWindowContent} from "../../utils";
+import {actions, getActionName} from "./actions";
+export {actions, getActionName};
 
 import Window, {defaultWindowProps} from "../Window";
 import {IWindowsManagerProps, IWindowsManagerDispatchProps} from "./interfaces";
@@ -18,7 +18,7 @@ class WindowsManager extends React.Component<IWindowsManagerProps & IWindowsMana
 		);
 	}
 	renderWindow(window){
-		return (<Window key={window.id} {...{...window, content: checkContent(window.content)}} />);
+		return (<Window key={window.id} {...{...window, ...getWindowContent(window)}} />);
 	}
 	componentDidMount(){
 		actions._load();

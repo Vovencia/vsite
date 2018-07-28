@@ -2,7 +2,7 @@ import * as React from "react";
 
 import {div} from "../../utils";
 
-class ScrolledContent extends React.Component<{
+class ScrolledContent extends React.PureComponent<{
 
 }, {
 	scrollArea: number;
@@ -23,6 +23,7 @@ class ScrolledContent extends React.Component<{
 		this.content = React.createRef();
 		this.track = React.createRef();
 		this.bar = React.createRef();
+		this.onResize = this.onResize.bind(this);
 		this.state = {
 			scrollArea: 0,
 			contentHeight: 1,
@@ -90,11 +91,22 @@ class ScrolledContent extends React.Component<{
 		this.scroll(event.deltaY);
 	}
 	componentDidMount(){
+		window.addEventListener('resize', this.onResize);
+
 		this.contentTop = -(parseFloat(window.getComputedStyle( this.content.current ).top) || 0);
-		this.setScrollState( this.calcScrollState() );
+		this.update();
+	}
+	componentWillUnmount(){
+		window.removeEventListener('resize', this.onResize);
 	}
 	componentDidUpdate(){
-		// this.contentTop = -(parseFloat(window.getComputedStyle( this.content.current ).top) || 0);
+		this.update();
+	}
+	update(){
+		this.setScrollState( this.calcScrollState() );
+	}
+	onResize(){
+		this.update();
 	}
 }
 

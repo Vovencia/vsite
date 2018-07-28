@@ -1,6 +1,8 @@
 import * as React from "react";
 
 import allowProps from "./allowProps";
+import storage from "./storage";
+import {ISize, IPosition, ISizeStrict, IPositionStrict} from "../interfaces";
 
 export function el(tagName, name, _props?){
 	var result = function (props){
@@ -77,30 +79,99 @@ export function random(arg1:number, arg2:number = 0):number {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-let lastUidIndex = 0;
-export function uid(){
-	return Date.now() + "." + random(1000000, 9999999) + "." + (lastUidIndex++);
-}
-
+export let uid = (function(){
+	let lastIndex = 0;
+	const dateLengthPrefix = "00000000000000";
+	const indexPrefix 	   = "00000000000000";
+	return function(){
+		var _date  = (dateLengthPrefix + Date.now())   .slice(-dateLengthPrefix.length);
+		var _index = (indexPrefix      + (lastIndex++)).slice(-indexPrefix.length);
+		return _date + '.' + _index;
+	}
+})();
 
 var contents = {};
 
-export function checkContent(content){
+export function getContent(content, contentId?: string){
+	var contentState = contentId ? (stateLoad("Content." + contentId)) : {};
+
 	if( typeof content == 'string' && content.indexOf("@required:") === 0 ){
-		return contents[content.replace("@required:", "")];
+		content = contents[content.replace("@required:", "")];
 	}
-	return content;
+	return {content, contentState};
 }
-export function requiredContent(contentName, content){
-	contents[contentName] = content;
-	return "@required:" + contentName;
+
+export function getWindowContent(window) {
+	var windowId = window.id;
+	var windowContent = window.content;
+	var contentId = '';
+
+	if( typeof windowContent == 'string' && windowContent.indexOf("@required:") === 0 ){
+
+		var contentId = windowContent.replace("@required:", "");
+		var contentState = contentId ? (stateLoad("Content." + windowId + ':' + contentId)) : {};
+
+		windowContent = contents[contentId];
+	}
+
+	return {content: windowContent, contentState, contentId: contentId};
+}
+
+export function requiredContent(contentId, content){
+	contents[contentId] = content;
+	return "@required:" + contentId;
 }
 
 export function stateSave(stateName, state){
-	localStorage.setItem('States.' + stateName, JSON.stringify(state));
+	storage.set('States.' + stateName, JSON.stringify(state));
+}
+
+export function stateRemove(stateName){
+	storage.remove('States.' + stateName);
 }
 
 export function stateLoad<T>(stateName, _default = {}) {
-	var parsed = JSON.parse(localStorage.getItem('States.' + stateName) || "{}");
+	var parsed = JSON.parse(storage.get('States.' + stateName) || "{}");
 	return {..._default, ...parsed};
 }
+
+export function round(value, afterDots: number = 0){
+	afterDots = Math.pow(10, afterDots);
+	return Math.round(value*afterDots)/afterDots;
+}
+
+function mapToArray<T>(obj: any, handler: (element: any, index: any, obj: any) => T): T[] {
+	if( Array.isArray(obj) ){
+		return obj.map(handler);
+	}
+	var result = []
+
+	for(var key in obj){
+		result.push( handler(obj[key], key, obj) );
+	}
+
+	return result;
+}
+
+export function positionToSize(pos: IPosition): ISize{
+	return {
+		width: pos.x,
+		height: pos.y,
+	}
+}
+export function sizeToPosition(pos: ISize): IPosition{
+	return {
+		x: pos.width,
+		y: pos.height,
+	}
+}
+
+export {mapToArray};
+
+// export function map<T>(obj: Array<T> | object, handler: (element: T, index: number | string, obj: Array<T> | object) => boolean ): Array<T> | object {
+// 	if( Array.isArray(obj) ){
+// 		return obj.map(handler);
+// 	} else {
+// 		var result = {}
+// 	}
+// }

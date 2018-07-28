@@ -15,6 +15,8 @@ module.exports = function(obj, {Content, Track,Bar, ...children}){
 			position: relative;
 		`,
 		Content: styled(Content)`
+			display: flex;
+			flex-direction: column;
 			flex-grow: 1;
 			flex-shrink: 0;
 			position: relative;

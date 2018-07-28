@@ -5,7 +5,7 @@ module.exports = function StylesCursor(Cursor) {
 		position: fixed;
 		pointer-events: none;
 		color: #20efa4;
-		transition: top 0.05s, left 0.05s, color 0.3s;
+		transition: color 0.3s;
 		z-index: 1000;
 		&:before {
 			content: '';

@@ -11,7 +11,7 @@ import Layout, {reducer as LayoutReducer} from "./components/Layout/index";
 import {reducer as systemReducer} from "./system"
 
 export const store = createStore(function(state:any, action){
-	state = {...systemReducer(store, state, action)};
+	state = {...systemReducer(state, action)};
 	state = {...LayoutReducer(state, action)};
 	return state;
 });
@@ -38,7 +38,7 @@ setTimeout(() => {
 
 loadApplications().then(function(apps){
 	store.dispatch({
-		type: 'Taskbar.add',
+		type: 'Applications.loaded',
 		list: apps
 	})
 
