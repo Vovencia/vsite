@@ -8,9 +8,6 @@
 		"jsx": "react",
 		"importHelpers": true,
 		"module": "CommonJS",
-		"baseUrl": ".",
-		"paths": {
-			"@system/*": ["./source/system/*"]
-		}
+		"baseUrl": "."
 	}
 }

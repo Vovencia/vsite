@@ -1,1 +1,1 @@
-require("./system/init");
+// require("./system/index");

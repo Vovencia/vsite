@@ -6,7 +6,7 @@ import * as apps from "../apps";
 export default function(){
 	var promise = new Promise(function(resolve, reject){
 		console.log(apps.calculator)
-		setTimeout( () => resolve([apps.calculator]), 10 );
+		setTimeout( () => resolve([{appInfo: apps.calculator}]), 10 );
 	});
 
 	return promise;
