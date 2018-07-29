@@ -1,4 +1,4 @@
-import {windowStates, IWindowInstanceProps} from "./interfaces";
+import {windowStates, IWindowInstanceProps} from "@components/Window/interfaces";
 
 export function isState(windowProps: IWindowInstanceProps, needState: windowStates){
 	var state = windowProps.state;

@@ -1,7 +1,8 @@
-import {getContentState} from "@system/window";
-import {isMaximized, isOpened} from "@components/Window/index"
-import {round} from "@utils";
-import {ISize, IPosition} from	"@interfaces";
+import {getContentState} from "@system/window"
+import {isMaximized, isOpened} from "@components/Window/methods"
+import {defaultWindowConstructorProps, IWindowConstructorPropsStrict, IWindowConstructorProps} from "@components/Window/interfaces";
+import {round, uid} from "@utils";
+import {ISizeAny, IPositionAny, ISizeStrict, IPositionStrict} from	"@interfaces";
 import {store} from "@system/index";
 
 export function windowFocus(list, windowId){
@@ -77,9 +78,7 @@ function windowClasStateSize(keySize, windowProps, contentProps) {
 	return parseFloat(windowProps[keySize]) || 0;
 }
 
-export function windowCalcState(windowProps:
-	{ width?: any, height?: any, x?: any, y?: any}
-) : ISize & IPosition {
+export function windowCalcState(windowProps: ISizeAny & IPositionAny ) : ISizeStrict & IPositionStrict {
 	var contentState = getContentState();
 
 	var result = {
@@ -100,4 +99,13 @@ export function windowCalcState(windowProps:
 
 export function getList(){
 	return store.getState().WindowsManager.opened.filter( window => isOpened(window) );
+}
+
+export function constructorOptions(options: IWindowConstructorProps): IWindowConstructorPropsStrict {
+	return {
+		...defaultWindowConstructorProps,
+		id: uid(),
+		...options,
+		...windowCalcState(options),
+	}
 }

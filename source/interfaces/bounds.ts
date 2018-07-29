@@ -4,7 +4,7 @@ export interface IBounds {
 	y1 ?: number;
 	y2 ?: number;
 }
-export interface IBoundsTricts {
+export interface IBoundsStrict {
 	x1  : number;
 	x2  : number;
 	y1  : number;

@@ -1,4 +1,4 @@
-import {IAppInfo, Percent, IPositionRelativeX, IPositionRelativeY} from "@interfaces";
+import {IAppInfo, Percent, IPositionRelativeX, IPositionRelativeY, IBoundsStrict} from "@interfaces";
 
 export enum windowStates {
 	New 		= 0b0000001,
@@ -44,13 +44,13 @@ export interface IWindowConstructorProps {
 	resizable		?: boolean;
 
 	appInfo			?: IAppInfo;
+	id				?: any;
 }
-
-export interface IWindowInstanceProps {
-	width			: number | Percent,
-	height			: number | Percent,
-	x				: number | Percent | IPositionRelativeX,
-	y				: number | Percent | IPositionRelativeY,
+export interface IWindowConstructorPropsStrict {
+	width			: number,
+	height			: number,
+	x				: number,
+	y				: number,
 	minWidth		: number,
 	minHeight		: number,
 	maxWidth		: number,
@@ -62,52 +62,16 @@ export interface IWindowInstanceProps {
 	resizable		: boolean;
 
 	appInfo			: IAppInfo;
-
-	
-	contentId		: any;
 	id				: any;
+}
+
+export interface IWindowInstanceProps extends IWindowConstructorPropsStrict {
+	contentId		: any;
 	content			: React.ComponentType<{id: string, state: any, contentId: string}> | string;
 	contentState	: any;
 }
 
-// export interface IPropsInstanceNoStrict {
-// 	width			?: string | number,
-// 	height			?: string | number,
-// 	x				?: string | number,
-// 	y				?: string | number,
-// 	minWidth		?: number,
-// 	minHeight		?: number,
-// 	maxWidth		?: number,
-// 	maxHeight		?: number,
-
-// 	inFocus			?: boolean;
-// 	state			?: windowStates;
-// 	toState			?: windowStates;
-// 	resizable		?: boolean;
-
-// 	appInfo			?: IAppInfo;
-// }
-
-// export interface IPropsInstance extends IPropsInstanceNoStrict {
-// 	width			?: number,
-// 	height			?: number,
-// 	x				?: number,
-// 	y				?: number,
-// }
-
-// interface _IProps {
-// 	contentId?		: any;
-// 	id				: any;
-// 	content?		: React.ComponentType<{id: string, state: any, contentId: string}>;
-// 	contentState?	: any;
-// }
-
-// export interface IProps extends IPropsInstance, _IProps {
-// }
-// export interface IPropsNoStrict extends IPropsInstanceNoStrict, _IProps {
-// }
-
-export const defaultWindowProps:IWindowInstanceProps = {
+export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
 	x				: 100,
 	y				: 100,
 	width			: 400,
@@ -121,6 +85,11 @@ export const defaultWindowProps:IWindowInstanceProps = {
 	toState			: windowStates.Normal,
 	resizable		: true,
 	appInfo			: null,
+	id				: '',
+}
+
+export const defaultWindowProps:IWindowInstanceProps = {
+	...defaultWindowConstructorProps,
 	contentId		: 0,
 	id				: 0,
 	content			: '',

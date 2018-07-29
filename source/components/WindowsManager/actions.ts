@@ -3,7 +3,7 @@ import {store} from "@system/index";
 import {createAction, uid} from "@utils";
 import {ISize, IPosition,IBounds} from	"@interfaces";
 
-import {windowCalcState, getList} from "./methods";
+import {windowCalcState, getList, constructorOptions} from "./methods";
 
 let _createAction = createAction.bind({}, "WindowsManager");
 
@@ -17,19 +17,13 @@ export let actions = {
 		store.dispatch(_createAction("load"));
 		actions.changed();
 	},
-	open(props: {options?: IWindowConstructorProps, content, callback?}) {
-		var options: IWindowInstanceProps = {
-			...defaultWindowProps,
-			id: uid(),
-			...props.options,
-		};
-		options = {
-			...options,
-			...windowCalcState(options),
-		}
-		props.options = options;
-		store.dispatch(_createAction("open", props));
-		actions.focus( options.id );
+	open(params: {options?: IWindowConstructorProps, content, callback?: (windowId: string) => void}) {
+		params = {...params};
+
+		let windowProps:IWindowConstructorProps = constructorOptions(params.options);
+		params.options = windowProps;
+		store.dispatch(_createAction("open", params));
+		actions.focus( windowProps.id );
 		actions.changed();
 	},
 	focus(windowId: string){

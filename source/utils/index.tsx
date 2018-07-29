@@ -22,7 +22,7 @@ export function el(tagName, name, _props?){
 
 export let div = el.bind({}, 'div');
 
-export {default as styled} from 'styled-components';
+export {default as styled} from './styled';
 export {default as _styled} from '../mixins/styled';
 
 

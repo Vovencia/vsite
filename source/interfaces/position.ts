@@ -1,8 +1,17 @@
-export interface IPosition {
+export interface IPositionAny {
+	x?: any;
+	y?: any;
+}
+export interface IPositionAnyStrict {
+	x : any;
+	y : any;
+}
+
+export interface IPosition extends IPositionAny {
 	x?: number;
 	y?: number;
 }
-export interface IPositionStrict {
+export interface IPositionStrict extends IPositionAnyStrict {
 	x: number;
 	y: number;
 }
