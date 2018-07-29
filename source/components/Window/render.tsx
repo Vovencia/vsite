@@ -7,7 +7,6 @@ import {isVisible} from "./index";
 export default class WindowRender extends React.PureComponent<IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>> {
 	protected boxRef = React.createRef<HTMLDivElement>();
 	protected headerRef = React.createRef<HTMLDivElement>();
-	private lastProps: IWindowInstanceProps;
 
 	constructor(props){
 		super(props);
@@ -15,18 +14,8 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 		this.ResizeBorders = this.ResizeBorders.bind(this);
 		this.Header = this.Header.bind(this);
 		this.Body = this.Body.bind(this);
-		this.lastProps = props;
+		// this.lastProps = props;
 		console.log('constructor')
-	}
-
-	// shouldComponentUpdate(){
-	// 	if( this.props.id != "01532874032151.00000000000001" ) return true;
-	// 	return (JSON.stringify(this.props) != JSON.stringify(this.lastProps));
-	// }
-	componentDidUpdate(){
-		if( this.props.id != "01532874032151.00000000000001" ) return true;
-		console.log('componentDidUpdate');
-		this.lastProps = this.props;
 	}
 
 	render(){

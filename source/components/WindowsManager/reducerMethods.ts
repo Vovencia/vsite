@@ -1,4 +1,4 @@
-import {defaultWindowProps, windowStates} from "@components/Window";
+import {defaultWindowProps, windowStates, BoundsManager as WindowBoundsManager, IWindowInstanceProps} from "@components/Window";
 import {IWindowsManagerProps} from "./interfaces";
 import {isFunction, checkAction, stateLoad, stateSave} from "@utils";
 import {windowFocus, windowMap} from "./methods";
@@ -49,7 +49,7 @@ export class ReducerMethods {
 	}
 	show(){
 		this.setState({
-			opened: windowMap(this.state.opened, this.action.windowId, (window) => {
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
 				return {
 					...window,
 					state: window.toState || windowStates.Normal
@@ -59,7 +59,7 @@ export class ReducerMethods {
 	}
 	hide(){
 		this.setState({
-			opened: windowMap(this.state.opened, this.action.windowId, (window) => {
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
 				return {
 					...window,
 					state: window.state | windowStates.Minimized
@@ -74,29 +74,51 @@ export class ReducerMethods {
 	}
 	closing(){
 		this.setState({
-			opened: windowMap(this.state.opened, this.action.windowId, (window) => {
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
 				window = {...window};
 				window.state = window.state | windowStates.Closing;
 				return window;
 			})
 		})
 	}
-	move(){
+	setPosition(){
 		this.setState({
-			opened: windowMap(this.state.opened, this.action.windowId, (window) => {
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
+				let windowBoundsManager = new WindowBoundsManager(window);
+				
+				windowBoundsManager.setPosition(this.action.position);
+
 				return {
 					...window,
-					...this.action.position,
+					...windowBoundsManager.getState(),
 				}
 			})
 		})
 	}
-	resize(){
+	setSize(){
 		this.setState({
-			opened: windowMap(this.state.opened, this.action.windowId, (window) => {
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
+				let windowBoundsManager = new WindowBoundsManager(window);
+				
+				windowBoundsManager.setSize(this.action.size);
+
 				return {
 					...window,
 					...this.action.size,
+				}
+			})
+		})
+	}
+	setBounds(){
+		this.setState({
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
+				let windowBoundsManager = new WindowBoundsManager(window);
+				
+				windowBoundsManager.setBounds(this.action.bounds);
+
+				return {
+					...window,
+					...windowBoundsManager.getState(),
 				}
 			})
 		})

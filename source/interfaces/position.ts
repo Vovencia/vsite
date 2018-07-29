@@ -29,3 +29,9 @@ export enum IPositionRelativeY {
 	middle	= 'CENTER'	,
 	bottom	= 'BOTTOM' 	,
 }
+
+
+export let positionDefault: IPositionStrict = {
+	x: 0,
+	y: 0,
+}

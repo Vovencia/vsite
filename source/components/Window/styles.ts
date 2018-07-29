@@ -2,7 +2,7 @@ import {styled} from "@utils";
 
 
 module.exports = function(Self){
-	return styled(Self, true)`
+	return styled(Self)`
 		position: fixed;
 		width: 400rem;
 		height: 400rem;

@@ -29,8 +29,8 @@ export let actions = {
 	focus(windowId: string){
 		store.dispatch(_createAction("focus", {windowId}));
 	},
-	move(windowId: string, position: IPosition){
-		store.dispatch(_createAction("move", {windowId, position}));
+	setPosition(windowId: string, position: IPosition){
+		store.dispatch(_createAction("setPosition", {windowId, position}));
 	},
 	show(windowId: string){
 		store.dispatch(_createAction("show", {windowId}));
@@ -47,12 +47,15 @@ export let actions = {
 		actions.changed();
 	},
 	resize(windowId, size: ISize){
-		store.dispatch(_createAction("resize", {windowId, size}));
+		store.dispatch(_createAction("setSize", {windowId, size}));
 	},
 	changed(){
 		store.dispatch(_createAction("changed", {list: getList()}));
 	},
-	setBounds(bounds: IBounds){
-		store.dispatch(_createAction("setBounds", {bounds}));
+	setBounds(windowId, bounds: IBounds){
+		store.dispatch(_createAction("setBounds", {windowId, bounds}));
+	},
+	setSize(windowId, size: ISize){
+		store.dispatch(_createAction("setSize", {windowId, size}));
 	}
 }

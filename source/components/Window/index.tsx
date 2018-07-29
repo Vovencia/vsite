@@ -1,19 +1,19 @@
 import {actions as WindowsManagerActions} from "@components/WindowsManager";
-import {ISize, IPosition} from	"@interfaces";
+import {ISize, IPosition, IPositionStrict, IBounds} from	"@interfaces";
 import {positionToSize, sizeToPosition} from "@utils";
 
 import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
 
 export * from "./interfaces";
 export * from "./methods";
-export * from "./manager";
+export * from "./boundsManager";
 
 import WindowRender from "./render";
 
 
 class Window extends WindowRender {
 	protected pressed = windowPressState.None;
-	protected lastMousePosition: IPosition;
+	protected lastMousePosition: IPositionStrict;
 	protected currentBorderType: string;
 
 	constructor(props){
@@ -92,116 +92,52 @@ class Window extends WindowRender {
 		}
 	}
 
-	onHeaderMove(mouseMove: IPosition){
+	onHeaderMove(mouseMove: IPositionStrict){
 		this.addPosition(mouseMove);
 	}
-	onBorderMove(mousePosition: IPosition){
-		var size = this.getSize();
-		var position = this.getPosition();
-
-		var bounds = {
-			x1: position.x,
-			y1: position.y,
-			x2: position.x + size.width,
-			y2: position.y + size.height,
-		}
-
-		var changed = {x: 0, y: 0}
+	onBorderMove(mousePosition: IPositionStrict){
+		let xPosition = 0;
+		let yPosition = 0;
 
 		switch(this.currentBorderType){
 			case windowBorderTypes.Left:
-				bounds.x1 = mousePosition.x;
-				changed['x'] = 1;
+				xPosition = 1;
 			break;
 			case windowBorderTypes.Right:
-				bounds.x2 = mousePosition.x;
-				changed['x'] = 2;
+				xPosition = 2;
 			break;
 			case windowBorderTypes.Top:
-				bounds.y1 = mousePosition.y;
-				changed['y'] = 1;
+				yPosition = 1;
 			break;
 			case windowBorderTypes.Bottom:
-				bounds.y2 = mousePosition.y;
-				changed['y'] = 2;
+				yPosition = 2;
 			break;
 			case windowBorderTypes.LeftTop:
-				bounds.x1 = mousePosition.x;
-				bounds.y1 = mousePosition.y;
-				changed['x'] = 1;
-				changed['y'] = 1;
+				xPosition = 1;
+				yPosition = 1;
 			break;
 			case windowBorderTypes.LeftBottom:
-				bounds.x1 = mousePosition.x;
-				bounds.y2 = mousePosition.y;
-				changed['x'] = 1;
-				changed['y'] = 2;
+				xPosition = 1;
+				yPosition = 2;
 			break;
 			case windowBorderTypes.RightTop:
-				bounds.x2 = mousePosition.x;
-				bounds.y1 = mousePosition.y;
-				changed['x'] = 2;
-				changed['y'] = 1;
+				xPosition = 2;
+				yPosition = 1;
 			break;
 			case windowBorderTypes.RightBottom:
-				bounds.x2 = mousePosition.x;
-				bounds.y2 = mousePosition.y;
-				changed['x'] = 2;
-				changed['y'] = 2;
+				xPosition = 2;
+				yPosition = 2;
 			break;
 		}
 
-		var minSize = sizeToPosition(this.getMinSize());
-
-		;['x', 'y'].forEach(function(direction){
-			if( changed[direction] ){
-				bounds[direction + changed[direction]] = mousePosition[direction];
-				if( (bounds[direction + 2] - bounds[direction + 1]) < minSize[direction] ){
-					bounds[direction + changed[direction]] = (
-						changed[direction] == 1 ?
-						bounds[direction + 2] - minSize[direction] :
-						bounds[direction + 1] + minSize[direction]
-					)
-				}
-			}
-		});
-
-
-
-		position = {
-			x: bounds.x1,
-			y: bounds.y1,
-		}
-		size = {
-			width: bounds.x2 - bounds.x1,
-			height: bounds.y2 - bounds.y1,
-		}
-
-		this.setSize(size);
-		this.setPosition(position);
+		let bounds = {};
+		if( xPosition ){ bounds['x' + xPosition] = mousePosition.x; }
+		if( yPosition ){ bounds['y' + yPosition] = mousePosition.y; }
+		this.setBounds(bounds);
 	}
 
-	getMinSize(){
-		return {
-			width: ( this.props.minWidth > 50 ? this.props.minWidth : 50 ),
-			height: ( this.props.minHeight > 50 ? this.props.minHeight : 50 ),
-		}
-	}
-	getMaxSize(){
-		return {
-			width: this.props.maxWidth,
-			height: this.props.maxHeight,
-		}
-	}
-
-	checkSize(_size: ISize){
-		var size = {..._size};
-		var minSize = this.getMinSize();
-
-		if(size.width < minSize.width) size.width = minSize.width;
-		if(size.height < minSize.height) size.height = minSize.height;
-
-		return size;
+	setBounds(bounds: IBounds){
+		WindowsManagerActions.setBounds(this.props.id, bounds);
 	}
 
 	getSize(){
@@ -211,8 +147,7 @@ class Window extends WindowRender {
 		}
 	}
 	setSize(size: ISize){
-		size = this.checkSize(size);
-		WindowsManagerActions.resize(this.props.id, size);
+		WindowsManagerActions.setSize(this.props.id, size);
 	}
 	addSize(addSize: ISize){
 		let size = this.getSize();
@@ -228,7 +163,7 @@ class Window extends WindowRender {
 		return position;
 	}
 	setPosition(position){
-		WindowsManagerActions.move(this.props.id, {
+		WindowsManagerActions.setPosition(this.props.id, {
 			x: position.x,
 			y: position.y,
 		});
