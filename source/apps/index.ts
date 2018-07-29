@@ -1,1 +1,2 @@
-export {default as calculator} from "./calculator/appInfo"
+import * as calculator from "./calculator";
+export {calculator};

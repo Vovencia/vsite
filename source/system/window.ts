@@ -1,10 +1,10 @@
 import {store} from "@system/index";
-import {defaultWindowProps, IProps, IPropsInstanceNoStrict} from "@components/Window";
+import {defaultWindowProps, IWindowConstructorProps} from "@components/Window";
 import {actions as WindowsManagerActions} from "@components/WindowsManager";
 import {ILayoutStateElements} from "@components/Layout/interfaces";
 import {IAppInfo} from "@interfaces";
 
-export function open(content, options:IPropsInstanceNoStrict = defaultWindowProps, callback = function(windowId){}) {
+export function open(content, options:IWindowConstructorProps = defaultWindowProps, callback = function(windowId){}) {
 	WindowsManagerActions.open({
 		options: options,
 		content: content,

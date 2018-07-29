@@ -25,11 +25,13 @@ var config = {
 			return {
 				name: parsed[1],
 				path: item,
+				dir: item.replace(/index.+(t|j)s?(x)$/, ''),
 			}
 		});
 
 		apps = apps.reduce(function(result, item){
 			result[ 'apps/' + item.name + '/index' ] = item.path;
+			result[ 'apps/' + item.name + '/content' ] = path.normalize( path.join(item.dir, 'content') );
 			return result;
 		}, {});
 

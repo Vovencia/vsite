@@ -12,15 +12,7 @@ class TaskBar extends React.Component <any> {
 			<div {...attrs(this.props)}>
 				<Content>
 					<ScrolledContent>
-						{
-							this.props.apps.map((function(app){
-								return (
-									<Item onClick={ this.handlerItemClick.bind(this, app) } title={app.appInfo.name} key={app.id}>
-										<img src={ app.appInfo.icon } alt=""/>
-									</Item>
-								)
-							}).bind(this))
-						}
+						{ this.props.apps.map(this.renderItem.bind(this)) }
 					</ScrolledContent>
 				</Content>
 			</div>
@@ -29,6 +21,18 @@ class TaskBar extends React.Component <any> {
 	handlerItemClick (app, event){
 		event.preventDefault();
 		if( app.call ) app.call();
+	}
+	renderItem(app){
+		return (
+			<Item
+				States={ app.states }
+				typeShutcut={ app.typeShutcut }
+				onClick={ this.handlerItemClick.bind(this, app) }
+				title={app.appInfo.name} key={app.id}
+			>
+				<img src={ app.appInfo.icon } alt=""/>
+			</Item>
+		)
 	}
 }
 

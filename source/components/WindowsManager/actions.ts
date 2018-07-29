@@ -1,7 +1,7 @@
-import {defaultWindowProps, IPropsNoStrict, IPropsInstanceNoStrict} from "@components/Window";
+import {defaultWindowProps, IWindowInstanceProps, IWindowConstructorProps} from "@components/Window";
 import {store} from "@system/index";
 import {createAction, uid} from "@utils";
-import {ISize, IPosition} from	"@interfaces";
+import {ISize, IPosition,IBounds} from	"@interfaces";
 
 import {windowCalcState, getList} from "./methods";
 
@@ -15,10 +15,10 @@ export function getActionName(name){
 export let actions = {
 	_load(){
 		store.dispatch(_createAction("load"));
-		actions.countChanged();
+		actions.changed();
 	},
-	open(props: {options?: IPropsInstanceNoStrict, content, callback?}) {
-		var options: IPropsNoStrict = {
+	open(props: {options?: IWindowConstructorProps, content, callback?}) {
+		var options: IWindowInstanceProps = {
 			...defaultWindowProps,
 			id: uid(),
 			...props.options,
@@ -30,7 +30,7 @@ export let actions = {
 		props.options = options;
 		store.dispatch(_createAction("open", props));
 		actions.focus( options.id );
-		actions.countChanged();
+		actions.changed();
 	},
 	focus(windowId: string){
 		store.dispatch(_createAction("focus", {windowId}));
@@ -50,12 +50,15 @@ export let actions = {
 		setTimeout(function(){
 			store.dispatch(_createAction("close", {windowId}));
 		}, 300);
-		actions.countChanged();
+		actions.changed();
 	},
 	resize(windowId, size: ISize){
 		store.dispatch(_createAction("resize", {windowId, size}));
 	},
-	countChanged(){
-		store.dispatch(_createAction("countChanged", {list: getList()}));
+	changed(){
+		store.dispatch(_createAction("changed", {list: getList()}));
+	},
+	setBounds(bounds: IBounds){
+		store.dispatch(_createAction("setBounds", {bounds}));
 	}
 }

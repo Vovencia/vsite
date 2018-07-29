@@ -13,7 +13,7 @@ module.exports = function(obj, {Content, Item, ...children}){
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
-			margin: 20px 0;
+			margin: 20rem 0;
 		`,
 		Content: styled(Content)`
 			width: 50rem;
@@ -22,16 +22,17 @@ module.exports = function(obj, {Content, Item, ...children}){
 			max-height: 100%;
 			display: flex;
 			flex-direction: column;
-			padding: 5px 0;
+			padding: 5rem 0;
 		`,
 		Item: styled(Item)`
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			width: 30px;
-			height: 30px;
-			margin: 5px auto;
+			width: 30rem;
+			height: 30rem;
+			margin: 5rem auto;
 			transition: transform 0.3s;
+			position: relative;
 			img,
 			svg {
 				max-width: 80%;
@@ -41,6 +42,22 @@ module.exports = function(obj, {Content, Item, ...children}){
 			&:hover {
 				transform: scale(1.1)
 			}
+			${props => {
+				if( props['typeShutcut'] != 'window' ) return '';
+				return `
+					&:after {
+						content: '';
+						display: block;
+						position: absolute;
+						right: 0rem;
+						bottom: 0rem;
+						width: 10rem;
+						height: 10rem;
+						border-radius: 50%;
+						background: #5f5;
+					}
+				`;
+			}}
 		`
 	}
 }

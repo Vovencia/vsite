@@ -18,3 +18,9 @@ export function reducer(state, action){
 export const store = createStore();
 init(store);
 render(store);
+
+declare let _App: Array<string>;
+
+export function getApp(appId) {
+	console.log(appId);
+}

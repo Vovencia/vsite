@@ -1,4 +1,4 @@
-import {IAppInfo} from "@interfaces";
+import {IAppInfo, Percent, IPositionRelativeX, IPositionRelativeY} from "@interfaces";
 
 export enum windowStates {
 	New 		= 0b0000001,
@@ -27,11 +27,12 @@ export enum windowBorderTypes {
 	RightBottom		= 'right-bottom',
 }
 
-export interface IPropsInstanceNoStrict {
-	width			?: string | number,
-	height			?: string | number,
-	x				?: string | number,
-	y				?: string | number,
+
+export interface IWindowConstructorProps {
+	width			?: number | Percent,
+	height			?: number | Percent,
+	x				?: number | Percent | IPositionRelativeX,
+	y				?: number | Percent | IPositionRelativeY,
 	minWidth		?: number,
 	minHeight		?: number,
 	maxWidth		?: number,
@@ -45,26 +46,68 @@ export interface IPropsInstanceNoStrict {
 	appInfo			?: IAppInfo;
 }
 
-export interface IPropsInstance extends IPropsInstanceNoStrict {
-	width			?: number,
-	height			?: number,
-	x				?: number,
-	y				?: number,
-}
+export interface IWindowInstanceProps {
+	width			: number | Percent,
+	height			: number | Percent,
+	x				: number | Percent | IPositionRelativeX,
+	y				: number | Percent | IPositionRelativeY,
+	minWidth		: number,
+	minHeight		: number,
+	maxWidth		: number,
+	maxHeight		: number,
 
-interface _IProps {
-	contentId?		: any;
+	inFocus			: boolean;
+	state			: windowStates;
+	toState			: windowStates;
+	resizable		: boolean;
+
+	appInfo			: IAppInfo;
+
+	
+	contentId		: any;
 	id				: any;
-	content?		: React.ComponentType<{id: string, state: any, contentId: string}>;
-	contentState?	: any;
+	content			: React.ComponentType<{id: string, state: any, contentId: string}> | string;
+	contentState	: any;
 }
 
-export interface IProps extends IPropsInstance, _IProps {
-}
-export interface IPropsNoStrict extends IPropsInstanceNoStrict, _IProps {
-}
+// export interface IPropsInstanceNoStrict {
+// 	width			?: string | number,
+// 	height			?: string | number,
+// 	x				?: string | number,
+// 	y				?: string | number,
+// 	minWidth		?: number,
+// 	minHeight		?: number,
+// 	maxWidth		?: number,
+// 	maxHeight		?: number,
 
-export const defaultWindowProps:IPropsInstance = {
+// 	inFocus			?: boolean;
+// 	state			?: windowStates;
+// 	toState			?: windowStates;
+// 	resizable		?: boolean;
+
+// 	appInfo			?: IAppInfo;
+// }
+
+// export interface IPropsInstance extends IPropsInstanceNoStrict {
+// 	width			?: number,
+// 	height			?: number,
+// 	x				?: number,
+// 	y				?: number,
+// }
+
+// interface _IProps {
+// 	contentId?		: any;
+// 	id				: any;
+// 	content?		: React.ComponentType<{id: string, state: any, contentId: string}>;
+// 	contentState?	: any;
+// }
+
+// export interface IProps extends IPropsInstance, _IProps {
+// }
+// export interface IPropsNoStrict extends IPropsInstanceNoStrict, _IProps {
+// }
+
+export const defaultWindowProps:IWindowInstanceProps = {
 	x				: 100,
 	y				: 100,
 	width			: 400,
@@ -78,4 +121,8 @@ export const defaultWindowProps:IPropsInstance = {
 	toState			: windowStates.Normal,
 	resizable		: true,
 	appInfo			: null,
+	contentId		: 0,
+	id				: 0,
+	content			: '',
+	contentState	: {},
 }

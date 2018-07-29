@@ -4,6 +4,9 @@ import allowProps from "./allowProps";
 import storage from "./storage";
 import {ISize, IPosition, ISizeStrict, IPositionStrict} from "@interfaces";
 
+export * from "./ReactComponentWithEventEmmiter";
+export * from "./AliveReactComponent";
+
 export function el(tagName, name, _props?){
 	var result = function (props){
 		var props = {
@@ -168,10 +171,35 @@ export function sizeToPosition(pos: ISize): IPosition{
 
 export {mapToArray};
 
-// export function map<T>(obj: Array<T> | object, handler: (element: T, index: number | string, obj: Array<T> | object) => boolean ): Array<T> | object {
-// 	if( Array.isArray(obj) ){
-// 		return obj.map(handler);
-// 	} else {
-// 		var result = {}
-// 	}
-// }
+
+export function sortByKey (key) {
+	return function(a, b){
+		if( a[key] > b[key] ) return  1;
+		if( a[key] < b[key] ) return -1;
+		return 0;
+	}
+}
+
+export function keysToArray(obj: any): Array<string | number> {
+	let result = [];
+	for(let key in obj){
+		if( obj[key] ){
+			result.push(key);
+		}
+	}
+	return result;
+}
+
+export function firstLetterUppercase(string: string): string {
+	return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+export function RenderElement(ElementHandler: (props) => React.Component, self?){
+	return function(props){
+		return ElementHandler.call(self, props);
+	}
+}
+
+export function isFunction(func) {
+	return typeof func == 'function';
+}

@@ -6,6 +6,7 @@ import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
 
 export * from "./interfaces";
 export * from "./methods";
+export * from "./manager";
 
 import WindowRender from "./render";
 

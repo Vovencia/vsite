@@ -1,6 +1,6 @@
-import {windowStates, IPropsInstance, IProps} from "./interfaces";
+import {windowStates, IWindowInstanceProps} from "./interfaces";
 
-export function isState(windowProps: IPropsInstance, needState: windowStates){
+export function isState(windowProps: IWindowInstanceProps, needState: windowStates){
 	var state = windowProps.state;
 	// if( windowProps.state == windowStates.New ){
 	// 	state = windowProps.toState;
@@ -8,23 +8,23 @@ export function isState(windowProps: IPropsInstance, needState: windowStates){
 	return !!(state & needState);
 }
 
-export function isNormal(windowProps: IPropsInstance){
+export function isNormal(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.Normal);
 }
-export function isMaximized(windowProps: IPropsInstance){
+export function isMaximized(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.Maximized);
 }
-export function isMinimized(windowProps: IPropsInstance){
+export function isMinimized(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.Minimized);
 }
-export function isClosing(windowProps: IPropsInstance){
+export function isClosing(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.Closing);
 }
 
-export function isVisible(windowProps: IPropsInstance){
+export function isVisible(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.isVisible) && !isMinimized(windowProps);
 }
 
-export function isOpened(windowProps: IPropsInstance){
+export function isOpened(windowProps: IWindowInstanceProps){
 	return isState(windowProps, windowStates.isOpened) && !isClosing(windowProps);
 }

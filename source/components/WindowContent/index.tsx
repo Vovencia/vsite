@@ -1,25 +1,21 @@
 import * as React from "react";
-import {stateLoad, stateRemove, stateSave} from "@utils";
+import {AliveReactComponent} from "@utils";
 
 export interface IWindowContentProps {
-	id: string;
-	contentId: string;
+	windowId		: string;
+	contentId		: string;
+	contentState	: object;
 }
 
-export default class WindowContent<P, S> extends React.Component<IWindowContentProps & P, S> {
-	private stateId: string;
+
+export default class WindowContent<P, S> extends AliveReactComponent<IWindowContentProps & P, S> {
+	protected id: string;
+	protected windowId: string;
+
 	constructor(props){
-		super(props)
-		this.stateId = "Content:" + this.props.contentId + ':' + this.props.id;
-		this.state = stateLoad(this.stateId);
-	}
-	componentDidUpdate(){
-		stateSave(this.stateId, this.state);
-	}
-	componentDidMount(){
-		stateSave(this.stateId, this.state);
-	}
-	componentWillUnmount(){
-		stateRemove(this.stateId);
+		super(props, "Content:" + props.contentId);
+		this.componentId = '';
+		this.id = "Content:" + this.props.contentId;
+		this.windowId = this.props.windowId;
 	}
 }

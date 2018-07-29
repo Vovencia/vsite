@@ -1,70 +1,119 @@
 import * as React from "react";
 import {div, el, mapToArray} from "@utils";
-import {windowStates, IProps, windowBorderTypes} from "./interfaces";
+import {IWindowInstanceProps, windowBorderTypes} from "./interfaces";
 import {isVisible} from "./index";
 
 
-export default abstract class WindowRender extends React.PureComponent<IProps & React.HTMLAttributes<HTMLDivElement>> {
+export default class WindowRender extends React.PureComponent<IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>> {
 	protected boxRef = React.createRef<HTMLDivElement>();
 	protected headerRef = React.createRef<HTMLDivElement>();
-	
-	abstract handlerOnPress(event): void;
-	abstract handlerHeaderOnPress(event): void;
-	abstract handlerResizeBorderPress(direction, event): void;
-	
-	abstract handlerButtonControlClick(type, event): void;
 
-	checkSizeValue(value: number | string){
-		if(typeof value == 'number') return value + 'px';
-		return value;
+	constructor(props){
+		super(props);
+		this.Box = this.Box.bind(this);
+		this.ResizeBorders = this.ResizeBorders.bind(this);
+		this.Header = this.Header.bind(this);
+		this.Body = this.Body.bind(this);
 	}
 
 	render(){
-		const Content = this.props.content;
-		const contentState = this.props.contentState;
-
-		let style = {
-			left		: this.props.x + 'px',
-			top 		: this.props.y + 'px',
-			width		: this.checkSizeValue(this.props.width),
-			height		: this.checkSizeValue(this.props.height),
-		}
 		return (
-			<Box
-				style={style}
-				elementRef={this.boxRef}
-				isVisible={ isVisible(this.props) }
-				inFocus={ this.props.inFocus }
-				className={this.props.className}
-				onMouseDown={ this.handlerOnPress.bind(this) }
-			>
-				{
-					this.props.resizable && mapToArray(	windowBorderTypes, (type, index) =>
-						<ResizeBorder
-							key={index}
-							onMouseDown={ this.handlerResizeBorderPress.bind(this, type) }
-							Type={type}
-						/>
-					)
-				}
-				<Header
-					elementRef	={ this.headerRef }
+			<this.Box>
+				<this.ResizeBorders />
+				<this.Header />
+				<this.Body />
+			</this.Box>
+		)
+	}
 
-					onMouseDown	={ this.handlerHeaderOnPress.bind(this) }
-				>
-					<Buttons>
-						{
-							['close', this.props.resizable && 'maximize', 'minimize'].map( (type) =>
-								type && <ButtonControl key={type} button-type={type} onClick={ this.handlerButtonControlClick.bind(this, type) } />
-							)
-						}
-					</Buttons>
-				</Header>
-				<Body>
-					<Content id={ this.props.id } contentId={ this.props.contentId } state={contentState} />
-				</Body>
+	Box(props){
+		return (
+			<Box {...this.getBoxAttrs()}>
+				{ props.children }
 			</Box>
 		)
+	}
+	ResizeBorders(){
+		return (
+			<React.Fragment>
+				{ this.props.resizable && mapToArray(windowBorderTypes, this.renderResizeBorder.bind(this)) }
+			</React.Fragment>
+		)
+	}
+	Header(){
+		return (
+			<Header
+				elementRef	={ this.headerRef }
+				onMouseDown	={ this.handlerHeaderOnPress.bind(this) }
+			>
+				<Buttons>
+					{ this.getButtonControlList().map(this.renderButtonControl.bind(this)) }
+				</Buttons>
+			</Header>
+		)
+	}
+	Body(){
+		const Content = this.props.content;
+		const contentState = this.props.contentState;
+		return (
+			<Body>
+				{ this.renderContent(Content, {windowId:this.props.id, contentId:this.props.contentId, contentState}) }
+			</Body>
+		)
+	}
+
+
+	renderContent(Content, attrs){
+		if( typeof Content == 'string' ) return Content;
+		if( typeof Content == 'function' ) return <Content {...attrs} />;
+		return '';
+	}
+	renderButtonControl(buttonType){
+		if(!buttonType) return '';
+		return (
+			<ButtonControl
+				key={buttonType}
+				button-type={buttonType}
+				onClick={ this.handlerButtonControlClick.bind(this, buttonType) }
+			/>
+		)
+	}
+	renderResizeBorder(type, index){
+		return (
+			<ResizeBorder
+				key={index}
+				onMouseDown={ this.handlerResizeBorderPress.bind(this, type) }
+				Type={type}
+			/>
+		)
+	}
+
+	handlerOnPress(event) {}
+	handlerHeaderOnPress(event) {}
+	handlerResizeBorderPress(direction, event) {}
+	handlerButtonControlClick(type, event) {}
+
+	getValue(value: any){
+		return parseFloat(value) + 'px';
+	}
+	getButtonControlList(){
+		return ['close', this.props.resizable && 'maximize', 'minimize'];
+	}
+	getBoxAttrs(){
+		let style = {
+			left		: this.getValue(this.props.x),
+			top 		: this.getValue(this.props.y),
+			width		: this.getValue(this.props.width),
+			height		: this.getValue(this.props.height),
+		}
+		return {
+			style: style,
+			elementRef: this.boxRef,
+			isVisible: isVisible(this.props),
+			inFocus: this.props.inFocus,
+			className: this.props.className,
+			onMouseDown: this.handlerOnPress.bind(this),
+		}
 	}
 }
 

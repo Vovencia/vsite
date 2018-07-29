@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title><style>.preloader {
+	position: fixed;
+	z-index: 999999;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: all 0.3s;
+	background: #111;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 1;
+	font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+	cursor: progress !important;
+}
+.preloader:before {
+	content: '';
+	display: block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	box-sizing: padding-box;
+	box-sizing: border-box;
+	border-left: 1px solid #fff;
+	margin-bottom: 20px;
+	animation: preloader-animation 0.7s infinite linear;
+}
+@keyframes preloader-animation {
+	from {
+		transform: rotate(0)
+	}
+	to {
+		transform: rotate(360deg)
+	}
+}
+.document-loaded .preloader {
+	opacity: 0;
+	visibility: hidden;
+}</style></head><body><div class="preloader"></div><div id="App"></div><script>window.__Apps = ["/apps/calculator/index.js","/apps/calculator/content.js"]
+</script><script src="/runtime.js"></script><script src="/app/vendors.js"></script><script src="/app/components.js"></script><script src="/app/utils.js"></script><script src="/app/mixins.js"></script><script src="/app/system.js"></script><script src="/app/interfaces.js"></script><script src="/app/main.js"></script></body></html>
