@@ -76,10 +76,10 @@ export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
 	y				: 100,
 	width			: 400,
 	height			: 400,
-	minWidth		: -1,
-	minHeight		: -1,
-	maxWidth		: -1,
-	maxHeight		: -1,
+	minWidth		: 50,
+	minHeight		: 50,
+	maxWidth		: NaN,
+	maxHeight		: NaN,
 	inFocus			: false,
 	state			: windowStates.New,
 	toState			: windowStates.Normal,
@@ -90,8 +90,8 @@ export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
 
 export const defaultWindowProps:IWindowInstanceProps = {
 	...defaultWindowConstructorProps,
-	contentId		: 0,
-	id				: 0,
+	contentId		: '',
+	id				: '',
 	content			: '',
 	contentState	: {},
 }

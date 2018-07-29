@@ -2,7 +2,7 @@ import {getContentState} from "@system/window"
 import {isMaximized, isOpened} from "@components/Window/methods"
 import {defaultWindowConstructorProps, IWindowConstructorPropsStrict, IWindowConstructorProps} from "@components/Window/interfaces";
 import {round, uid} from "@utils";
-import {ISizeAny, IPositionAny, ISizeStrict, IPositionStrict} from	"@interfaces";
+import {ISizeAny, IPositionAny, ISizeStrict, IPositionStrict, IPositionRelativeX, IPositionRelativeY, Percent} from	"@interfaces";
 import {store} from "@system/index";
 
 export function windowFocus(list, windowId){
@@ -47,20 +47,25 @@ function _windowCalcState(keyPosition, keySize, windowProps, contentProps) {
 
 	switch(windowPosition){
 		case 'center'	:
+		case 'middle'	:
+		case IPositionRelativeX.center:
+		case IPositionRelativeY.center:
+		case IPositionRelativeX.middle:
+		case IPositionRelativeY.middle:
 			windowPosition = '50%';
 		break;
-		case 'left'		:
-		case 'top'		:
+		case IPositionRelativeX.left:
+		case IPositionRelativeY.top:
 			windowPosition = '0%';
 		break;
-		case 'right'	:
-		case 'bottom'	:
+		case IPositionRelativeX.right:
+		case IPositionRelativeY.bottom:
 			windowPosition = '100%';
 		break;
 	}
 
-	if( isPercent.test(windowPosition) ){
-		windowPosition = parsePercent( windowPosition )*(contentSize - windowSize) || 0;
+	if( isPercent.test(windowPosition) || windowPosition instanceof Percent ){
+		windowPosition = parsePercent( windowPosition.toString() )*(contentSize - windowSize) || 0;
 	} else {
 		windowPosition = parseFloat(windowPosition) || 0;
 	}
