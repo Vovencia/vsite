@@ -8,7 +8,6 @@ export function reducer(state, action){
 		case getWindowsManagerActionName('changed'):
 			var list = taskbarGetListFromState(state);
 			if( action.type == 'Applications.loaded' ){
-				console.log('action.list', action.list)
 				list = list.filter( item => item.typeShutcut != 'app' ).concat(
 					action.list.map(function(item){
 						return {

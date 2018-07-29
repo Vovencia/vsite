@@ -1,7 +1,9 @@
-import {defaultWindowProps, windowStates, BoundsManager as WindowBoundsManager, IWindowInstanceProps} from "@components/Window";
+import {defaultWindowProps, windowStates, BoundsManager as WindowBoundsManager, IWindowInstanceProps, IWindowConstructorProps} from "@components/Window";
 import {IWindowsManagerProps} from "./interfaces";
 import {isFunction, checkAction, stateLoad, stateSave} from "@utils";
 import {windowFocus, windowMap} from "./methods";
+import {windowCalcState, getList, constructorOptions} from "./methods";
+import {actions} from "./actions";
 
 export class ReducerMethods {
 	protected state: any = {};
@@ -26,13 +28,20 @@ export class ReducerMethods {
 		stateSave("WindowsManager", this.state);
 	}
 	open(){
+		let windowProps:IWindowConstructorProps = constructorOptions(this.action.params.options);
+
+		const newWindow = {
+			...defaultWindowProps,
+			...windowProps,
+			content: this.action.content,
+		}
+
 		this.setState({
-			opened: this.state.opened.concat({
-				...defaultWindowProps,
-				...this.action.options,
-				content: this.action.content,
-			})
+			opened: this.state.opened.concat(newWindow)
 		})
+		this.action.windowId = newWindow.id;
+		this.focus()
+
 		if( isFunction(this.action.callback) ){
 			this.action.callback(this.action.id);
 		}
@@ -119,6 +128,26 @@ export class ReducerMethods {
 				return {
 					...window,
 					...windowBoundsManager.getState(),
+				}
+			})
+		})
+	}
+	setMaximize(){
+		this.setState({
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
+				return {
+					...window,
+					isMaximize: this.action.isMaximize,
+				}
+			})
+		})
+	}
+	setMinimize(){
+		this.setState({
+			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
+				return {
+					...window,
+					isMinimize: this.action.isMinimize,
 				}
 			})
 		})

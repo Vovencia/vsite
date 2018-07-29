@@ -1,5 +1,4 @@
 import * as React from "react";
-import { combineReducers } from 'redux'
 import { connect } from "react-redux";
 
 import {ILayoutProps, ILayoutDispatchProps, ILayoutState} from "./interfaces";
@@ -11,6 +10,8 @@ import WindowsManager, {reducer as WindowsManagerReducer} from "@components/Wind
 
 import ControlBar from "@components/ControlBar";
 import TaskBar, {reducer as TaskBarReducer} from "@components/Taskbar";
+
+import { reducersManager } from "@system";
 
 class Layout extends React.Component<ILayoutProps & ILayoutDispatchProps> {
 	private window: React.RefObject<HTMLDivElement>;
@@ -105,53 +106,46 @@ var ConnectedStyledLayout = connect<ILayoutProps, ILayoutDispatchProps, any>(fun
 
 
 export default ConnectedStyledLayout;
-export let reducer = combineReducers({
-	Layout: function(state: ILayoutState, action){
-		if(!state){
-			state = {};
+
+reducersManager.addLocalReducer('Layout', function(state: ILayoutState, action){
+	if(!state || !state.window){
+		state = {
+			...state,
+			window: {
+				width	: 0,
+				height	: 0,
+				x		: 0,
+				y		: 0,
+			},
 		}
-		if(!state.window){
+	}
+	if(!state || !state.content){
+		state = {
+			...state,
+			content: {
+				width	: 0,
+				height	: 0,
+				x		: 0,
+				y		: 0,
+			},
+		}
+	}
+	switch(action.type){
+		case 'Layout.setLayoutState':
 			state = {
 				...state,
 				window: {
-					width	: 0,
-					height	: 0,
-					x		: 0,
-					y		: 0,
+					...state.window,
+					...action.window,
 				},
-			}
-		}
-		if(!state.content){
-			state = {
-				...state,
 				content: {
-					width	: 0,
-					height	: 0,
-					x		: 0,
-					y		: 0,
+					...state.content,
+					...action.content,
 				},
-			}
-		}
-		switch(action.type){
-			case 'Layout.setLayoutState':
-				state = {
-					...state,
-					window: {
-						...state.window,
-						...action.window,
-					},
-					content: {
-						...state.content,
-						...action.content,
-					},
-				};
-			break;
-		}
-		return state;
-	},
-	System: function(state = {}, action){
-		return state;
-	},
-	Taskbar: TaskBarReducer,
-	WindowsManager: WindowsManagerReducer,
+			};
+		break;
+	}
+	return state;
 })
+reducersManager.addLocalReducer('Taskbar', TaskBarReducer);
+reducersManager.addLocalReducer('WindowsManager', WindowsManagerReducer);

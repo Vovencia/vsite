@@ -4,7 +4,7 @@ import {getWindowContent} from "@utils";
 import {actions, getActionName} from "./actions";
 export {actions, getActionName};
 
-import Window, {defaultWindowProps, IWindowInstanceProps as IWindowProps} from "@components/Window";
+import Window, {defaultWindowProps, IWindowInstanceProps} from "@components/Window";
 import {IWindowsManagerProps, IWindowsManagerDispatchProps} from "./interfaces";
 import {reducer} from "./reducer";
 export {reducer};
@@ -17,17 +17,21 @@ class WindowsManager extends React.Component<IWindowsManagerProps & IWindowsMana
 			</React.Fragment>
 		);
 	}
-	renderWindow(window: IWindowProps){
-		return (<Window key={window.id} {...{...window, ...getWindowContent(window)}} />);
+	renderWindow(window: IWindowInstanceProps){
+		const props = this.getWindowProps(window);
+		return (<Window {...props} />);
 	}
 	componentDidMount(){
 		actions._load();
 	}
-	getWindowProps(window){
-
-		return {
-
-		};
+	getWindowProps(window: IWindowInstanceProps): IWindowInstanceProps & React.ReactNode {
+		let props = {
+			...window,
+			key: window.id,
+			...getWindowContent(window),
+		}
+		console.log('getWindowProps', props)
+		return props;
 	}
 }
 

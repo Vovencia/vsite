@@ -1,12 +1,10 @@
+import {ISizeStrict, IPositionStrict} from "@interfaces"
+
 export interface ILayoutState {
-	window?: ILayoutStateElements,
-	content?: ILayoutStateElements,
+	window: ISizeStrict & IPositionStrict,
+	content: ISizeStrict & IPositionStrict,
 }
-export interface ILayoutStateElements {
-	width?	: number;
-	height?	: number;
-	x? 		: number;
-	y? 		: number;
+export interface ILayoutStateElements extends IPositionStrict, ISizeStrict {
 }
 export interface ILayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 	loading: boolean

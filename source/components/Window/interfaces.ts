@@ -39,6 +39,9 @@ export interface IWindowConstructorProps {
 	maxHeight		?: number,
 
 	inFocus			?: boolean;
+	isMinified		?: boolean;
+	isMaximized		?: boolean;
+
 	state			?: windowStates;
 	toState			?: windowStates;
 	resizable		?: boolean;
@@ -57,6 +60,9 @@ export interface IWindowConstructorPropsStrict {
 	maxHeight		: number,
 
 	inFocus			: boolean;
+	isMinified		: boolean;
+	isMaximized		: boolean;
+
 	state			: windowStates;
 	toState			: windowStates;
 	resizable		: boolean;
@@ -80,7 +86,11 @@ export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
 	minHeight		: 50,
 	maxWidth		: NaN,
 	maxHeight		: NaN,
+
 	inFocus			: false,
+	isMinified		: false,
+	isMaximized		: false,
+
 	state			: windowStates.New,
 	toState			: windowStates.Normal,
 	resizable		: true,

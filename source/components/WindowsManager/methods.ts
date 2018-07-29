@@ -34,13 +34,8 @@ function parsePercent(val){
 
 function _windowCalcState(keyPosition, keySize, windowProps, contentProps) {
 	var result = {};
-	if( isMaximized(windowProps) ){
-		result[keyPosition] = contentProps[keyPosition];
-		result[keySize] = contentProps[keySize];
-		return result;
-	}
 
-	var windowSize = windowClasStateSize(keySize, windowProps, contentProps);
+	var windowSize = windowCalcStateSize(keySize, windowProps, contentProps);
 	var windowPosition = windowProps[keyPosition];
 
 	var contentSize = contentProps[keySize];
@@ -76,7 +71,7 @@ function _windowCalcState(keyPosition, keySize, windowProps, contentProps) {
 
 	return result;
 }
-function windowClasStateSize(keySize, windowProps, contentProps) {
+function windowCalcStateSize(keySize, windowProps, contentProps) {
 	if( isPercent.test(windowProps[keySize]) ){
 		return parsePercent(windowProps[keySize])*contentProps[keySize];
 	}
@@ -112,5 +107,13 @@ export function constructorOptions(options: IWindowConstructorProps): IWindowCon
 		id: uid(),
 		...options,
 		...windowCalcState(options),
+	}
+}
+
+export function getWindowMaximizedSize(): ISizeStrict {
+	var contentState = getContentState();
+	return {
+		width: contentState.width,
+		height: contentState.height,
 	}
 }

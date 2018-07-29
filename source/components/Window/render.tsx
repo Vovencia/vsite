@@ -14,8 +14,6 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 		this.ResizeBorders = this.ResizeBorders.bind(this);
 		this.Header = this.Header.bind(this);
 		this.Body = this.Body.bind(this);
-		// this.lastProps = props;
-		console.log('constructor')
 	}
 
 	render(){

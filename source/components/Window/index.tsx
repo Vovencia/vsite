@@ -87,7 +87,10 @@ class Window extends WindowRender {
 		event.preventDefault();
 		switch(type){
 			case 'close':
-				WindowsManagerActions.close(this.props.id);
+				this.close();
+			break;
+			case 'maximize':
+				this.setMaximize( !this.props.isMaximized );
 			break;
 		}
 	}
@@ -173,6 +176,15 @@ class Window extends WindowRender {
 		if(addPosition.x) position.x += addPosition.x;
 		if(addPosition.y) position.y += addPosition.y;
 		this.setPosition(position);
+	}
+	setMaximize(isMaximize: boolean){
+		WindowsManagerActions.setMaximize(this.props.id, isMaximize);
+	}
+	setMinimize(isMinimize: boolean){
+		WindowsManagerActions.setMinimize(this.props.id, isMinimize);
+	}
+	close(){
+		WindowsManagerActions.close(this.props.id);
 	}
 }
 

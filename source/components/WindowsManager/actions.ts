@@ -3,7 +3,7 @@ import {store} from "@system/index";
 import {createAction, uid} from "@utils";
 import {ISize, IPosition,IBounds} from	"@interfaces";
 
-import {windowCalcState, getList, constructorOptions} from "./methods";
+import {getList} from "./methods";
 
 let _createAction = createAction.bind({}, "WindowsManager");
 
@@ -18,12 +18,7 @@ export let actions = {
 		actions.changed();
 	},
 	open(params: {options?: IWindowConstructorProps, content, callback?: (windowId: string) => void}) {
-		params = {...params};
-
-		let windowProps:IWindowConstructorProps = constructorOptions(params.options);
-		params.options = windowProps;
-		store.dispatch(_createAction("open", params));
-		actions.focus( windowProps.id );
+		store.dispatch(_createAction("open", {params}));
 		actions.changed();
 	},
 	focus(windowId: string){
@@ -57,5 +52,11 @@ export let actions = {
 	},
 	setSize(windowId, size: ISize){
 		store.dispatch(_createAction("setSize", {windowId, size}));
+	},
+	setMaximize(windowId, isMaximize: boolean = true){
+		store.dispatch(_createAction("setMaximize", {windowId, isMaximize}));
+	},
+	setMinimize(windowId, isMinimize: boolean = true){
+		store.dispatch(_createAction("setMinimize", {windowId, isMinimize}));
 	}
 }

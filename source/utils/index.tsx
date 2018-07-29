@@ -6,6 +6,7 @@ import {ISize, IPosition, ISizeStrict, IPositionStrict} from "@interfaces";
 
 export * from "./ReactComponentWithEventEmmiter";
 export * from "./AliveReactComponent";
+export * from "./ReducersManager";
 
 export function el(tagName, name, _props?){
 	var result = function (props){

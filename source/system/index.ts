@@ -1,26 +1,40 @@
+import {createStore} from "redux";
+
 import * as _window from "./window";
+
 import {reducer as loadingReducer} from "./loading";
 import {reducer as taskbarUpdateReducer} from "./taskbar-update";
 
-import {render} from "./render";
 import {init} from "./init";
-import {createStore} from "./store";
+import {ReducersManager} from "@utils";
 
 export {_window as window}
 
-export function reducer(state, action){
-	state = loadingReducer(state, action);
-	state = taskbarUpdateReducer(state, action);
-	return state;
-}
+export const reducersManager = new ReducersManager();
 
+reducersManager.addReducer(loadingReducer);
+reducersManager.addReducer(taskbarUpdateReducer);
 
-export const store = createStore();
+export const store = createStore(reducersManager.getMainReducer());
+
+Object.assign(window, {
+	__store: store,
+})
+
 init(store);
+
+import {render} from "./render";
 render(store);
 
 declare let _App: Array<string>;
 
 export function getApp(appId) {
 	console.log(appId);
+}
+
+export function getState(){
+	if( reducersManager.isInReducer() ){
+		return reducersManager.getGlobalState();
+	}
+	return store.getState();
 }
