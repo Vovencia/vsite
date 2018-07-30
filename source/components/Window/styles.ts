@@ -53,6 +53,7 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			justify-content: stretch;
 			text-align: ${ props => (console.log(props), props['windowWidth'] > 200 ? 'center' : 'left') };
 			padding: 0 ${ props => (console.log(props), props['windowWidth'] > 200 ? '45rem' : '10rem') } 0 45rem;
+			pointer-events: none;
 		`,
 		TitleText: styled(TitleText)`
 			display: block;

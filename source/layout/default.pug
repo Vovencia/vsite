@@ -86,4 +86,4 @@ html(lang="ru")
 			window.__Apps = !{ JSON.stringify(appsList) }
 
 		each file in appFiles
-			script(src=file)
+			script(src=('.' + file))
