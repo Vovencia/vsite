@@ -1,10 +1,29 @@
 {
-  "compilerOptions": {
-	"target": "es6",
-	"allowSyntheticDefaultImports": true,
-	"sourceMap": true,
-	"allowJs": true
-  },
-  "exclude": ["node_modules"],
-  "files": ["index.ts"]
+	"compilerOptions": {
+        "target": "es5",
+        "lib": ["es2015", "es2017", "dom"],
+		"outDir": "./docs",
+		"watch": true,
+		"sourceMap": true,
+		"jsx": "react",
+		"importHelpers": true,
+		"module": "CommonJS",
+		"baseUrl": ".",
+		"paths": {
+			"@system": ["./source/system/index"],
+			"@system/*": ["./source/system/*"],
+			"@utils": ["./source/utils/index"],
+			"@utils/*": ["./source/utils/*"],
+			"@components": ["./source/components/index"],
+			"@components/*": ["./source/components/*"],
+			"@apps": ["./source/apps/index"],
+			"@apps/*": ["./source/apps/*"],
+			"@assets": ["./source/assets/index"],
+			"@assets/*": ["./source/assets/*"],
+			"@interfaces": ["./source/interfaces/index"],
+			"@interfaces/*": ["./source/interfaces/*"],
+			"@mixins": ["./source/mixins/index"],
+			"@mixins/*": ["./source/mixins/*"]
+		}
+	}
 }

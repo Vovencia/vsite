@@ -1,18 +1,89 @@
-include ../mixins/pug/*.pug
-<!DOCTYPE html>
+include ../mixins/mixins
+doctype html
 html(lang="ru")
 	head
+		-
+			const requireFiles = [
+				"browserconfig.xml",
+				"site.webmanifest",
+				"images/app-icon/android-chrome-192x192.png",
+				"images/app-icon/android-chrome-512x512.png",
+				"images/app-icon/apple-touch-icon.png",
+				"images/app-icon/favicon.ico",
+				"images/app-icon/favicon-16x16.png",
+				"images/app-icon/favicon-32x32.png",
+				"images/app-icon/icon.svg",
+				"images/app-icon/icon-512.png",
+				"images/app-icon/mstile-150x150.png",
+				"images/app-icon/safari-pinned-tab.svg",
+			]
+			requireFiles.forEach( file => require("@assets/" + file) )
 		meta(charset="UTF-8")
 		meta(name="viewport", content="width=device-width, initial-scale=1.0")
-		title VSite
-
-		link(rel="stylesheet", href="assets/styles/prolog.css")
-		script(src="assets/scripts/prolog.bundle.js")
-
+		link(rel="apple-touch-icon" sizes="180x180" href=require("@assets/images/app-icon/apple-touch-icon.png"))
+		link(rel="icon" type="image/png" sizes="32x32" href=require("@assets/images/app-icon/favicon-32x32.png"))
+		link(rel="icon" type="image/png" sizes="16x16" href=require("@assets/images/app-icon/favicon-16x16.png"))
+		link(rel="manifest" href=require("@assets/site.webmanifest"))
+		link(rel="mask-icon" href=require("@assets/images/app-icon/safari-pinned-tab.svg") color="#5bbad5")
+		meta(name="msapplication-TileColor" content="#2cbfbf")
+		meta(name="theme-color" content="#ffffff")
+		title Document
+		style.
+			.preloader {
+				position: fixed;
+				z-index: 999999;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				transition: all 0.3s;
+				background: #111;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				color: #fff;
+				font-weight: 300;
+				font-size: 20px;
+				line-height: 1;
+				font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+				cursor: progress !important;
+			}
+			.preloader:before {
+				content: '';
+				display: block;
+				width: 64px;
+				height: 64px;
+				border-radius: 50%;
+				box-sizing: padding-box;
+				box-sizing: border-box;
+				border-left: 1px solid #fff;
+				margin-bottom: 20px;
+				animation: preloader-animation 0.7s infinite linear;
+			}
+			@keyframes preloader-animation {
+				from {
+					transform: rotate(0)
+				}
+				to {
+					transform: rotate(360deg)
+				}
+			}
+			.document-loaded .preloader {
+				opacity: 0;
+				visibility: hidden;
+			}
 	body
-		block content
+		.preloader
+		#App
 
+		- var jsFiles 	  = [].concat(locals.htmlWebpackPlugin.files.js);
+		- var appFiles	  = [];
+		- var appsList 	  = [];
+		- var excludeApps = (file, list) => (file.indexOf('/apps/') !== 0)
+		- appFiles = jsFiles.filterTo(excludeApps, appsList);
+		script.
+			window.__Apps = !{ JSON.stringify(appsList) }
 
-		link(rel="stylesheet", href="assets/styles/main.css")
-		script(src="https://code.jquery.com/jquery-3.3.1.min.js")
-		script(src="assets/scripts/main.bundle.js")
+		each file in appFiles
+			script(src=file)

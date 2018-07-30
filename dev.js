@@ -1,0 +1,1 @@
+console.log('use "npm run dev" | "node_modules/.bin/webpack-dev-server"')

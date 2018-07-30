@@ -1,0 +1,6 @@
+-
+	Array.prototype.filterTo = function(handler, excludedArray) {
+		return this.filter(function(item, index, array){
+			return handler.call(this, item, index, array) || (excludedArray.push(item), false);
+		})
+	}
