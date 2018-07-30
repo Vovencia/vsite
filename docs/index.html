@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="apple-touch-icon" sizes="180x180" href="/assets/images/app-icon/assets/images/app-icon/assets/images/app-icon/apple-touch-icon.png?f49634ca4dd46a195efe914f2135eb43"><link rel="icon" type="image/png" sizes="32x32" href="/assets/images/app-icon/assets/images/app-icon/assets/images/app-icon/favicon-32x32.png?bc4200aa0f853e5d1dad73a1c81514a0"><link rel="icon" type="image/png" sizes="16x16" href="/assets/images/app-icon/assets/images/app-icon/assets/images/app-icon/favicon-16x16.png?fcc2a9eb86094b6c90b0eb347219d8c4"><link rel="manifest" href="/assets/assets/assets/site.webmanifest?87ebfd2ad240763f1c0f8cc41d3d1bf6"><link rel="mask-icon" href="/assets/images/app-icon/assets/images/app-icon/assets/images/app-icon/safari-pinned-tab.svg?b330b2a4fcb9b5711de5566c8f118f75" color="#5bbad5"><meta name="msapplication-TileColor" content="#2cbfbf"><meta name="theme-color" content="#ffffff"><title>Document</title><style>.preloader {
+	position: fixed;
+	z-index: 999999;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	transition: all 0.3s;
+	background: #111;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	font-weight: 300;
+	font-size: 20px;
+	line-height: 1;
+	font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;
+	cursor: progress !important;
+}
+.preloader:before {
+	content: '';
+	display: block;
+	width: 64px;
+	height: 64px;
+	border-radius: 50%;
+	box-sizing: padding-box;
+	box-sizing: border-box;
+	border-left: 1px solid #fff;
+	margin-bottom: 20px;
+	animation: preloader-animation 0.7s infinite linear;
+}
+@keyframes preloader-animation {
+	from {
+		transform: rotate(0)
+	}
+	to {
+		transform: rotate(360deg)
+	}
+}
+.document-loaded .preloader {
+	opacity: 0;
+	visibility: hidden;
+}</style></head><body><div class="preloader"></div><div id="App"></div><script>window.__Apps = ["/apps/browser/index.js","/apps/browser/content.js","/apps/calculator/index.js","/apps/calculator/content.js"]
+</script><script src="./runtime.js"></script><script src="./app/vendors.js"></script><script src="./app/components.js"></script><script src="./app/utils.js"></script><script src="./app/mixins.js"></script><script src="./app/system.js"></script><script src="./app/interfaces.js"></script><script src="./app/main.js"></script></body></html>

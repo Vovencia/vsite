@@ -133,8 +133,10 @@ var config = {
 					{
 						loader: 'file-loader',
 						options: {
+							useRelativePath: true,
 							outputPath: function(path){
-								return path.replace('source/', '');
+								path = path.replace('/source/', '');
+								return path;
 							},
 							name: '[path][name].[ext]?[hash]',
 						}
