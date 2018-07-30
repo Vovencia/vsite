@@ -10,6 +10,8 @@ import {ReducersManager} from "@utils";
 
 export {_window as window}
 
+export * from "./methods";
+
 export const reducersManager = new ReducersManager();
 
 reducersManager.addReducer(loadingReducer);
@@ -37,4 +39,9 @@ export function getState(){
 		return reducersManager.getGlobalState();
 	}
 	return store.getState();
+}
+
+import {layoutRef} from "@components/Layout";
+export function getDocumentRef(){
+	return layoutRef;
 }

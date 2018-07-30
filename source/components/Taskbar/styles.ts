@@ -51,10 +51,10 @@ module.exports = function(obj, {Content, Item, ...children}){
 						position: absolute;
 						right: 0rem;
 						bottom: 0rem;
-						width: 10rem;
-						height: 10rem;
+						width: 5rem;
+						height: 5rem;
 						border-radius: 50%;
-						background: #5f5;
+						background: ${ (props['States'] && props['States'].indexOf('inFocus') != -1) ? '#5f5' : '#ff5' };
 					}
 				`;
 			}}

@@ -37,6 +37,18 @@ export function reducer(state, action){
 					}).sort(sortByKey('id'))
 				)
 			}
+
+			list.sort(function(a, b){
+				if( a.appInfo.uid > b.appInfo.uid ) return  1;
+				if( a.appInfo.uid < b.appInfo.uid ) return -1;
+				if( a.id > b.appInfo.id ) return  1;
+				if( a.id < b.appInfo.id ) return -1;
+
+				return 0;
+			})
+
+			console.log('list', list);
+
 			state = taskbarSetListInState(list, state);
 		break;
 	}

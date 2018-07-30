@@ -10,7 +10,7 @@ module.exports = function(Self){
 	`;
 }
 
-module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, ResizeBorder, ...children}){
+module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, ResizeBorder, Title, TitleText, ...children}){
 	return {
 		...children,
 		Box: styled(Box)`
@@ -21,7 +21,7 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			left: 100rem;
 			display: flex;
 			flex-direction: column;
-			transition: transform 0.3s, opacity 0.3s, top 0.05s, left 0.05s, height 0.05s, width 0.05s;
+			transition: transform 0.3s, opacity 0.3s/*, top 0.05s, left 0.05s, height 0.05s, width 0.05s*/;
 		`,
 		Header: styled(Header)`
 			width: 100%;
@@ -31,6 +31,9 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			flex-grow: 0;
 			flex-shrink: 0;
 			position: relative;
+			&:active {
+				cursor: pointer;
+			}
 		`,
 		Body: styled(Body)`
 			display: flex;
@@ -39,10 +42,33 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			overflow: hidden;
 			position: relative;
 		`,
+		Title: styled(Title)`
+			display: flex;
+			flex-grow: 1;
+			flex-shrink: 1;
+			width: 100%;
+			font-size: 10rem;
+			font-weight: 300;
+			align-items: center;
+			justify-content: stretch;
+			text-align: ${ props => (console.log(props), props['windowWidth'] > 200 ? 'center' : 'left') };
+			padding: 0 ${ props => (console.log(props), props['windowWidth'] > 200 ? '45rem' : '10rem') } 0 45rem;
+		`,
+		TitleText: styled(TitleText)`
+			display: block;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			width: 100%;
+		`,
 		Buttons: styled(Buttons)`
 			display: flex;
 			align-items: center;
 			padding: 6rem;
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
 		`,
 		ButtonControl: styled(ButtonControl)`
 			display: block;

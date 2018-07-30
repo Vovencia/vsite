@@ -58,16 +58,14 @@ export class BoundsManager {
 			const _minSize = minSize[sizeKey];
 			const _maxSize = maxSize[sizeKey];
 
-			if( _minSize >= 0 && ((value2 - value1) < _minSize) ){
-				console.log('1')
+			if( _minSize != null && _minSize >= 0 && ((value2 - value1) < _minSize) ){
 				if( changed2 ){
 					newBounds[key2] = value1 + _minSize;
 				} else {
 					newBounds[key1] = value2 - _minSize;
 				}
 			}
-			if( _maxSize >= 0 && ((value2 - value1) > _maxSize) ){
-				console.log('2')
+			if( _maxSize != null && _maxSize >= 0 && ((value2 - value1) > _maxSize) ){
 				if( changed2 ){
 					newBounds[key2] = value1 + _maxSize;
 				} else {
@@ -75,7 +73,6 @@ export class BoundsManager {
 				}
 			}
 			if( newBounds[key1] > newBounds[key2] ){
-				console.log('3')
 				if( changed2 ){
 					newBounds[key2] = newBounds[key1];
 				} else {

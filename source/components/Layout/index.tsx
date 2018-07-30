@@ -13,6 +13,8 @@ import TaskBar, {reducer as TaskBarReducer} from "@components/Taskbar";
 
 import { reducersManager } from "@system";
 
+export const layoutRef = React.createRef<HTMLDivElement>();
+
 class Layout extends React.Component<ILayoutProps & ILayoutDispatchProps> {
 	private window: React.RefObject<HTMLDivElement>;
 	private content: React.RefObject<HTMLDivElement>;
@@ -25,7 +27,7 @@ class Layout extends React.Component<ILayoutProps & ILayoutDispatchProps> {
 	}
 	render() {
 		return (
-			<div className={this.props.className}>
+			<div className={this.props.className} ref={layoutRef}>
 				<Cursor />
 				
 				{ !this.props.loading && this.renderContent() }

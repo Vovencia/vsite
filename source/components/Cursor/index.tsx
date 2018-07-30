@@ -1,5 +1,6 @@
 import * as React from "react";
 import "./index.styl";
+import * as fs from "fs";
 
 interface ICursorState {
 	mouseX: Number,
@@ -9,11 +10,14 @@ interface ICursorState {
 }
 
 class Cursor extends React.Component<null, ICursorState> {
+	private cursors = require('!svg-inline-loader!@assets/images/cursors/cursors.svg');
+
 	constructor(props){
 		super(props);
+		this.checkCursor 	= this.checkCursor.bind(this);
+
 		this.handlerMouseMove 	= this.handlerMouseMove.bind(this);
 
-		this.handlerMouseOver 	= this.handlerMouseOver.bind(this);
 		this.handlerMouseOut 	= this.handlerMouseOut.bind(this);
 
 		this.handlerMouseDown 	= this.handlerMouseDown.bind(this);
@@ -24,33 +28,48 @@ class Cursor extends React.Component<null, ICursorState> {
 		this.handlerDrag 	= this.handlerDrag.bind(this);
 
 		this.state = {
-			mouseX: -100,
-			mouseY: -100,
+			mouseX: null,
+			mouseY: null,
 			cursor: 'default',
 			mouseState: {}
 		}
 	}
 	render(){
+		let styles:CSSStyleDeclaration = {} as CSSStyleDeclaration;
+		
+
+		if( this.state.mouseX != null ){
+			styles.left = this.state.mouseX + 'px';
+		}
+		if( this.state.mouseY != null ){
+			styles.top = this.state.mouseY + 'px';
+		}
+
 		var attrs = {
 			...this.props,
-			'style': {left: this.state.mouseX + 'px', top: this.state.mouseY + 'px'},
+			'style': styles as object,
 			'data-cursor': this.state.cursor,
 			'data-state': this.getMouseState(),
+
+			dangerouslySetInnerHTML: {
+				__html: this.cursors
+			}
 		};
 
+		// const cursorSvg = fs.readFileSync( require('@assets/images/cursors/cursors.svg') )
+
 		return (
-			<div {...attrs} >
-				<svg version="1.1" x="0px" y="0px" viewBox="-50 -50 563 563">
-					<path d="M359.55,344.47,18.22,3.13A10.67,10.67,0,0,0,0,10.69V501.35a10.66,10.66,0,0,0,18.47,7.25L154,362.69H352a10.67,10.67,0,0,0,7.55-18.22Z"/>
-				</svg>
-			</div>
+			<div {...attrs} ></div>
 		);
 	}
 	componentDidMount(){
+		document.addEventListener('mouseover', this.checkCursor);
+		document.addEventListener('mousedown', this.checkCursor);
+		document.addEventListener('mouseup', this.checkCursor);
+
 		document.addEventListener('mousemove', this.handlerMouseMove);
 		window.addEventListener('drag' , this.handlerMouseMove);
 
-		document.addEventListener('mouseover', this.handlerMouseOver);
 		document.addEventListener('mouseout' , this.handlerMouseOut);
 
 		window.addEventListener('mousedown' , this.handlerMouseDown);
@@ -62,10 +81,13 @@ class Cursor extends React.Component<null, ICursorState> {
 		window.addEventListener('drag' , this.handlerDrag);
 	}
 	componentWillUnmount(){
+		document.removeEventListener('mouseover', this.checkCursor);
+		document.removeEventListener('mousedown', this.checkCursor);
+		document.removeEventListener('mouseup', this.checkCursor);
+
 		document.removeEventListener('mousemove', this.handlerMouseMove);
 		window.removeEventListener('drag' , this.handlerMouseMove);
 
-		document.removeEventListener('mouseover', this.handlerMouseOver);
 		document.removeEventListener('mouseout' , this.handlerMouseOut);
 
 		window.removeEventListener('mousedown' , this.handlerMouseDown);
@@ -76,7 +98,7 @@ class Cursor extends React.Component<null, ICursorState> {
 		window.removeEventListener('dragend' , this.handlerDragEnd);
 		window.removeEventListener('drag' , this.handlerDrag);
 	}
-	handlerMouseOver(event){
+	checkCursor(event){
 		let targets = event.path;
 		let cursor = "";
 

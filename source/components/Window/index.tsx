@@ -4,6 +4,8 @@ import {positionToSize, sizeToPosition} from "@utils";
 
 import {windowStates, windowPressState, windowBorderTypes} from "./interfaces";
 
+import {documentAddClass, documentRemoveClass} from "@system";
+
 export * from "./interfaces";
 export * from "./methods";
 export * from "./boundsManager";
@@ -20,6 +22,7 @@ class Window extends WindowRender {
 		super(props);
 		this.handlerMouseMove = this.handlerMouseMove.bind(this);
 		this.handlerMouseUp = this.handlerMouseUp.bind(this);
+		this.handleGlobalClick = this.handleGlobalClick.bind(this);
 	}
 	checkSizeValue(value: number | string){
 		if(typeof value == 'number') return value + 'px';
@@ -29,21 +32,37 @@ class Window extends WindowRender {
 		if(this.props.state === windowStates.New){
 			setTimeout(() => WindowsManagerActions.show(this.props.id), 10);
 		}
+		document.documentElement.addEventListener('click', this.handleGlobalClick);
+
 		document.documentElement.addEventListener('mousemove', this.handlerMouseMove);
 		document.documentElement.addEventListener('mouseup', this.handlerMouseUp);
 	}
 	componentWillUnmount(){
+		document.documentElement.removeEventListener('click', this.handleGlobalClick);
+
 		document.documentElement.removeEventListener('mousemove', this.handlerMouseMove);
 		document.documentElement.removeEventListener('mouseup', this.handlerMouseUp);
 	}
+	handleGlobalClick(event: MouseEvent){
+		if( !this.props.inFocus ) return;
+		let parent = event.target as Element;
+		do {
+			if( parent == this.boxRef.current ) return;
+		} while ( (parent = parent.parentElement) && parent instanceof Element );
+		this.unfocus();
+		
+	}
 	handlerOnPress(event){
 		event.preventDefault();
-		WindowsManagerActions.focus(this.props.id);
+		this.focus();
 	}
 	handlerHeaderOnPress(event){
 		if( event.target != this.headerRef.current ) return;
 		event.preventDefault();
 		this.pressed = windowPressState.Header;
+
+		documentAddClass('window__press--window-header');
+
 		this.lastMousePosition = {
 			x: event.clientX,
 			y: event.clientY,
@@ -52,6 +71,9 @@ class Window extends WindowRender {
 	handlerResizeBorderPress(direction: windowBorderTypes, event){
 		event.preventDefault();
 		this.pressed = windowPressState.Border;
+
+		documentAddClass('window__press--window-header');
+
 		this.lastMousePosition = {
 			x: event.clientX,
 			y: event.clientY,
@@ -60,6 +82,9 @@ class Window extends WindowRender {
 	}
 	handlerMouseUp(){
 		this.pressed = windowPressState.None;
+
+		documentRemoveClass('window__press--window-header');
+		documentRemoveClass('window__press--window-header');
 	}
 	handlerMouseMove(event){
 		if(this.pressed == windowPressState.None) return;
@@ -185,6 +210,12 @@ class Window extends WindowRender {
 	}
 	close(){
 		WindowsManagerActions.close(this.props.id);
+	}
+	focus(){
+		WindowsManagerActions.focus(this.props.id);
+	}
+	unfocus(){
+		WindowsManagerActions.unfocus(this.props.id);
 	}
 }
 

@@ -56,6 +56,11 @@ export class ReducerMethods {
 			opened: windowFocus(this.state.opened, this.action.windowId),
 		})
 	}
+	unfocus(){
+		this.setState({
+			opened: windowFocus(this.state.opened, this.action.windowId, false),
+		})
+	}
 	show(){
 		this.setState({
 			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {

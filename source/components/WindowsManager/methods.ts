@@ -5,12 +5,12 @@ import {round, uid} from "@utils";
 import {ISizeAny, IPositionAny, ISizeStrict, IPositionStrict, IPositionRelativeX, IPositionRelativeY, Percent} from	"@interfaces";
 import {store} from "@system/index";
 
-export function windowFocus(list, windowId){
+export function windowFocus(list, windowId, setFocus = true){
 	var focusWindow;
 	list = list.filter(function(window) {
-		if( window.id === windowId ){
+		if( setFocus && window.id === windowId ){
 			focusWindow = window;
-			window.inFocus = true;
+			window.inFocus = setFocus;
 			return false;
 		}
 		window.inFocus = false;

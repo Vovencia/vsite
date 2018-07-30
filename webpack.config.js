@@ -128,7 +128,7 @@ var config = {
 				}]
 			},
 			{
-				test: /\.(png|jpg|gif|svg)$/,
+				test: /((\/assets\/|\\assets\\)|(\.(png|jpg|gif|svg)$))/,
 				use: [
 					{
 						loader: 'file-loader',

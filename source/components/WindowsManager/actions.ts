@@ -23,15 +23,22 @@ export let actions = {
 	},
 	focus(windowId: string){
 		store.dispatch(_createAction("focus", {windowId}));
+		actions.changed();
+	},
+	unfocus(windowId: string){
+		store.dispatch(_createAction("unfocus", {windowId}));
+		actions.changed();
 	},
 	setPosition(windowId: string, position: IPosition){
 		store.dispatch(_createAction("setPosition", {windowId, position}));
 	},
 	show(windowId: string){
 		store.dispatch(_createAction("show", {windowId}));
+		actions.changed();
 	},
 	hide(windowId: string){
 		store.dispatch(_createAction("hide", {windowId}));
+		actions.changed();
 	},
 	close(windowId){
 		store.dispatch(_createAction("closing", {windowId}));

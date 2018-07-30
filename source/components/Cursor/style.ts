@@ -7,6 +7,8 @@ module.exports = function StylesCursor(Cursor) {
 		color: #20efa4;
 		transition: color 0.3s;
 		z-index: 1000;
+		top: 50%;
+		left: 50%;
 		&:before {
 			content: '';
 			display: block;
@@ -35,34 +37,48 @@ module.exports = function StylesCursor(Cursor) {
 		}
 		svg {
 			display: block;
-			width: 20px;
+			width: 40rem;
+			height: 40rem;
 			color: #20efa4;
 			fill: currentColor;
 			stroke: currentColor;
-			stroke-width: 50;
+			stroke-width: 0;
 			z-index: 1;
 			position: absolute;
-			top: 0;
-			left: 0;
+			top: -20rem;
+			left: -20rem;
 			transition: all 0.3s;
 			transform-origin: top left;
+			#default {
+				display: block;
+			}
+			*:not(#default) {
+				display: none;
+			}
+		}
+		&[data-cursor="default"]{
+			svg {
+				#default {
+					display: block;
+				}
+				*:not(#default) {
+					display: none;
+				}
+			}
 		}
 		&[data-cursor="pointer"] {
 			&,
 			svg {
 				color: #efe120;
 			}
-			/* &:before {
-				visibility: visible;
-				opacity: 1;
-				width: 10px;
-				height: 10px;
-				margin: -5px 0 0 -5px;
-			} */
-			/* svg {
-				fill: transparent;
-				stroke-dasharray: 100;
-			} */
+			svg {
+				#pointer {
+					display: block;
+				}
+				*:not(#pointer) {
+					display: none;
+				}
+			}
 		}
 		&[data-state*="active"] {
 			svg {

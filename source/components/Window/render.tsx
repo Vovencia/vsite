@@ -2,6 +2,7 @@ import * as React from "react";
 import {div, el, mapToArray} from "@utils";
 import {IWindowInstanceProps, windowBorderTypes} from "./interfaces";
 import {isVisible} from "./index";
+import {getDocumentRef} from "@system";
 
 
 export default class WindowRender extends React.PureComponent<IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>> {
@@ -49,6 +50,11 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 				<Buttons>
 					{ this.getButtonControlList().map(this.renderButtonControl.bind(this)) }
 				</Buttons>
+				<Title windowWidth={ this.props.width }>
+					<TitleText>
+						{ this.props.appInfo.name }
+					</TitleText>
+				</Title>
 			</Header>
 		)
 	}
@@ -107,6 +113,7 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 			height		: this.getValue(this.props.height),
 		}
 		return {
+			documentRef: getDocumentRef(),
 			style: style,
 			elementRef: this.boxRef,
 			isVisible: isVisible(this.props),
@@ -123,11 +130,15 @@ let {
 	Body,
 	Buttons,
 	ButtonControl,
+	Title,
+	TitleText,
 
 	ResizeBorder,
 } = require('./styles').children({
 	Box: div("Window_Box"),
 	Header: div("Window_Header"),
+	Title: div("Window_Title"),
+	TitleText: div("Window_TitleText"),
 	Body: div("Window_Body"),
 	Buttons: div("Window_Buttons"),
 	ButtonControl: el("button", "Window_ButtonControl"),

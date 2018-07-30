@@ -8,7 +8,11 @@ import {getApp} from "@system";
 
 export default function(){
 	var promise = new Promise(function(resolve, reject){
-		setTimeout( () => resolve([apps.calculator]), 10 );
+
+		let _apps = [];
+		for(let key in apps) _apps.push(apps[key]);
+
+		setTimeout( () => resolve(_apps), 10 );
 	});
 
 	return promise;
