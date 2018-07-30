@@ -148,7 +148,11 @@ var config = {
 
 	plugins: [
 		new CheckerPlugin(),
-		new CleanWebpackPlugin([_path('docs', '*')]),
+		new CleanWebpackPlugin(
+			[_path('docs', '!(CNAME)')],
+		{
+
+		}),
 		// Generates an `index.html` file with the <script> injected.
 		new HtmlWebpackPlugin({
 			inject: false,
