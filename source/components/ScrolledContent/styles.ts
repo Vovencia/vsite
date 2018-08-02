@@ -1,7 +1,7 @@
 import {styled} from "@utils";
 
 
-module.exports = function(obj, {Content, Track,Bar, ...children}){
+export default function(obj, {Content, Track,Bar, ...children}){
 	return {
 		...children,
 		Self: styled(obj)`

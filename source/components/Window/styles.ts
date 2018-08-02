@@ -1,7 +1,7 @@
 import {styled} from "@utils";
 
 
-module.exports = function(Self){
+export function self (Self){
 	return styled(Self)`
 		position: fixed;
 		width: 400rem;
@@ -10,7 +10,7 @@ module.exports = function(Self){
 	`;
 }
 
-module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, ResizeBorder, Title, TitleText, ...children}){
+export function children({Box, Header, Body, Buttons, ButtonControl, ResizeBorder, Title, TitleText, ...children}){
 	return {
 		...children,
 		Box: styled(Box)`
@@ -32,7 +32,7 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			flex-shrink: 0;
 			position: relative;
 			&:active {
-				cursor: pointer;
+				cursor: grabbing;
 			}
 		`,
 		Body: styled(Body)`
@@ -51,8 +51,8 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			font-weight: 300;
 			align-items: center;
 			justify-content: stretch;
-			text-align: ${ props => (console.log(props), props['windowWidth'] > 200 ? 'center' : 'left') };
-			padding: 0 ${ props => (console.log(props), props['windowWidth'] > 200 ? '45rem' : '10rem') } 0 45rem;
+			text-align: ${ props => props['windowWidth'] > 200 ? 'center' : 'left' };
+			padding: 0 ${ props => props['windowWidth'] > 200 ? '45rem' : '10rem' } 0 45rem;
 			pointer-events: none;
 		`,
 		TitleText: styled(TitleText)`
@@ -87,8 +87,8 @@ module.exports.children = function({Box, Header, Body, Buttons, ButtonControl, R
 			position: absolute;
 			font-size: 4rem;
 			z-index: 2;
-			background: red;
-			${ ResizeBorderStyle };
+			/* background: red; */
+			${ ResizeBorderStyle }
 		`
 	}
 }
@@ -205,7 +205,7 @@ function ResizeBorderStyle(props){
 	if( props['Type'].indexOf('-') != -1 ){
 		result += `
 			z-index: 3;
-			background: green;
+			/* background: green; */
 		`;
 	}
 

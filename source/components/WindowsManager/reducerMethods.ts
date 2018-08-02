@@ -28,13 +28,15 @@ export class ReducerMethods {
 		stateSave("WindowsManager", this.state);
 	}
 	open(){
-		let windowProps:IWindowConstructorProps = constructorOptions(this.action.params.options);
+		let windowProps:IWindowConstructorProps = constructorOptions(this.action.options);
 
-		const newWindow = {
+		let newWindow = {
 			...defaultWindowProps,
 			...windowProps,
 			content: this.action.content,
 		}
+
+		console.log('newWindow', newWindow)
 
 		this.setState({
 			opened: this.state.opened.concat(newWindow)

@@ -220,5 +220,5 @@ class Window extends WindowRender {
 }
 
 
-let StyledWindow = require('./styles')(Window);
+let StyledWindow = require('./styles').self(Window);
 export default StyledWindow;

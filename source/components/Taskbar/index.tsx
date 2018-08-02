@@ -40,7 +40,7 @@ let {
 	Self: StyledTaskBar,
 	Content,
 	Item,
-} = require("./styles.ts")(TaskBar, {
+} = require("./styles.ts").default(TaskBar, {
 	Content: div("TaskBar_Content"),
 	Item: el("a", "TaskBar_Item", {href: "#"}),
 })

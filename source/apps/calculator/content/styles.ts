@@ -1,7 +1,7 @@
 import {styled} from "@utils";
 
 
-module.exports = function(Self, {Display, DisplayText, Button, Buttons, ...children}){
+export default function(Self, {Display, DisplayText, Button, Buttons, ...children}){
 	return {
 		...children,
 		Self: styled(Self)`

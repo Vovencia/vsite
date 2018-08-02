@@ -1,13 +1,15 @@
 {
 	"compilerOptions": {
-        "target": "es5",
+		"target": "es5",
+		"module": "esnext",
+		"moduleResolution": "node",
+
         "lib": ["es2015", "es2017", "dom"],
 		"outDir": "./docs",
 		"watch": true,
 		"sourceMap": true,
 		"jsx": "react",
 		"importHelpers": true,
-		"module": "CommonJS",
 		"baseUrl": ".",
 		"paths": {
 			"@system": ["./source/system/index"],

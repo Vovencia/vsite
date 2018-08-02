@@ -19,7 +19,7 @@ let {
 	Self: StyledControlBar,
 	RightPanel,
 	Time: StyledTime
-} = require("./styles.ts")(ControlBar, {
+} = require("./styles.ts").default(ControlBar, {
 	RightPanel: div("ControlBar_RightPanel"),
 	Time: Time,
 });

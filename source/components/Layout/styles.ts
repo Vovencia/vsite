@@ -1,6 +1,6 @@
 import {_styled as _, styled} from "@utils";
 
-module.exports = function(obj, {Container, Content, ContainerColumn, ContainerRow,...children}){
+export default function(obj, {Container, Content, ContainerColumn, ContainerRow,...children}){
 	return {
 		...children,
 

@@ -98,7 +98,7 @@ let {
 	DisplayText,
 	Buttons,
 	Button,
-} = require('./styles')(CalculatorContent, {
+} = require('./styles').default(CalculatorContent, {
 	Display: div("Calculator_Display"),
 	DisplayText: div("Calculator_DisplayText"),
 	Buttons: div("Calculator_Buttons"),

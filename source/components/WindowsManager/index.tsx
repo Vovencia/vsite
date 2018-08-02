@@ -30,7 +30,6 @@ class WindowsManager extends React.Component<IWindowsManagerProps & IWindowsMana
 			key: window.id,
 			...getWindowContent(window),
 		}
-		console.log('getWindowProps', props)
 		return props;
 	}
 }

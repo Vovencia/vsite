@@ -78,12 +78,12 @@ html(lang="ru")
 		#App
 
 		- var jsFiles 	  = [].concat(locals.htmlWebpackPlugin.files.js);
-		- var appFiles	  = [];
-		- var appsList 	  = [];
-		- var excludeApps = (file, list) => (file.indexOf('/apps/') !== 0)
-		- appFiles = jsFiles.filterTo(excludeApps, appsList);
-		script.
+		//- - var appFiles	  = [];
+		//- - var appsList 	  = [];
+		//- - var excludeApps = (file, list) => (file.indexOf('/apps/') !== 0)
+		//- - appFiles = jsFiles.filterTo(excludeApps, appsList);
+		//- script.
 			window.__Apps = !{ JSON.stringify(appsList) }
 
-		each file in appFiles
+		each file in jsFiles
 			script(src=('.' + file))

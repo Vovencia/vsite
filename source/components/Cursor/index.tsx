@@ -1,7 +1,9 @@
 import * as React from "react";
+import * as ReactDOM from 'react-dom';
 import "./index.styl";
-import * as fs from "fs";
+const Snap = require('snapsvg');
 
+const cursors = require('!svg-inline-loader!@assets/images/cursors/cursors.svg');
 interface ICursorState {
 	mouseX: Number,
 	mouseY: Number,
@@ -10,7 +12,9 @@ interface ICursorState {
 }
 
 class Cursor extends React.Component<null, ICursorState> {
-	private cursors = require('!svg-inline-loader!@assets/images/cursors/cursors.svg');
+	private cursorsHTML: SVGElement;
+	private cursorRef: React.RefObject<HTMLDivElement>;
+	private snapCursor: Snap.Element;
 
 	constructor(props){
 		super(props);
@@ -27,6 +31,15 @@ class Cursor extends React.Component<null, ICursorState> {
 		this.handlerDragEnd 	= this.handlerDragEnd.bind(this);
 		this.handlerDrag 	= this.handlerDrag.bind(this);
 
+		this.cursorRef = React.createRef<HTMLDivElement>();
+
+		let tempDiv = document.createElement('div');
+
+		tempDiv.innerHTML = cursors;
+		this.cursorsHTML = tempDiv.children[0] as SVGElement;
+
+		this.snapCursor = Snap(this.cursorsHTML);
+
 		this.state = {
 			mouseX: null,
 			mouseY: null,
@@ -38,31 +51,35 @@ class Cursor extends React.Component<null, ICursorState> {
 		let styles:CSSStyleDeclaration = {} as CSSStyleDeclaration;
 		
 
-		if( this.state.mouseX != null ){
-			styles.left = this.state.mouseX + 'px';
-		}
-		if( this.state.mouseY != null ){
-			styles.top = this.state.mouseY + 'px';
-		}
-
+		if( this.state.mouseX != null ){ styles.left = this.state.mouseX + 'px'; }
+		if( this.state.mouseY != null ){ styles.top = this.state.mouseY + 'px'; }
+	
 		var attrs = {
 			...this.props,
 			'style': styles as object,
 			'data-cursor': this.state.cursor,
-			'data-state': this.getMouseState(),
-
-			dangerouslySetInnerHTML: {
-				__html: this.cursors
-			}
+			'data-state': this.getMouseState()
 		};
 
-		// const cursorSvg = fs.readFileSync( require('@assets/images/cursors/cursors.svg') )
-
 		return (
-			<div {...attrs} ></div>
+			<div ref={this.cursorRef} {...attrs} ></div>
 		);
 	}
+	componentDidUpdate(){
+		let newCursor = this.cursorRef.current.querySelector('#' + this.state.cursor);
+		if(!newCursor) newCursor = this.cursorRef.current.querySelector('#default');
+
+		const newCursorD = newCursor.getAttribute('d');
+
+		this.snapCursor.select('#cursor').animate({
+			d: newCursorD,
+		}, 150, mina.easeinout);
+
+		// cursor.setAttribute('d', newCursor.getAttribute('d'));
+	}
 	componentDidMount(){
+		this.cursorRef.current.appendChild( this.cursorsHTML );
+
 		document.addEventListener('mouseover', this.checkCursor);
 		document.addEventListener('mousedown', this.checkCursor);
 		document.addEventListener('mouseup', this.checkCursor);
@@ -106,6 +123,7 @@ class Cursor extends React.Component<null, ICursorState> {
 			if(!target.computedStyleMap) continue;
 			target.classList.add('get-cursor');
 			let _cursor = target.computedStyleMap().get("cursor").value;
+			_cursor = _cursor.replace(/^-.+?-/, '');
 			target.classList.remove('get-cursor');
 			switch (_cursor) {
 				case 'none':
@@ -166,4 +184,4 @@ class Cursor extends React.Component<null, ICursorState> {
 	}
 }
 
-export default require("./style.ts")(Cursor);
+export default require("./style.ts").default(Cursor);

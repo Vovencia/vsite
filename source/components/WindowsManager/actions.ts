@@ -18,7 +18,7 @@ export let actions = {
 		actions.changed();
 	},
 	open(params: {options?: IWindowConstructorProps, content, callback?: (windowId: string) => void}) {
-		store.dispatch(_createAction("open", {params}));
+		store.dispatch(_createAction("open", {...params}));
 		actions.changed();
 	},
 	focus(windowId: string){

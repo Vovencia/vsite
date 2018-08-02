@@ -116,7 +116,7 @@ let {
 	Content,
 	Track,
 	Bar,
-} = require("./styles.ts")(ScrolledContent, {
+} = require("./styles.ts").default(ScrolledContent, {
 	Content: div("ScrolledContent_Content"),
 	Track: div("ScrolledContent_Track"),
 	Bar: div("ScrolledContent_Bar"),

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["app/main"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["apps/index"],{
 
 /***/ "../node_modules/svg-inline-loader/index.js!./assets/images/cursors/cursors.svg":
 /*!*****************************************************************************!*\
@@ -190,19 +190,7 @@ __webpack_require__.r(__webpack_exports__);
 
 module.exports = __webpack_require__.p + "assets/images/backgrounds/assets/images/backgrounds/assets/images/backgrounds/digital_space_universe_4k_8k-3840x2160.jpg?17b9f609b92eb1b6d17f6c82f65b0990";
 
-/***/ }),
-
-/***/ "./index.tsx":
-/*!*******************!*\
-  !*** ./index.tsx ***!
-  \*******************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(/*! ./system/index */ "./system/index.ts");
-
-
 /***/ })
 
-},[["./index.tsx","runtime","app/components","app/vendors","app/utils","app/system","app/interfaces","app/mixins"]]]);
-//# sourceMappingURL=main.js.map
+},[["./apps/index.tsx","runtime","app/components","app/vendors","app/utils","app/system","app/interfaces","app/mixins"]]]);
+//# sourceMappingURL=index.js.map

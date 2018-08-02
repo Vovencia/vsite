@@ -50,6 +50,8 @@ export class ReducersManager {
 			this.globalState = state;
 
 			_state = reducer.handler(_state, action);
+
+			if(!state) state = {};
 			
 			if( reducer.namespace ){
 				state[reducer.namespace] = _state;

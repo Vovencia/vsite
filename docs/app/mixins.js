@@ -4,13 +4,12 @@
 /*!**************************!*\
   !*** ./mixins/styled.ts ***!
   \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = {
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
     checkValue: function (value) {
         switch ((typeof value).toLowerCase()) {
             case 'number':
@@ -34,7 +33,7 @@ exports.default = {
             height: height
         });
     }
-};
+});
 
 
 /***/ })

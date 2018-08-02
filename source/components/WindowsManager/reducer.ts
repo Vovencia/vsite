@@ -2,6 +2,8 @@ import {checkAction} from "@utils";
 import {IWindowsManagerProps} from "./interfaces";
 import {ReducerMethods} from "./reducerMethods";
 
+import { reducersManager } from "@system";
+
 export function reducer(state: IWindowsManagerProps = {
 	opened: []
 }, action){
@@ -14,3 +16,5 @@ export function reducer(state: IWindowsManagerProps = {
 
 	return reducer.getState();
 }
+
+reducersManager.addLocalReducer('WindowsManager', reducer);

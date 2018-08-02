@@ -1,6 +1,6 @@
 import {_styled as _, styled} from "@utils";
 
-module.exports = function(obj, {RightPanel, Time, ...children}){
+export default function(obj, {RightPanel, Time, ...children}){
 	return {
 		...children,
 		Self: styled(obj)`

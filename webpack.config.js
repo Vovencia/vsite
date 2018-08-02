@@ -1,5 +1,7 @@
 const ENV = process.env.NODE_ENV || 'development';
 
+const clearDocs = (ENV == 'production');
+
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -8,8 +10,16 @@ const path = require('path');
 const webpack = require('webpack');
 const glob = require('glob').sync;
 const pugIncludeGlob = require('pug-include-glob');
+const fs = require('fs');
 
 function _path(...args) { args.unshift(__dirname); return path.normalize( path.join(...args) ); }
+
+let snapSvgPath = _path('node_modules/snapsvg/');
+if( fs.existsSync( path.join(snapSvgPath, 'dist', 'snap.svg-min.js') ) ){
+	snapSvgPath = path.join(snapSvgPath, 'dist', 'snap.svg-min.js');
+} else {
+	snapSvgPath = path.join(snapSvgPath, 'dist', 'snap.svg.js');
+}
 
 var config = {
 	mode: 'development',
@@ -31,27 +41,23 @@ var config = {
 
 		apps = apps.reduce(function(result, item){
 			result[ 'apps/' + item.name + '/index' ] = item.path;
-			result[ 'apps/' + item.name + '/content' ] = path.normalize( path.join(item.dir, 'content') );
+			// result[ 'apps/' + item.name + '/content' ] = path.normalize( path.join(item.dir, 'content') );
 			return result;
 		}, {});
 
 		var result = {
 			'app/main': _path("source/index.tsx"),
-			...apps,
+			'apps/index': _path("source/apps/index.tsx"),
+			// ...apps,
 		}
-
 		return result;
 	},
-	// entry: {
-	// 	'app/main': _path("source/index.tsx"),
-	// 	'apps/calculator/index': _path("source/apps/calculator/index.tsx"),
-	// },
 	output: {
-		// library: 'MyLibrary',
-		// libraryTarget: 'umd',
 		filename: "[name].js",
 		path: _path("docs"),
 		publicPath: '/',
+
+		chunkFilename: '[name].js',
 	},
 
 	context: _path('source') + "/",
@@ -68,6 +74,7 @@ var config = {
 			'@assets': _path('source/assets'),
 			'@interfaces': _path('source/interfaces'),
 			'@mixins': _path('source/mixins'),
+			'snapsvg': snapSvgPath,
 		}
 	},
 
@@ -89,7 +96,12 @@ var config = {
 					{
 						loader: "awesome-typescript-loader",
 						options: {
-							configFileName: _path('./tsconfig.json')
+							configFileName: _path('./tsconfig.json'),
+							// useBabel: true,
+							// babelOptions: {
+							// 	plugins: ["dynamic-import-webpack"]
+							// },
+							// babelCore: "@babel/core"
 						}
 					}
 				],
@@ -143,16 +155,16 @@ var config = {
 					}
 				]
 			},
+			{
+				test: snapSvgPath,
+				use: 'imports-loader?this=>window,fix=>module.exports=0',
+			},
 		]
 	},
 
 	plugins: [
 		new CheckerPlugin(),
-		new CleanWebpackPlugin(
-			[_path('docs', '!(CNAME)')],
-		{
-
-		}),
+		(clearDocs && new CleanWebpackPlugin([_path('docs', '!(CNAME)')])),
 		// Generates an `index.html` file with the <script> injected.
 		new HtmlWebpackPlugin({
 			inject: false,
@@ -171,7 +183,7 @@ var config = {
 		// https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
 		// You can remove this if you don't use Moment.js:
 		new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-	],
+	].filter(Boolean),
 
 	// When importing a module whose path matches one of the following, just
 	// assume a corresponding global variable exists and use that instead.

@@ -54,47 +54,62 @@ if(false) {}
 /*!*************************!*\
   !*** ./system/index.ts ***!
   \*************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: reducersManager, window, store, getApp, getState, getDocumentRef, documentAddClass, documentRemoveClass */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "store", function() { return store; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getApp", function() { return getApp; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getState", function() { return getState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDocumentRef", function() { return getDocumentRef; });
+/* harmony import */ var redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! redux */ "../node_modules/redux/es/redux.js");
+/* harmony import */ var _reducersManager__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./reducersManager */ "./system/reducersManager.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducersManager", function() { return _reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"]; });
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var tslib_1 = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-var redux_1 = __webpack_require__(/*! redux */ "../node_modules/redux/es/redux.js");
-var _window = __webpack_require__(/*! ./window */ "./system/window.ts");
-exports.window = _window;
-var loading_1 = __webpack_require__(/*! ./loading */ "./system/loading.ts");
-var taskbar_update_1 = __webpack_require__(/*! ./taskbar-update */ "./system/taskbar-update.ts");
-var init_1 = __webpack_require__(/*! ./init */ "./system/init.ts");
-var _utils_1 = __webpack_require__(/*! @utils */ "./utils/index.tsx");
-tslib_1.__exportStar(__webpack_require__(/*! ./methods */ "./system/methods.ts"), exports);
-exports.reducersManager = new _utils_1.ReducersManager();
-exports.reducersManager.addReducer(loading_1.reducer);
-exports.reducersManager.addReducer(taskbar_update_1.reducer);
-exports.store = redux_1.createStore(exports.reducersManager.getMainReducer());
+/* harmony import */ var _window__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./window */ "./system/window.ts");
+/* harmony reexport (module object) */ __webpack_require__.d(__webpack_exports__, "window", function() { return _window__WEBPACK_IMPORTED_MODULE_2__; });
+/* harmony import */ var _loading__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./loading */ "./system/loading.ts");
+/* harmony import */ var _taskbar_update__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./taskbar-update */ "./system/taskbar-update.ts");
+/* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./init */ "./system/init.ts");
+/* harmony import */ var _methods__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./methods */ "./system/methods.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "documentAddClass", function() { return _methods__WEBPACK_IMPORTED_MODULE_6__["documentAddClass"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "documentRemoveClass", function() { return _methods__WEBPACK_IMPORTED_MODULE_6__["documentRemoveClass"]; });
+
+/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./render */ "./system/render.tsx");
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @components/Layout */ "./components/Layout/index.tsx");
+
+
+
+
+
+
+
+
+
+_reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"].addReducer(_loading__WEBPACK_IMPORTED_MODULE_3__["reducer"]);
+_reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"].addReducer(_taskbar_update__WEBPACK_IMPORTED_MODULE_4__["reducer"]);
+var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"].getMainReducer());
 Object.assign(window, {
-    __store: exports.store,
+    __store: store,
 });
-init_1.init(exports.store);
-var render_1 = __webpack_require__(/*! ./render */ "./system/render.tsx");
-render_1.render(exports.store);
+Object(_init__WEBPACK_IMPORTED_MODULE_5__["init"])(store);
+
+Object(_render__WEBPACK_IMPORTED_MODULE_7__["render"])(store);
 function getApp(appId) {
     console.log(appId);
 }
-exports.getApp = getApp;
 function getState() {
-    if (exports.reducersManager.isInReducer()) {
-        return exports.reducersManager.getGlobalState();
+    if (_reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"].isInReducer()) {
+        return _reducersManager__WEBPACK_IMPORTED_MODULE_1__["reducersManager"].getGlobalState();
     }
-    return exports.store.getState();
+    return store.getState();
 }
-exports.getState = getState;
-var Layout_1 = __webpack_require__(/*! @components/Layout */ "./components/Layout/index.tsx");
+
 function getDocumentRef() {
-    return Layout_1.layoutRef;
+    return _components_Layout__WEBPACK_IMPORTED_MODULE_8__["layoutRef"];
 }
-exports.getDocumentRef = getDocumentRef;
 
 
 /***/ }),
@@ -103,13 +118,14 @@ exports.getDocumentRef = getDocumentRef;
 /*!************************!*\
   !*** ./system/init.ts ***!
   \************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: init */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "init", function() { return init; });
+/* harmony import */ var _load_applications__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./load-applications */ "./system/load-applications.ts");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var load_applications_1 = __webpack_require__(/*! ./load-applications */ "./system/load-applications.ts");
 function init(store) {
     store.dispatch({
         type: 'loading',
@@ -125,7 +141,7 @@ function init(store) {
             name: 'delay',
         });
     }, 1000);
-    load_applications_1.default().then(function (apps) {
+    Object(_load_applications__WEBPACK_IMPORTED_MODULE_0__["default"])().then(function (apps) {
         store.dispatch({
             type: 'Applications.loaded',
             list: apps
@@ -136,7 +152,6 @@ function init(store) {
         });
     });
 }
-exports.init = init;
 
 
 /***/ }),
@@ -145,25 +160,24 @@ exports.init = init;
 /*!*************************************!*\
   !*** ./system/load-applications.ts ***!
   \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _apps__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @apps */ "./apps/index.tsx");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var apps = __webpack_require__(/*! @apps */ "./apps/index.ts");
 // declare  var __Apps: any
 // let apps = __Apps;
-function default_1() {
+/* harmony default export */ __webpack_exports__["default"] = (function () {
     var promise = new Promise(function (resolve, reject) {
         var _apps = [];
-        for (var key in apps)
-            _apps.push(apps[key]);
+        for (var key in _apps__WEBPACK_IMPORTED_MODULE_0__)
+            _apps.push(_apps__WEBPACK_IMPORTED_MODULE_0__[key]);
         setTimeout(function () { return resolve(_apps); }, 10);
     });
     return promise;
-}
-exports.default = default_1;
+});
 
 
 /***/ }),
@@ -172,12 +186,12 @@ exports.default = default_1;
 /*!***************************!*\
   !*** ./system/loading.ts ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
 var loadingComponents = [];
 function reducer(state, action) {
     if (state === void 0) { state = {}; }
@@ -202,7 +216,6 @@ function reducer(state, action) {
     document.documentElement.classList[!state.System.loading ? 'add' : 'remove']('document-loaded');
     return state;
 }
-exports.reducer = reducer;
 
 
 /***/ }),
@@ -211,20 +224,36 @@ exports.reducer = reducer;
 /*!***************************!*\
   !*** ./system/methods.ts ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: documentAddClass, documentRemoveClass */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "documentAddClass", function() { return documentAddClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "documentRemoveClass", function() { return documentRemoveClass; });
 function documentAddClass(className) {
     document.documentElement.classList.add(className);
 }
-exports.documentAddClass = documentAddClass;
 function documentRemoveClass(className) {
     document.documentElement.classList.remove(className);
 }
-exports.documentRemoveClass = documentRemoveClass;
+
+
+/***/ }),
+
+/***/ "./system/reducersManager.ts":
+/*!***********************************!*\
+  !*** ./system/reducersManager.ts ***!
+  \***********************************/
+/*! exports provided: reducersManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducersManager", function() { return reducersManager; });
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
+
+var reducersManager = new _utils__WEBPACK_IMPORTED_MODULE_0__["ReducersManager"]();
 
 
 /***/ }),
@@ -233,22 +262,29 @@ exports.documentRemoveClass = documentRemoveClass;
 /*!***************************!*\
   !*** ./system/render.tsx ***!
   \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: render */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "../node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "../node_modules/react-redux/es/index.js");
+/* harmony import */ var _components_Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @components/Layout */ "./components/Layout/index.tsx");
+/* harmony import */ var _index_styl__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index.styl */ "./system/index.styl");
+/* harmony import */ var _index_styl__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_index_styl__WEBPACK_IMPORTED_MODULE_4__);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var React = __webpack_require__(/*! react */ "../node_modules/react/index.js");
-var ReactDOM = __webpack_require__(/*! react-dom */ "../node_modules/react-dom/index.js");
-var react_redux_1 = __webpack_require__(/*! react-redux */ "../node_modules/react-redux/es/index.js");
-var index_1 = __webpack_require__(/*! @components/Layout/index */ "./components/Layout/index.tsx");
-__webpack_require__(/*! ./index.styl */ "./system/index.styl");
+
+
+
+
 function render(store) {
-    ReactDOM.render(React.createElement(react_redux_1.Provider, { store: store },
-        React.createElement(index_1.default, null)), document.getElementById("App"));
+    react_dom__WEBPACK_IMPORTED_MODULE_1__["render"](react__WEBPACK_IMPORTED_MODULE_0__["createElement"](react_redux__WEBPACK_IMPORTED_MODULE_2__["Provider"], { store: store },
+        react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_components_Layout__WEBPACK_IMPORTED_MODULE_3__["default"], null)), document.getElementById("App"));
 }
-exports.render = render;
 
 
 /***/ }),
@@ -257,20 +293,23 @@ exports.render = render;
 /*!**********************************!*\
   !*** ./system/taskbar-update.ts ***!
   \**********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: reducer */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return reducer; });
+/* harmony import */ var _components_WindowsManager__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @components/WindowsManager */ "./components/WindowsManager/index.tsx");
+/* harmony import */ var _components_Taskbar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @components/Taskbar */ "./components/Taskbar/index.tsx");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var WindowsManager_1 = __webpack_require__(/*! @components/WindowsManager */ "./components/WindowsManager/index.tsx");
-var Taskbar_1 = __webpack_require__(/*! @components/Taskbar */ "./components/Taskbar/index.tsx");
-var _utils_1 = __webpack_require__(/*! @utils */ "./utils/index.tsx");
+
+
 function reducer(state, action) {
     switch (action.type) {
         case 'Applications.loaded':
-        case WindowsManager_1.getActionName('changed'):
-            var list = Taskbar_1.getListFromState(state);
+        case Object(_components_WindowsManager__WEBPACK_IMPORTED_MODULE_0__["getActionName"])('changed'):
+            var list = Object(_components_Taskbar__WEBPACK_IMPORTED_MODULE_1__["getListFromState"])(state);
             if (action.type == 'Applications.loaded') {
                 list = list.filter(function (item) { return item.typeShutcut != 'app'; }).concat(action.list.map(function (item) {
                     return {
@@ -279,7 +318,7 @@ function reducer(state, action) {
                         call: item.call,
                         appInfo: item.appInfo,
                     };
-                }).sort(_utils_1.sortByKey('id')));
+                }).sort(Object(_utils__WEBPACK_IMPORTED_MODULE_2__["sortByKey"])('id')));
             }
             else {
                 list = list.filter(function (item) { return item.typeShutcut != 'window'; }).concat(action.list.map(function (item) {
@@ -290,11 +329,11 @@ function reducer(state, action) {
                         states: state.filter(Boolean).join(' '),
                         id: item.id + ':' + item.appInfo.uid,
                         call: function () {
-                            WindowsManager_1.actions.focus(item.id);
+                            _components_WindowsManager__WEBPACK_IMPORTED_MODULE_0__["actions"].focus(item.id);
                         },
                         appInfo: item.appInfo,
                     };
-                }).sort(_utils_1.sortByKey('id')));
+                }).sort(Object(_utils__WEBPACK_IMPORTED_MODULE_2__["sortByKey"])('id')));
             }
             list.sort(function (a, b) {
                 if (a.appInfo.uid > b.appInfo.uid)
@@ -308,13 +347,12 @@ function reducer(state, action) {
                 return 0;
             });
             console.log('list', list);
-            state = Taskbar_1.setListInState(list, state);
+            state = Object(_components_Taskbar__WEBPACK_IMPORTED_MODULE_1__["setListInState"])(list, state);
             break;
     }
     // Taskbar.add
     return state;
 }
-exports.reducer = reducer;
 
 
 /***/ }),
@@ -323,40 +361,42 @@ exports.reducer = reducer;
 /*!**************************!*\
   !*** ./system/window.ts ***!
   \**************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! exports provided: open, getContentState, getOpenedApps */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "open", function() { return open; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContentState", function() { return getContentState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getOpenedApps", function() { return getOpenedApps; });
+/* harmony import */ var _system_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @system/index */ "./system/index.ts");
+/* harmony import */ var _components_Window__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @components/Window */ "./components/Window/index.tsx");
+/* harmony import */ var _components_WindowsManager__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @components/WindowsManager */ "./components/WindowsManager/index.tsx");
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = __webpack_require__(/*! @system/index */ "./system/index.ts");
-var Window_1 = __webpack_require__(/*! @components/Window */ "./components/Window/index.tsx");
-var WindowsManager_1 = __webpack_require__(/*! @components/WindowsManager */ "./components/WindowsManager/index.tsx");
+
+
 function open(content, options, callback) {
-    if (options === void 0) { options = Window_1.defaultWindowProps; }
+    if (options === void 0) { options = _components_Window__WEBPACK_IMPORTED_MODULE_1__["defaultWindowProps"]; }
     if (callback === void 0) { callback = function (windowId) { }; }
-    WindowsManager_1.actions.open({
+    _components_WindowsManager__WEBPACK_IMPORTED_MODULE_2__["actions"].open({
         options: options,
         content: content,
         callback: callback,
     });
 }
-exports.open = open;
 function getContentState(state) {
     if (!state)
-        state = index_1.getState();
+        state = Object(_system_index__WEBPACK_IMPORTED_MODULE_0__["getState"])();
     return state.Layout.window;
 }
-exports.getContentState = getContentState;
 function getOpenedApps() {
-    return index_1.getState().WindowsManager.opened.map(function (window) {
+    return Object(_system_index__WEBPACK_IMPORTED_MODULE_0__["getState"])().WindowsManager.opened.map(function (window) {
         return {
             windowId: window.id,
             appInfo: window.appInfo,
         };
     });
 }
-exports.getOpenedApps = getOpenedApps;
 
 
 /***/ })

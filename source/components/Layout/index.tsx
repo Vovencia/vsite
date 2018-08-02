@@ -6,7 +6,7 @@ import {ILayoutProps, ILayoutDispatchProps, ILayoutState} from "./interfaces";
 import {div} from "@utils";
 
 import Cursor from "@components//Cursor";
-import WindowsManager, {reducer as WindowsManagerReducer} from "@components/WindowsManager";
+import WindowsManager from "@components/WindowsManager";
 
 import ControlBar from "@components/ControlBar";
 import TaskBar, {reducer as TaskBarReducer} from "@components/Taskbar";
@@ -84,7 +84,7 @@ let {
 	Content,
 	ContainerColumn,
 	ContainerRow,
-} = require('./styles.ts')(Layout, {
+} = require('./styles.ts').default(Layout, {
 	Container: div("Layout_Container"),
 	ContainerColumn: div("Layout_Column"),
 	ContainerRow: div("Layout_Row"),
@@ -150,4 +150,3 @@ reducersManager.addLocalReducer('Layout', function(state: ILayoutState, action){
 	return state;
 })
 reducersManager.addLocalReducer('Taskbar', TaskBarReducer);
-reducersManager.addLocalReducer('WindowsManager', WindowsManagerReducer);
