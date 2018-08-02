@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["calculator.content"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["apps/calculator/content"],{
 
 /***/ "./apps/calculator/content/index.tsx":
 /*!*******************************************!*\
@@ -78,7 +78,7 @@ var CalculatorContent = /** @class */ (function (_super) {
     return CalculatorContent;
 }(_components_WindowContent__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
-var _a = __webpack_require__(/*! ./styles */ "./apps/calculator/content/styles.ts")(CalculatorContent, {
+var _a = __webpack_require__(/*! ./styles */ "./apps/calculator/content/styles.ts").default(CalculatorContent, {
     Display: Object(_utils__WEBPACK_IMPORTED_MODULE_3__["div"])("Calculator_Display"),
     DisplayText: Object(_utils__WEBPACK_IMPORTED_MODULE_3__["div"])("Calculator_DisplayText"),
     Buttons: Object(_utils__WEBPACK_IMPORTED_MODULE_3__["div"])("Calculator_Buttons"),
@@ -112,4 +112,4 @@ var templateObject_1, templateObject_2, templateObject_3, templateObject_4, temp
 /***/ })
 
 }]);
-//# sourceMappingURL=calculator.content.js.map
+//# sourceMappingURL=content.js.map

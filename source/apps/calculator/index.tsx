@@ -6,8 +6,8 @@ import {requiredContent} from "@utils";
 import {IPositionRelativeX, IPositionRelativeY} from "@interfaces"
 
 function getContent(){
-	return import(/* webpackChunkName: "calculator.content" */ "./content").then(function(){
-		console.log('test')
+	return import(/* webpackChunkName: "apps/calculator/content" */ "./content").then(function(){
+		console.log(arguments)
 	})
 }
 

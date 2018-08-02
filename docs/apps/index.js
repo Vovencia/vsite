@@ -135,8 +135,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function getContent() {
-    return Promise.all(/*! import() | calculator.content */[__webpack_require__.e("app/components"), __webpack_require__.e("calculator.content")]).then(__webpack_require__.bind(null, /*! ./content */ "./apps/calculator/content/index.tsx")).then(function () {
-        console.log('test');
+    return Promise.all(/*! import() | apps/calculator/content */[__webpack_require__.e("app/components"), __webpack_require__.e("apps/calculator/content")]).then(__webpack_require__.bind(null, /*! ./content */ "./apps/calculator/content/index.tsx")).then(function () {
+        console.log(arguments);
     });
 }
 function call() {
