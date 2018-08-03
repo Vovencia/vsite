@@ -1,11 +1,20 @@
 import * as React from "react";
-import {div, el, mapToArray} from "@utils";
-import {IWindowInstanceProps, windowBorderTypes} from "./interfaces";
-import {isVisible} from "./index";
+import {
+	div, el,
+	mapToArray,
+	promiseDelay,
+	isPromiseFunction, promiseFunctionCall,
+} from "@utils";
 import {getDocumentRef} from "@system";
 
+import {IWindowInstanceProps, windowBorderTypes, IWindowInstanceState} from "./interfaces";
+import {isVisible} from "./index";
 
-export default class WindowRender extends React.PureComponent<IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>> {
+
+export default class WindowRender extends React.PureComponent<
+	IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>,
+	IWindowInstanceState
+> {
 	protected boxRef = React.createRef<HTMLDivElement>();
 	protected headerRef = React.createRef<HTMLDivElement>();
 
@@ -15,6 +24,12 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 		this.ResizeBorders = this.ResizeBorders.bind(this);
 		this.Header = this.Header.bind(this);
 		this.Body = this.Body.bind(this);
+
+		this.state = {
+			Content: this.props.content,
+			loading: false,
+		}
+		console.log(this.props)
 	}
 
 	render(){
@@ -59,19 +74,33 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 		)
 	}
 	Body(){
-		const Content = this.props.content;
-		const contentState = this.props.contentState;
 		return (
 			<Body>
-				{ this.renderContent(Content, {windowId:this.props.id, contentId:this.props.contentId, contentState}) }
+				{ this.renderContent(this.state.Content, {windowId:this.props.id, contentId:this.props.contentId}) }
 			</Body>
 		)
 	}
 
+	componentWillMount(){
+		if( isPromiseFunction(this.state.Content) ) {
+			this.setState({
+				Content: 'loading',
+				loading: true,
+			})
+			promiseFunctionCall(this.state.Content).then((Content) => {
+				this.setState({
+					Content: Content,
+					loading: false,
+				})
+			})
+		}
+	}
 
 	renderContent(Content, attrs){
-		if( typeof Content == 'string' ) return Content;
-		if( typeof Content == 'function' ) return <Content {...attrs} />;
+		switch(typeof Content){
+			case 'string': return Content;
+			case 'function': return <Content windowId={ this.props.id } {...attrs} />;
+		}
 		return '';
 	}
 	renderButtonControl(buttonType){
@@ -90,6 +119,7 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 				key={index}
 				onMouseDown={ this.handlerResizeBorderPress.bind(this, type) }
 				Type={type}
+				Hidden={ this.props.isMaximized }
 			/>
 		)
 	}
@@ -121,6 +151,11 @@ export default class WindowRender extends React.PureComponent<IWindowInstancePro
 			className: this.props.className,
 			onMouseDown: this.handlerOnPress.bind(this),
 		}
+	}
+	loading(isLoading = true){
+		this.setState({
+			loading: isLoading
+		})
 	}
 }
 

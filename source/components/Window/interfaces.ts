@@ -74,7 +74,6 @@ export interface IWindowConstructorPropsStrict {
 export interface IWindowInstanceProps extends IWindowConstructorPropsStrict {
 	contentId		: any;
 	content			: React.ComponentType<{id: string, state: any, contentId: string}> | string;
-	contentState	: any;
 }
 
 export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
@@ -103,5 +102,9 @@ export const defaultWindowProps:IWindowInstanceProps = {
 	contentId		: '',
 	id				: '',
 	content			: '',
-	contentState	: {},
+}
+
+export interface IWindowInstanceState {
+	Content: any;
+	loading: boolean;
 }

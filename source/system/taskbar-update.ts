@@ -47,8 +47,6 @@ export function reducer(state, action){
 				return 0;
 			})
 
-			console.log('list', list);
-
 			state = taskbarSetListInState(list, state);
 		break;
 	}

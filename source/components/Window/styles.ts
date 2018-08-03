@@ -87,8 +87,8 @@ export function children({Box, Header, Body, Buttons, ButtonControl, ResizeBorde
 			position: absolute;
 			font-size: 4rem;
 			z-index: 2;
-			/* background: red; */
 			${ ResizeBorderStyle }
+			${ props => ( props['Hidden'] ? 'display: none' : '' ) }
 		`
 	}
 }
@@ -127,6 +127,10 @@ function boxOpacity(props) {
 }
 function ResizeBorderStyle(props){
 	var result = '';
+
+	if( props['isMaximized'] ){
+		result += 'display: none;' ;
+	}
 
 	switch(props['Type']){
 		case 'top':
@@ -205,7 +209,6 @@ function ResizeBorderStyle(props){
 	if( props['Type'].indexOf('-') != -1 ){
 		result += `
 			z-index: 3;
-			/* background: green; */
 		`;
 	}
 

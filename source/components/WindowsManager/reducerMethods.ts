@@ -144,7 +144,7 @@ export class ReducerMethods {
 			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
 				return {
 					...window,
-					isMaximize: this.action.isMaximize,
+					isMaximized: this.action.isMaximize,
 				}
 			})
 		})
@@ -154,7 +154,7 @@ export class ReducerMethods {
 			opened: windowMap(this.state.opened, this.action.windowId, (window: IWindowInstanceProps) => {
 				return {
 					...window,
-					isMinimize: this.action.isMinimize,
+					isMinimized: this.action.isMinimize,
 				}
 			})
 		})

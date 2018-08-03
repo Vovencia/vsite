@@ -200,6 +200,31 @@ module.exports = __webpack_require__.p + "assets/images/backgrounds/assets/image
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./system/index */ "./system/index.ts");
+function testMe() {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, new Promise(function (resolve) {
+                        setTimeout(function () {
+                            resolve('Hello!');
+                        }, 2000);
+                    })];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+}
+var result = function () {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, testMe()];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
+    });
+};
+result().then(function (result) { return console.log('result', result); });
 
 
 /***/ })

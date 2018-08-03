@@ -14,6 +14,9 @@ export default function (obj, {Content, Item, ...children}){
 			flex-direction: column;
 			justify-content: center;
 			margin: 20rem 0;
+			&:hover {
+				z-index: 10;
+			}
 		`,
 		Content: styled(Content)`
 			width: 50rem;
@@ -23,6 +26,16 @@ export default function (obj, {Content, Item, ...children}){
 			display: flex;
 			flex-direction: column;
 			padding: 5rem 0;
+			position: relative;
+			&:after {
+				content: '';
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				left: 0;
+				width: 10rem;
+				z-index: 100;
+			}
 		`,
 		Item: styled(Item)`
 			display: flex;

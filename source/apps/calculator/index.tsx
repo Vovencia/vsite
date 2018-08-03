@@ -2,27 +2,29 @@ import appInfo from "./appInfo";
 export {appInfo}
 
 import {window} from "@system";
-import {requiredContent} from "@utils";
+import * as contentStore from "@system/contentStore"
 import {IPositionRelativeX, IPositionRelativeY} from "@interfaces"
+import {promiseFunction} from "@utils/promiseFunction";
 
-function getContent(){
-	return import(/* webpackChunkName: "apps/calculator/content" */ "./content").then(function(){
-		console.log(arguments)
+const getContent = promiseFunction(function getContent(){
+	return import(/* webpackChunkName: "apps/calculator/content" */ "./content").then(function(content){
+		return content.default;
 	})
-}
+});
+
+const content = contentStore.add(appInfo.uid, getContent);
 
 export function call(){
-	getContent();
-	window.open('123', {
+	window.open(content, {
 		width: 165,
 		height: 240,
-		maxWidth: 165,
-		maxHeight: 240,
+		// maxWidth: 165,
+		// maxHeight: 240,
 		minWidth: 165,
 		minHeight: 240,
 		x: IPositionRelativeX.center,
 		y: IPositionRelativeY.center,
-		resizable: false,
+		resizable: true,
 		appInfo: appInfo,
 	}, function(windowId){
 		console.log(windowId)
