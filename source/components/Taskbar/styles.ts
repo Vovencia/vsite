@@ -14,9 +14,6 @@ export default function (obj, {Content, Item, ...children}){
 			flex-direction: column;
 			justify-content: center;
 			margin: 20rem 0;
-			&:hover {
-				z-index: 10;
-			}
 		`,
 		Content: styled(Content)`
 			width: 50rem;
@@ -27,6 +24,7 @@ export default function (obj, {Content, Item, ...children}){
 			flex-direction: column;
 			padding: 5rem 0;
 			position: relative;
+			transition: box-shadow 0.3s;
 			&:after {
 				content: '';
 				position: absolute;
@@ -35,6 +33,10 @@ export default function (obj, {Content, Item, ...children}){
 				left: 0;
 				width: 10rem;
 				z-index: 100;
+			}
+			&:hover {
+				z-index: 10;
+				box-shadow: 0 0 20rem rgba(0, 0, 0, 0.5);
 			}
 		`,
 		Item: styled(Item)`

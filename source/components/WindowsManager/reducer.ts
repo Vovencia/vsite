@@ -5,7 +5,7 @@ import {ReducerMethods} from "./reducerMethods";
 import { reducersManager } from "@system";
 
 export function reducer(state: IWindowsManagerProps = {
-	opened: []
+	opened: [],
 }, action){
 	var type = "";
 	if(!(type = checkAction("WindowsManager", action))) return state;

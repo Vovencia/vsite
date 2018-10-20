@@ -6,17 +6,23 @@ import {ISizeAny, IPositionAny, ISizeStrict, IPositionStrict, IPositionRelativeX
 import {store} from "@system/index";
 
 export function windowFocus(list, windowId, setFocus = true){
-	var focusWindow;
-	list = list.filter(function(window) {
+	let focusWindow;
+	let newlist = list.filter(function(window) {
 		if( setFocus && window.id === windowId ){
-			focusWindow = window;
-			window.inFocus = setFocus;
-			return false;
+			if( window.inFocus !== setFocus ){
+				focusWindow = window;
+				window.inFocus = setFocus;
+				return false;
+			}
+			return true;
 		}
 		window.inFocus = false;
 		return true;
 	});
-	if(focusWindow) list.push(focusWindow);
+	if(focusWindow){
+		newlist.push(focusWindow);
+		return newlist;
+	}
 	return list;
 }
 export function windowMap(list, windowId, handler){

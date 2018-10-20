@@ -54,7 +54,7 @@ export class CalculatorContent extends WindowContent<any, {
 						</DisplayText>
 					</ScrolledContent>
 				</Display>
-				<Buttons>
+				<StyledButtons>
 					{
 						this.actions.map((action, index) =>
 							<Button
@@ -64,7 +64,7 @@ export class CalculatorContent extends WindowContent<any, {
 							/>
 						)
 					}
-				</Buttons>
+				</StyledButtons>
 			</div>
 		);
 	}
@@ -162,6 +162,20 @@ export class CalculatorContent extends WindowContent<any, {
 }
 
 
+class Buttons extends React.Component {
+	private Content: any
+	constructor(props){
+		super(props);
+		this.Content = div("Calculator_Buttons");
+	}
+	render(){
+		return this.Content(this.props);
+	}
+	shouldComponentUpdate(){
+		return false
+	}
+}
+
 let {
 	Self: StyledCalculatorContent,
 	Display,
@@ -169,7 +183,7 @@ let {
 	DisplayValue,
 	DisplayValues,
 	DisplayAction,
-	Buttons,
+	Buttons: StyledButtons,
 	Button,
 } = require('./styles').default(CalculatorContent, {
 	Display: div("Calculator_Display"),
@@ -177,8 +191,9 @@ let {
 	DisplayValue: div("Calculator_DisplayValue"),
 	DisplayValues: div("Calculator_DisplayValues"),
 	DisplayAction: div("Calculator_DisplayAction"),
-	Buttons: div("Calculator_Buttons"),
+	Buttons: Buttons,
 	Button: el("button", "Calculator_Button")
 })
+
 
 export default StyledCalculatorContent;

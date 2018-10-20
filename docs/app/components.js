@@ -94,6 +94,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
+
 
 
 var Time = /** @class */ (function (_super) {
@@ -123,10 +125,10 @@ var Time = /** @class */ (function (_super) {
         return ("00" + time.hour).slice(-2) + ":" + ("00" + time.minutes).slice(-2);
     };
     Time.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.props), this.state.formattedTime));
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"]("div", tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, Object(_utils__WEBPACK_IMPORTED_MODULE_2__["attrs"])(this.props)), this.state.formattedTime));
     };
     return Time;
-}(react__WEBPACK_IMPORTED_MODULE_1__["Component"]));
+}(react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]));
 /* harmony default export */ __webpack_exports__["default"] = (Time);
 
 
@@ -739,7 +741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (obj, _a) {
     var Content = _a.Content, Item = _a.Item, children = tslib__WEBPACK_IMPORTED_MODULE_0__["__rest"](_a, ["Content", "Item"]);
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, children, { Self: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(obj)(templateObject_1 || (templateObject_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 50rem;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 1;\n\t\t\ttransition: left 0.3s;\n\t\t\tposition: relative;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tjustify-content: center;\n\t\t\tmargin: 20rem 0;\n\t\t"], ["\n\t\t\twidth: 50rem;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 1;\n\t\t\ttransition: left 0.3s;\n\t\t\tposition: relative;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tjustify-content: center;\n\t\t\tmargin: 20rem 0;\n\t\t"]))), Content: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Content)(templateObject_2 || (templateObject_2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 50rem;\n\t\t\tbackground: rgba(70, 70, 70, 0.5);\n\t\t\tborder-radius: 0 5rem 5rem 0;\n\t\t\tmax-height: 100%;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tpadding: 5rem 0;\n\t\t"], ["\n\t\t\twidth: 50rem;\n\t\t\tbackground: rgba(70, 70, 70, 0.5);\n\t\t\tborder-radius: 0 5rem 5rem 0;\n\t\t\tmax-height: 100%;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tpadding: 5rem 0;\n\t\t"]))), Item: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Item)(templateObject_3 || (templateObject_3 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\twidth: 30rem;\n\t\t\theight: 30rem;\n\t\t\tmargin: 5rem auto;\n\t\t\ttransition: transform 0.3s;\n\t\t\tposition: relative;\n\t\t\timg,\n\t\t\tsvg {\n\t\t\t\tmax-width: 80%;\n\t\t\t\tmax-height: 80%;\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\ttransform: scale(1.1)\n\t\t\t}\n\t\t\t", "\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\twidth: 30rem;\n\t\t\theight: 30rem;\n\t\t\tmargin: 5rem auto;\n\t\t\ttransition: transform 0.3s;\n\t\t\tposition: relative;\n\t\t\timg,\n\t\t\tsvg {\n\t\t\t\tmax-width: 80%;\n\t\t\t\tmax-height: 80%;\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\ttransform: scale(1.1)\n\t\t\t}\n\t\t\t",
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, children, { Self: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(obj)(templateObject_1 || (templateObject_1 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 50rem;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 1;\n\t\t\ttransition: left 0.3s;\n\t\t\tposition: relative;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tjustify-content: center;\n\t\t\tmargin: 20rem 0;\n\t\t"], ["\n\t\t\twidth: 50rem;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 1;\n\t\t\ttransition: left 0.3s;\n\t\t\tposition: relative;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tjustify-content: center;\n\t\t\tmargin: 20rem 0;\n\t\t"]))), Content: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Content)(templateObject_2 || (templateObject_2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 50rem;\n\t\t\tbackground: rgba(70, 70, 70, 0.5);\n\t\t\tborder-radius: 0 5rem 5rem 0;\n\t\t\tmax-height: 100%;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tpadding: 5rem 0;\n\t\t\tposition: relative;\n\t\t\ttransition: box-shadow 0.3s;\n\t\t\t&:after {\n\t\t\t\tcontent: '';\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 0;\n\t\t\t\tbottom: 0;\n\t\t\t\tleft: 0;\n\t\t\t\twidth: 10rem;\n\t\t\t\tz-index: 100;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\tz-index: 10;\n\t\t\t\tbox-shadow: 0 0 20rem rgba(0, 0, 0, 0.5);\n\t\t\t}\n\t\t"], ["\n\t\t\twidth: 50rem;\n\t\t\tbackground: rgba(70, 70, 70, 0.5);\n\t\t\tborder-radius: 0 5rem 5rem 0;\n\t\t\tmax-height: 100%;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tpadding: 5rem 0;\n\t\t\tposition: relative;\n\t\t\ttransition: box-shadow 0.3s;\n\t\t\t&:after {\n\t\t\t\tcontent: '';\n\t\t\t\tposition: absolute;\n\t\t\t\ttop: 0;\n\t\t\t\tbottom: 0;\n\t\t\t\tleft: 0;\n\t\t\t\twidth: 10rem;\n\t\t\t\tz-index: 100;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\tz-index: 10;\n\t\t\t\tbox-shadow: 0 0 20rem rgba(0, 0, 0, 0.5);\n\t\t\t}\n\t\t"]))), Item: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Item)(templateObject_3 || (templateObject_3 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\twidth: 30rem;\n\t\t\theight: 30rem;\n\t\t\tmargin: 5rem auto;\n\t\t\ttransition: transform 0.3s;\n\t\t\tposition: relative;\n\t\t\timg,\n\t\t\tsvg {\n\t\t\t\tmax-width: 80%;\n\t\t\t\tmax-height: 80%;\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\ttransform: scale(1.1)\n\t\t\t}\n\t\t\t", "\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\twidth: 30rem;\n\t\t\theight: 30rem;\n\t\t\tmargin: 5rem auto;\n\t\t\ttransition: transform 0.3s;\n\t\t\tposition: relative;\n\t\t\timg,\n\t\t\tsvg {\n\t\t\t\tmax-width: 80%;\n\t\t\t\tmax-height: 80%;\n\t\t\t\tdisplay: block;\n\t\t\t}\n\t\t\t&:hover {\n\t\t\t\ttransform: scale(1.1)\n\t\t\t}\n\t\t\t",
             "\n\t\t"])), function (props) {
             if (props['typeShutcut'] != 'window')
                 return '';
@@ -747,6 +749,145 @@ __webpack_require__.r(__webpack_exports__);
         }) });
 });
 var templateObject_1, templateObject_2, templateObject_3;
+
+
+/***/ }),
+
+/***/ "./components/Window/WindowRender.tsx":
+/*!********************************************!*\
+  !*** ./components/Window/WindowRender.tsx ***!
+  \********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
+/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @system */ "./system/index.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./interfaces */ "./components/Window/interfaces.ts");
+/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./index */ "./components/Window/index.tsx");
+
+
+
+
+
+
+var WindowRender = /** @class */ (function (_super) {
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WindowRender, _super);
+    function WindowRender(props) {
+        var _this = _super.call(this, props) || this;
+        _this.boxRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
+        _this.headerRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
+        _this.Box = _this.Box.bind(_this);
+        _this.ResizeBorders = _this.ResizeBorders.bind(_this);
+        _this.Header = _this.Header.bind(_this);
+        _this.Body = _this.Body.bind(_this);
+        _this.state = {
+            Content: _this.props.content,
+            loading: false,
+        };
+        return _this;
+    }
+    WindowRender.prototype.render = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Box, null,
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.ResizeBorders, null),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Header, null),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Body, null)));
+    };
+    WindowRender.prototype.Box = function (props) {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Box, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.getBoxAttrs()), props.children));
+    };
+    WindowRender.prototype.ResizeBorders = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, this.props.resizable && Object(_utils__WEBPACK_IMPORTED_MODULE_2__["mapToArray"])(_interfaces__WEBPACK_IMPORTED_MODULE_4__["windowBorderTypes"], this.renderResizeBorder.bind(this))));
+    };
+    WindowRender.prototype.Header = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Header, { elementRef: this.headerRef, onMouseDown: this.handlerHeaderOnPress.bind(this) },
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Buttons, null, this.getButtonControlList().map(this.renderButtonControl.bind(this))),
+            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Title, { windowWidth: this.props.width },
+                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](TitleText, null, this.props.appInfo.name))));
+    };
+    WindowRender.prototype.Body = function () {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Body, null, this.renderContent(this.state.Content, { windowId: this.props.id, contentId: this.props.contentId })));
+    };
+    WindowRender.prototype.componentWillMount = function () {
+        var _this = this;
+        if (Object(_utils__WEBPACK_IMPORTED_MODULE_2__["isPromiseFunction"])(this.state.Content)) {
+            this.setState({
+                Content: 'loading',
+                loading: true,
+            });
+            Object(_utils__WEBPACK_IMPORTED_MODULE_2__["promiseFunctionCall"])(this.state.Content).then(function (Content) {
+                _this.setState({
+                    Content: Content,
+                    loading: false,
+                });
+            });
+        }
+    };
+    WindowRender.prototype.renderContent = function (Content, attrs) {
+        switch (typeof Content) {
+            case 'string': return Content;
+            case 'function': return react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Content, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({ windowId: this.props.id }, attrs));
+        }
+        return '';
+    };
+    WindowRender.prototype.renderButtonControl = function (buttonType) {
+        if (!buttonType)
+            return '';
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](ButtonControl, { key: buttonType, "button-type": buttonType, onClick: this.handlerButtonControlClick.bind(this, buttonType) }));
+    };
+    WindowRender.prototype.renderResizeBorder = function (type, index) {
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](ResizeBorder, { key: index, onMouseDown: this.handlerResizeBorderPress.bind(this, type), Type: type, Hidden: this.props.isMaximized }));
+    };
+    WindowRender.prototype.handlerOnPress = function (event) { };
+    WindowRender.prototype.handlerHeaderOnPress = function (event) { };
+    WindowRender.prototype.handlerResizeBorderPress = function (direction, event) { };
+    WindowRender.prototype.handlerButtonControlClick = function (type, event) { };
+    WindowRender.prototype.getValue = function (value) {
+        return parseFloat(value) + 'px';
+    };
+    WindowRender.prototype.getButtonControlList = function () {
+        return ['close', this.props.resizable && 'maximize', 'minimize'];
+    };
+    WindowRender.prototype.getBoxAttrs = function () {
+        var style = {
+            left: this.getValue(this.props.x),
+            top: this.getValue(this.props.y),
+            width: this.getValue(this.props.width),
+            height: this.getValue(this.props.height),
+        };
+        return {
+            documentRef: Object(_system__WEBPACK_IMPORTED_MODULE_3__["getDocumentRef"])(),
+            style: style,
+            elementRef: this.boxRef,
+            isVisible: Object(_index__WEBPACK_IMPORTED_MODULE_5__["isVisible"])(this.props),
+            inFocus: this.props.inFocus,
+            className: this.props.className,
+            onMouseDown: this.handlerOnPress.bind(this),
+        };
+    };
+    WindowRender.prototype.loading = function (isLoading) {
+        if (isLoading === void 0) { isLoading = true; }
+        this.setState({
+            loading: isLoading
+        });
+    };
+    return WindowRender;
+}(_utils__WEBPACK_IMPORTED_MODULE_2__["ReactComponentWithEventEmmiter"]));
+/* harmony default export */ __webpack_exports__["default"] = (WindowRender);
+var _a = __webpack_require__(/*! ./styles */ "./components/Window/styles.ts").children({
+    Box: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Box"),
+    Header: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Header"),
+    Title: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Title"),
+    TitleText: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_TitleText"),
+    Body: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Body"),
+    Buttons: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Buttons"),
+    ButtonControl: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["el"])("button", "Window_ButtonControl"),
+    ResizeBorder: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_ResizeBorder"),
+}), Box = _a.Box, Header = _a.Header, Body = _a.Body, Buttons = _a.Buttons, ButtonControl = _a.ButtonControl, Title = _a.Title, TitleText = _a.TitleText, ResizeBorder = _a.ResizeBorder;
 
 
 /***/ }),
@@ -936,7 +1077,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _boundsManager__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./boundsManager */ "./components/Window/boundsManager.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BoundsManager", function() { return _boundsManager__WEBPACK_IMPORTED_MODULE_5__["BoundsManager"]; });
 
-/* harmony import */ var _render__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./render */ "./components/Window/render.tsx");
+/* harmony import */ var _WindowRender__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./WindowRender */ "./components/Window/WindowRender.tsx");
 
 
 
@@ -1039,6 +1180,9 @@ var Window = /** @class */ (function (_super) {
         switch (type) {
             case 'close':
                 this.close();
+                break;
+            case 'minimize':
+                this.setMinimize(!this.props.isMinimized);
                 break;
             case 'maximize':
                 this.setMaximize(!this.props.isMaximized);
@@ -1147,7 +1291,7 @@ var Window = /** @class */ (function (_super) {
         _components_WindowsManager__WEBPACK_IMPORTED_MODULE_1__["actions"].unfocus(this.props.id);
     };
     return Window;
-}(_render__WEBPACK_IMPORTED_MODULE_6__["default"]));
+}(_WindowRender__WEBPACK_IMPORTED_MODULE_6__["default"]));
 var StyledWindow = __webpack_require__(/*! ./styles */ "./components/Window/styles.ts").self(Window);
 /* harmony default export */ __webpack_exports__["default"] = (StyledWindow);
 
@@ -1207,7 +1351,7 @@ var defaultWindowConstructorProps = {
     maxWidth: NaN,
     maxHeight: NaN,
     inFocus: false,
-    isMinified: false,
+    isMinimized: false,
     isMaximized: false,
     state: windowStates.New,
     toState: windowStates.Normal,
@@ -1215,7 +1359,7 @@ var defaultWindowConstructorProps = {
     appInfo: null,
     id: '',
 };
-var defaultWindowProps = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, defaultWindowConstructorProps, { contentId: '', id: '', content: '', contentState: {} });
+var defaultWindowProps = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, defaultWindowConstructorProps, { contentId: '', id: '', content: '' });
 
 
 /***/ }),
@@ -1267,122 +1411,6 @@ function isOpened(windowProps) {
 
 /***/ }),
 
-/***/ "./components/Window/render.tsx":
-/*!**************************************!*\
-  !*** ./components/Window/render.tsx ***!
-  \**************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "../node_modules/tslib/tslib.es6.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./interfaces */ "./components/Window/interfaces.ts");
-/* harmony import */ var _index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./index */ "./components/Window/index.tsx");
-/* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @system */ "./system/index.ts");
-
-
-
-
-
-
-var WindowRender = /** @class */ (function (_super) {
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WindowRender, _super);
-    function WindowRender(props) {
-        var _this = _super.call(this, props) || this;
-        _this.boxRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
-        _this.headerRef = react__WEBPACK_IMPORTED_MODULE_1__["createRef"]();
-        _this.Box = _this.Box.bind(_this);
-        _this.ResizeBorders = _this.ResizeBorders.bind(_this);
-        _this.Header = _this.Header.bind(_this);
-        _this.Body = _this.Body.bind(_this);
-        return _this;
-    }
-    WindowRender.prototype.render = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Box, null,
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.ResizeBorders, null),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Header, null),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](this.Body, null)));
-    };
-    WindowRender.prototype.Box = function (props) {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Box, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.getBoxAttrs()), props.children));
-    };
-    WindowRender.prototype.ResizeBorders = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](react__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, this.props.resizable && Object(_utils__WEBPACK_IMPORTED_MODULE_2__["mapToArray"])(_interfaces__WEBPACK_IMPORTED_MODULE_3__["windowBorderTypes"], this.renderResizeBorder.bind(this))));
-    };
-    WindowRender.prototype.Header = function () {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Header, { elementRef: this.headerRef, onMouseDown: this.handlerHeaderOnPress.bind(this) },
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Buttons, null, this.getButtonControlList().map(this.renderButtonControl.bind(this))),
-            react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Title, { windowWidth: this.props.width },
-                react__WEBPACK_IMPORTED_MODULE_1__["createElement"](TitleText, null, this.props.appInfo.name))));
-    };
-    WindowRender.prototype.Body = function () {
-        var Content = this.props.content;
-        var contentState = this.props.contentState;
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Body, null, this.renderContent(Content, { windowId: this.props.id, contentId: this.props.contentId, contentState: contentState })));
-    };
-    WindowRender.prototype.renderContent = function (Content, attrs) {
-        if (typeof Content == 'string')
-            return Content;
-        if (typeof Content == 'function')
-            return react__WEBPACK_IMPORTED_MODULE_1__["createElement"](Content, tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, attrs));
-        return '';
-    };
-    WindowRender.prototype.renderButtonControl = function (buttonType) {
-        if (!buttonType)
-            return '';
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](ButtonControl, { key: buttonType, "button-type": buttonType, onClick: this.handlerButtonControlClick.bind(this, buttonType) }));
-    };
-    WindowRender.prototype.renderResizeBorder = function (type, index) {
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](ResizeBorder, { key: index, onMouseDown: this.handlerResizeBorderPress.bind(this, type), Type: type }));
-    };
-    WindowRender.prototype.handlerOnPress = function (event) { };
-    WindowRender.prototype.handlerHeaderOnPress = function (event) { };
-    WindowRender.prototype.handlerResizeBorderPress = function (direction, event) { };
-    WindowRender.prototype.handlerButtonControlClick = function (type, event) { };
-    WindowRender.prototype.getValue = function (value) {
-        return parseFloat(value) + 'px';
-    };
-    WindowRender.prototype.getButtonControlList = function () {
-        return ['close', this.props.resizable && 'maximize', 'minimize'];
-    };
-    WindowRender.prototype.getBoxAttrs = function () {
-        var style = {
-            left: this.getValue(this.props.x),
-            top: this.getValue(this.props.y),
-            width: this.getValue(this.props.width),
-            height: this.getValue(this.props.height),
-        };
-        return {
-            documentRef: Object(_system__WEBPACK_IMPORTED_MODULE_5__["getDocumentRef"])(),
-            style: style,
-            elementRef: this.boxRef,
-            isVisible: Object(_index__WEBPACK_IMPORTED_MODULE_4__["isVisible"])(this.props),
-            inFocus: this.props.inFocus,
-            className: this.props.className,
-            onMouseDown: this.handlerOnPress.bind(this),
-        };
-    };
-    return WindowRender;
-}(react__WEBPACK_IMPORTED_MODULE_1__["PureComponent"]));
-/* harmony default export */ __webpack_exports__["default"] = (WindowRender);
-var _a = __webpack_require__(/*! ./styles */ "./components/Window/styles.ts").children({
-    Box: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Box"),
-    Header: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Header"),
-    Title: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Title"),
-    TitleText: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_TitleText"),
-    Body: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Body"),
-    Buttons: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_Buttons"),
-    ButtonControl: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["el"])("button", "Window_ButtonControl"),
-    ResizeBorder: Object(_utils__WEBPACK_IMPORTED_MODULE_2__["div"])("Window_ResizeBorder"),
-}), Box = _a.Box, Header = _a.Header, Body = _a.Body, Buttons = _a.Buttons, ButtonControl = _a.ButtonControl, Title = _a.Title, TitleText = _a.TitleText, ResizeBorder = _a.ResizeBorder;
-
-
-/***/ }),
-
 /***/ "./components/Window/styles.ts":
 /*!*************************************!*\
   !*** ./components/Window/styles.ts ***!
@@ -1403,7 +1431,7 @@ function self(Self) {
 }
 function children(_a) {
     var Box = _a.Box, Header = _a.Header, Body = _a.Body, Buttons = _a.Buttons, ButtonControl = _a.ButtonControl, ResizeBorder = _a.ResizeBorder, Title = _a.Title, TitleText = _a.TitleText, children = tslib__WEBPACK_IMPORTED_MODULE_0__["__rest"](_a, ["Box", "Header", "Body", "Buttons", "ButtonControl", "ResizeBorder", "Title", "TitleText"]);
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, children, { Box: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Box)(templateObject_2 || (templateObject_2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\ttransform: scale(", ");\n\t\t\topacity: ", ";\n\t\t\tbox-shadow: ", ";\n\t\t\ttop: 100rem;\n\t\t\tleft: 100rem;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\ttransition: transform 0.3s, opacity 0.3s/*, top 0.05s, left 0.05s, height 0.05s, width 0.05s*/;\n\t\t"], ["\n\t\t\ttransform: scale(", ");\n\t\t\topacity: ", ";\n\t\t\tbox-shadow: ", ";\n\t\t\ttop: 100rem;\n\t\t\tleft: 100rem;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\ttransition: transform 0.3s, opacity 0.3s/*, top 0.05s, left 0.05s, height 0.05s, width 0.05s*/;\n\t\t"])), function (props) { return props['isVisible'] ? '1' : '0'; }, boxOpacity, function (props) { return props['inFocus'] ? '0 0 30rem rgba(0, 0, 0, 0.5)' : '0 0 10rem rgba(0, 0, 0, 0.1)'; }), Header: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Header)(templateObject_3 || (templateObject_3 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 100%;\n\t\t\theight: 20rem;\n\t\t\tbackground: rgba(0, 0, 0, 0.8);\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 0;\n\t\t\tposition: relative;\n\t\t\t&:active {\n\t\t\t\tcursor: grabbing;\n\t\t\t}\n\t\t"], ["\n\t\t\twidth: 100%;\n\t\t\theight: 20rem;\n\t\t\tbackground: rgba(0, 0, 0, 0.8);\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 0;\n\t\t\tposition: relative;\n\t\t\t&:active {\n\t\t\t\tcursor: grabbing;\n\t\t\t}\n\t\t"]))), Body: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Body)(templateObject_4 || (templateObject_4 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tflex-grow: 1;\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tflex-grow: 1;\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t"]))), Title: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Title)(templateObject_5 || (templateObject_5 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 1;\n\t\t\tflex-shrink: 1;\n\t\t\twidth: 100%;\n\t\t\tfont-size: 10rem;\n\t\t\tfont-weight: 300;\n\t\t\talign-items: center;\n\t\t\tjustify-content: stretch;\n\t\t\ttext-align: ", ";\n\t\t\tpadding: 0 ", " 0 45rem;\n\t\t\tpointer-events: none;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 1;\n\t\t\tflex-shrink: 1;\n\t\t\twidth: 100%;\n\t\t\tfont-size: 10rem;\n\t\t\tfont-weight: 300;\n\t\t\talign-items: center;\n\t\t\tjustify-content: stretch;\n\t\t\ttext-align: ", ";\n\t\t\tpadding: 0 ", " 0 45rem;\n\t\t\tpointer-events: none;\n\t\t"])), function (props) { return props['windowWidth'] > 200 ? 'center' : 'left'; }, function (props) { return props['windowWidth'] > 200 ? '45rem' : '10rem'; }), TitleText: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(TitleText)(templateObject_6 || (templateObject_6 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: block;\n\t\t\twhite-space: nowrap;\n\t\t\ttext-overflow: ellipsis;\n\t\t\toverflow: hidden;\n\t\t\twidth: 100%;\n\t\t"], ["\n\t\t\tdisplay: block;\n\t\t\twhite-space: nowrap;\n\t\t\ttext-overflow: ellipsis;\n\t\t\toverflow: hidden;\n\t\t\twidth: 100%;\n\t\t"]))), Buttons: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Buttons)(templateObject_7 || (templateObject_7 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tpadding: 6rem;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;\n\t\t\ttop: 0;\n\t\t\tbottom: 0;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tpadding: 6rem;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;\n\t\t\ttop: 0;\n\t\t\tbottom: 0;\n\t\t"]))), ButtonControl: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(ButtonControl)(templateObject_8 || (templateObject_8 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: block;\n\t\t\twidth: 8rem;\n\t\t\theight: 8rem;\n\t\t\tpadding: 0;\n\t\t\tborder-radius: 50%;\n\t\t\tborder: 0;\n\t\t\ttransition: all 0.3s;\n\t\t\tcursor: pointer;\n\t\t\tmargin-right: 4rem;\n\t\t\t", "\n\t\t"], ["\n\t\t\tdisplay: block;\n\t\t\twidth: 8rem;\n\t\t\theight: 8rem;\n\t\t\tpadding: 0;\n\t\t\tborder-radius: 50%;\n\t\t\tborder: 0;\n\t\t\ttransition: all 0.3s;\n\t\t\tcursor: pointer;\n\t\t\tmargin-right: 4rem;\n\t\t\t", "\n\t\t"])), buttonStyles), ResizeBorder: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(ResizeBorder)(templateObject_9 || (templateObject_9 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tposition: absolute;\n\t\t\tfont-size: 4rem;\n\t\t\tz-index: 2;\n\t\t\t/* background: red; */\n\t\t\t", "\n\t\t"], ["\n\t\t\tposition: absolute;\n\t\t\tfont-size: 4rem;\n\t\t\tz-index: 2;\n\t\t\t/* background: red; */\n\t\t\t", "\n\t\t"])), ResizeBorderStyle) });
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, children, { Box: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Box)(templateObject_2 || (templateObject_2 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\ttransform: scale(", ");\n\t\t\topacity: ", ";\n\t\t\tbox-shadow: ", ";\n\t\t\ttop: 100rem;\n\t\t\tleft: 100rem;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\ttransition: transform 0.3s, opacity 0.3s/*, top 0.05s, left 0.05s, height 0.05s, width 0.05s*/;\n\t\t"], ["\n\t\t\ttransform: scale(", ");\n\t\t\topacity: ", ";\n\t\t\tbox-shadow: ", ";\n\t\t\ttop: 100rem;\n\t\t\tleft: 100rem;\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\ttransition: transform 0.3s, opacity 0.3s/*, top 0.05s, left 0.05s, height 0.05s, width 0.05s*/;\n\t\t"])), function (props) { return isVisible(props) ? '1' : '0'; }, boxOpacity, function (props) { return props['inFocus'] ? '0 0 30rem rgba(0, 0, 0, 0.5)' : '0 0 10rem rgba(0, 0, 0, 0.1)'; }), Header: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Header)(templateObject_3 || (templateObject_3 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\twidth: 100%;\n\t\t\theight: 20rem;\n\t\t\tbackground: rgba(0, 0, 0, 0.8);\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 0;\n\t\t\tposition: relative;\n\t\t\t&:active {\n\t\t\t\tcursor: grabbing;\n\t\t\t}\n\t\t"], ["\n\t\t\twidth: 100%;\n\t\t\theight: 20rem;\n\t\t\tbackground: rgba(0, 0, 0, 0.8);\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 0;\n\t\t\tflex-shrink: 0;\n\t\t\tposition: relative;\n\t\t\t&:active {\n\t\t\t\tcursor: grabbing;\n\t\t\t}\n\t\t"]))), Body: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Body)(templateObject_4 || (templateObject_4 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tflex-grow: 1;\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\tflex-direction: column;\n\t\t\tflex-grow: 1;\n\t\t\toverflow: hidden;\n\t\t\tposition: relative;\n\t\t"]))), Title: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Title)(templateObject_5 || (templateObject_5 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 1;\n\t\t\tflex-shrink: 1;\n\t\t\twidth: 100%;\n\t\t\tfont-size: 10rem;\n\t\t\tfont-weight: 300;\n\t\t\talign-items: center;\n\t\t\tjustify-content: stretch;\n\t\t\ttext-align: ", ";\n\t\t\tpadding: 0 ", " 0 45rem;\n\t\t\tpointer-events: none;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\tflex-grow: 1;\n\t\t\tflex-shrink: 1;\n\t\t\twidth: 100%;\n\t\t\tfont-size: 10rem;\n\t\t\tfont-weight: 300;\n\t\t\talign-items: center;\n\t\t\tjustify-content: stretch;\n\t\t\ttext-align: ", ";\n\t\t\tpadding: 0 ", " 0 45rem;\n\t\t\tpointer-events: none;\n\t\t"])), function (props) { return props['windowWidth'] > 200 ? 'center' : 'left'; }, function (props) { return props['windowWidth'] > 200 ? '45rem' : '10rem'; }), TitleText: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(TitleText)(templateObject_6 || (templateObject_6 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: block;\n\t\t\twhite-space: nowrap;\n\t\t\ttext-overflow: ellipsis;\n\t\t\toverflow: hidden;\n\t\t\twidth: 100%;\n\t\t"], ["\n\t\t\tdisplay: block;\n\t\t\twhite-space: nowrap;\n\t\t\ttext-overflow: ellipsis;\n\t\t\toverflow: hidden;\n\t\t\twidth: 100%;\n\t\t"]))), Buttons: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(Buttons)(templateObject_7 || (templateObject_7 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tpadding: 6rem;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;\n\t\t\ttop: 0;\n\t\t\tbottom: 0;\n\t\t"], ["\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tpadding: 6rem;\n\t\t\tposition: absolute;\n\t\t\tleft: 0;\n\t\t\ttop: 0;\n\t\t\tbottom: 0;\n\t\t"]))), ButtonControl: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(ButtonControl)(templateObject_8 || (templateObject_8 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tdisplay: block;\n\t\t\twidth: 8rem;\n\t\t\theight: 8rem;\n\t\t\tpadding: 0;\n\t\t\tborder-radius: 50%;\n\t\t\tborder: 0;\n\t\t\ttransition: all 0.3s;\n\t\t\tcursor: pointer;\n\t\t\tmargin-right: 4rem;\n\t\t\t", "\n\t\t"], ["\n\t\t\tdisplay: block;\n\t\t\twidth: 8rem;\n\t\t\theight: 8rem;\n\t\t\tpadding: 0;\n\t\t\tborder-radius: 50%;\n\t\t\tborder: 0;\n\t\t\ttransition: all 0.3s;\n\t\t\tcursor: pointer;\n\t\t\tmargin-right: 4rem;\n\t\t\t", "\n\t\t"])), buttonStyles), ResizeBorder: Object(_utils__WEBPACK_IMPORTED_MODULE_1__["styled"])(ResizeBorder)(templateObject_9 || (templateObject_9 = tslib__WEBPACK_IMPORTED_MODULE_0__["__makeTemplateObject"](["\n\t\t\tposition: absolute;\n\t\t\tfont-size: 4rem;\n\t\t\tz-index: 2;\n\t\t\t", "\n\t\t\t", "\n\t\t"], ["\n\t\t\tposition: absolute;\n\t\t\tfont-size: 4rem;\n\t\t\tz-index: 2;\n\t\t\t", "\n\t\t\t", "\n\t\t"])), ResizeBorderStyle, function (props) { return (props['Hidden'] ? 'display: none' : ''); }) });
 }
 function buttonStyles(props) {
     var color = '';
@@ -1424,8 +1452,11 @@ function buttonStyles(props) {
     }
     return "\n\t\tbackground: " + color + ";\n\t\t&:hover {\n\t\t\tbackground: " + colorHover + ";\n\t\t}\n\t";
 }
+function isVisible(props) {
+    return props['isVisible'] && !props['isMinimized'];
+}
 function boxOpacity(props) {
-    if (props['isVisible']) {
+    if (isVisible(props)) {
         if (props['inFocus']) {
             return '1';
         }
@@ -1435,6 +1466,9 @@ function boxOpacity(props) {
 }
 function ResizeBorderStyle(props) {
     var result = '';
+    if (props['isMaximized']) {
+        result += 'display: none;';
+    }
     switch (props['Type']) {
         case 'top':
             result += "\n\t\t\t\ttop: -0.5em;\n\t\t\t\tleft: 0;\n\t\t\t\tright: 0;\n\t\t\t\theight: 1em;\n\t\t\t\tcursor: ns-resize !important;\n\t\t\t";
@@ -1462,7 +1496,7 @@ function ResizeBorderStyle(props) {
             break;
     }
     if (props['Type'].indexOf('-') != -1) {
-        result += "\n\t\t\tz-index: 3;\n\t\t\t/* background: green; */\n\t\t";
+        result += "\n\t\t\tz-index: 3;\n\t\t";
     }
     return result;
 }
@@ -1488,7 +1522,6 @@ var WindowContent = /** @class */ (function (_super) {
     tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"](WindowContent, _super);
     function WindowContent(props) {
         var _this = _super.call(this, props, "Content:" + props.contentId) || this;
-        _this.componentId = '';
         _this.id = "Content:" + _this.props.contentId;
         _this.windowId = _this.props.windowId;
         return _this;
@@ -1599,13 +1632,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "../node_modules/react-redux/es/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @utils */ "./utils/index.tsx");
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions */ "./components/WindowsManager/actions.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return _actions__WEBPACK_IMPORTED_MODULE_4__["actions"]; });
+/* harmony import */ var _system_contentStore__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @system/contentStore */ "./system/contentStore.ts");
+/* harmony import */ var _components_Window__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @components/Window */ "./components/Window/index.tsx");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./actions */ "./components/WindowsManager/actions.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "actions", function() { return _actions__WEBPACK_IMPORTED_MODULE_5__["actions"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getActionName", function() { return _actions__WEBPACK_IMPORTED_MODULE_4__["getActionName"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getActionName", function() { return _actions__WEBPACK_IMPORTED_MODULE_5__["getActionName"]; });
 
-/* harmony import */ var _components_Window__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @components/Window */ "./components/Window/index.tsx");
 /* harmony import */ var _reducer__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./reducer */ "./components/WindowsManager/reducer.ts");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "reducer", function() { return _reducer__WEBPACK_IMPORTED_MODULE_6__["reducer"]; });
 
@@ -1628,20 +1661,37 @@ var WindowsManager = /** @class */ (function (_super) {
     };
     WindowsManager.prototype.renderWindow = function (window) {
         var props = this.getWindowProps(window);
-        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Window__WEBPACK_IMPORTED_MODULE_5__["default"], tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, props)));
+        return (react__WEBPACK_IMPORTED_MODULE_1__["createElement"](_components_Window__WEBPACK_IMPORTED_MODULE_4__["default"], tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, props)));
     };
     WindowsManager.prototype.componentDidMount = function () {
-        _actions__WEBPACK_IMPORTED_MODULE_4__["actions"]._load();
+        _actions__WEBPACK_IMPORTED_MODULE_5__["actions"]._load();
     };
     WindowsManager.prototype.getWindowProps = function (window) {
-        var props = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { key: window.id }, Object(_utils__WEBPACK_IMPORTED_MODULE_3__["getWindowContent"])(window));
+        var props = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { key: window.id }, this.getWindowSize(window), this.getWindowContent(window));
         return props;
+    };
+    WindowsManager.prototype.getWindowSize = function (window) {
+        if (window.isMaximized) {
+            return {
+                x: this.props.Layout.content.x,
+                y: this.props.Layout.content.y,
+                width: this.props.Layout.content.width,
+                height: this.props.Layout.content.height,
+            };
+        }
+    };
+    WindowsManager.prototype.getWindowContent = function (window) {
+        var contentId = window.appInfo.uid + '.' + window.id;
+        return {
+            contentId: contentId,
+            content: _system_contentStore__WEBPACK_IMPORTED_MODULE_3__["getContent"](window.content),
+        };
     };
     return WindowsManager;
 }(react__WEBPACK_IMPORTED_MODULE_1__["Component"]));
 var ConnectedWindowsManager = Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(function mapStateToProps(state, ownProps) {
-    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state.WindowsManager);
-}, function mapDispatchToProps(dispatch) {
+    return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, state.WindowsManager, { Layout: state.Layout });
+}, function mapDispatchToProps(dispatch, getState) {
     return {};
 })(WindowsManager);
 /* harmony default export */ __webpack_exports__["default"] = (ConnectedWindowsManager);
@@ -1681,17 +1731,22 @@ __webpack_require__.r(__webpack_exports__);
 function windowFocus(list, windowId, setFocus) {
     if (setFocus === void 0) { setFocus = true; }
     var focusWindow;
-    list = list.filter(function (window) {
+    var newlist = list.filter(function (window) {
         if (setFocus && window.id === windowId) {
-            focusWindow = window;
-            window.inFocus = setFocus;
-            return false;
+            if (window.inFocus !== setFocus) {
+                focusWindow = window;
+                window.inFocus = setFocus;
+                return false;
+            }
+            return true;
         }
         window.inFocus = false;
         return true;
     });
-    if (focusWindow)
-        list.push(focusWindow);
+    if (focusWindow) {
+        newlist.push(focusWindow);
+        return newlist;
+    }
     return list;
 }
 function windowMap(list, windowId, handler) {
@@ -1791,7 +1846,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function reducer(state, action) {
     if (state === void 0) { state = {
-        opened: []
+        opened: [],
     }; }
     var type = "";
     if (!(type = Object(_utils__WEBPACK_IMPORTED_MODULE_0__["checkAction"])("WindowsManager", action)))
@@ -1841,13 +1896,21 @@ var ReducerMethods = /** @class */ (function () {
         return this.state;
     };
     ReducerMethods.prototype.setState = function (obj) {
-        this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.state, obj);
+        var changed = false;
+        for (var key in obj) {
+            if (obj[key] != this.state[key]) {
+                changed = true;
+                break;
+            }
+        }
+        if (changed) {
+            this.state = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, this.state, obj);
+        }
         Object(_utils__WEBPACK_IMPORTED_MODULE_2__["stateSave"])("WindowsManager", this.state);
     };
     ReducerMethods.prototype.open = function () {
         var windowProps = Object(_methods__WEBPACK_IMPORTED_MODULE_3__["constructorOptions"])(this.action.options);
         var newWindow = tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, _components_Window__WEBPACK_IMPORTED_MODULE_1__["defaultWindowProps"], windowProps, { content: this.action.content });
-        console.log('newWindow', newWindow);
         this.setState({
             opened: this.state.opened.concat(newWindow)
         });
@@ -1935,7 +1998,7 @@ var ReducerMethods = /** @class */ (function () {
         var _this = this;
         this.setState({
             opened: Object(_methods__WEBPACK_IMPORTED_MODULE_3__["windowMap"])(this.state.opened, this.action.windowId, function (window) {
-                return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { isMaximize: _this.action.isMaximize });
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { isMaximized: _this.action.isMaximize });
             })
         });
     };
@@ -1943,7 +2006,7 @@ var ReducerMethods = /** @class */ (function () {
         var _this = this;
         this.setState({
             opened: Object(_methods__WEBPACK_IMPORTED_MODULE_3__["windowMap"])(this.state.opened, this.action.windowId, function (window) {
-                return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { isMinimize: _this.action.isMinimize });
+                return tslib__WEBPACK_IMPORTED_MODULE_0__["__assign"]({}, window, { isMinimized: _this.action.isMinimize });
             })
         });
     };

@@ -1,6 +1,7 @@
 import * as React from "react";
+import {attrs} from "@utils"
 
-export default class Time extends React.Component<null, {
+export default class Time extends React.PureComponent<null, {
 	formattedTime: string;
 }> {
 	private interval;
@@ -29,7 +30,7 @@ export default class Time extends React.Component<null, {
 	}
 	render (){
 		return (
-			<div {...this.props}>{ this.state.formattedTime }</div>
+			<div {...attrs(this.props)}>{ this.state.formattedTime }</div>
 		)
 	}
 }

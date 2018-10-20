@@ -62,7 +62,7 @@ var ConnectedWindowsManager = connect<IWindowsManagerProps, IWindowsManagerDispa
 		...state.WindowsManager,
 		Layout: state.Layout,
 	};
-}, function mapDispatchToProps(dispatch): IWindowsManagerDispatchProps{
+}, function mapDispatchToProps(dispatch, getState): IWindowsManagerDispatchProps{
 	return {};
 })(WindowsManager);
 

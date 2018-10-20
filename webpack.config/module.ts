@@ -55,7 +55,7 @@ export default {
 			}]
 		},
 		{
-			test: /((\/assets\/|\\assets\\)|(\.(png|jpg|gif|svg)$))/,
+			test: /((\/assets\/|\\assets\\)(\/data\/|\\data\\)|(\.(png|jpg|gif|svg)$))/,
 			use: [
 				{
 					loader: 'file-loader',

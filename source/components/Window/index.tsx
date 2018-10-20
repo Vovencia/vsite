@@ -10,7 +10,7 @@ export * from "./interfaces";
 export * from "./methods";
 export * from "./boundsManager";
 
-import WindowRender from "./render";
+import WindowRender from "./WindowRender";
 
 
 class Window extends WindowRender {
@@ -113,6 +113,9 @@ class Window extends WindowRender {
 		switch(type){
 			case 'close':
 				this.close();
+			break;
+			case 'minimize':
+				this.setMinimize( !this.props.isMinimized );
 			break;
 			case 'maximize':
 				this.setMaximize( !this.props.isMaximized );

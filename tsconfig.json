@@ -18,6 +18,8 @@
 			"@utils/*": ["./source/utils/*"],
 			"@components": ["./source/components/index"],
 			"@components/*": ["./source/components/*"],
+			"@containers": ["./source/containers/index"],
+			"@containers/*": ["./source/containers/*"],
 			"@apps": ["./source/apps/index"],
 			"@apps/*": ["./source/apps/*"],
 			"@assets": ["./source/assets/index"],

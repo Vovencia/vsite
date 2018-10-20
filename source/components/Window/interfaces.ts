@@ -39,7 +39,7 @@ export interface IWindowConstructorProps {
 	maxHeight		?: number,
 
 	inFocus			?: boolean;
-	isMinified		?: boolean;
+	isMinimized		?: boolean;
 	isMaximized		?: boolean;
 
 	state			?: windowStates;
@@ -60,7 +60,7 @@ export interface IWindowConstructorPropsStrict {
 	maxHeight		: number,
 
 	inFocus			: boolean;
-	isMinified		: boolean;
+	isMinimized		: boolean;
 	isMaximized		: boolean;
 
 	state			: windowStates;
@@ -87,7 +87,7 @@ export const defaultWindowConstructorProps:IWindowConstructorPropsStrict = {
 	maxHeight		: NaN,
 
 	inFocus			: false,
-	isMinified		: false,
+	isMinimized		: false,
 	isMaximized		: false,
 
 	state			: windowStates.New,

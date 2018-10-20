@@ -29,6 +29,7 @@ const config = {
 			'@system': source('system'),
 			'@utils': source('utils'),
 			'@components': source('components'),
+			'@containers': source('containers'),
 			'@apps': source('apps'),
 			'@assets': source('assets'),
 			'@interfaces': source('interfaces'),

@@ -20,6 +20,43 @@ exports.push([module.i, "html,\nbody {\n  padding: 0;\n  margin: 0;\n}\nhtml {\n
 
 /***/ }),
 
+/***/ "./system/contentStore.ts":
+/*!********************************!*\
+  !*** ./system/contentStore.ts ***!
+  \********************************/
+/*! exports provided: add, get, getContent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "add", function() { return add; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "get", function() { return get; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContent", function() { return getContent; });
+/* harmony import */ var _newError__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./newError */ "./system/newError.ts");
+
+var contents = {};
+var contentPrefix = "@contentStore:";
+function add(contentName, content) {
+    if (contents[contentName]) {
+        return Object(_newError__WEBPACK_IMPORTED_MODULE_0__["newError"])('Content with name "' + contentName + '" already exists');
+    }
+    contents[contentName] = content;
+    return contentPrefix + contentName;
+}
+function get(contentName) {
+    return contents[contentName];
+}
+function getContent(contentRequest) {
+    if (typeof contentRequest != 'string')
+        return contentRequest;
+    if (contentRequest.indexOf(contentPrefix) !== 0)
+        return contentRequest;
+    return get(contentRequest.replace(contentPrefix, ""));
+}
+
+
+/***/ }),
+
 /***/ "./system/index.styl":
 /*!***************************!*\
   !*** ./system/index.styl ***!
@@ -241,6 +278,23 @@ function documentRemoveClass(className) {
 
 /***/ }),
 
+/***/ "./system/newError.ts":
+/*!****************************!*\
+  !*** ./system/newError.ts ***!
+  \****************************/
+/*! exports provided: newError */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newError", function() { return newError; });
+function newError(message) {
+    throw new Error(message);
+}
+
+
+/***/ }),
+
 /***/ "./system/reducersManager.ts":
 /*!***********************************!*\
   !*** ./system/reducersManager.ts ***!
@@ -346,7 +400,6 @@ function reducer(state, action) {
                     return -1;
                 return 0;
             });
-            console.log('list', list);
             state = Object(_components_Taskbar__WEBPACK_IMPORTED_MODULE_1__["setListInState"])(list, state);
             break;
     }

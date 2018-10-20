@@ -2,8 +2,8 @@ import * as React from "react";
 import {
 	div, el,
 	mapToArray,
-	promiseDelay,
 	isPromiseFunction, promiseFunctionCall,
+	ReactComponentWithEventEmmiter,
 } from "@utils";
 import {getDocumentRef} from "@system";
 
@@ -11,7 +11,7 @@ import {IWindowInstanceProps, windowBorderTypes, IWindowInstanceState} from "./i
 import {isVisible} from "./index";
 
 
-export default class WindowRender extends React.PureComponent<
+export default class WindowRender extends ReactComponentWithEventEmmiter<
 	IWindowInstanceProps & React.HTMLAttributes<HTMLDivElement>,
 	IWindowInstanceState
 > {
@@ -29,7 +29,6 @@ export default class WindowRender extends React.PureComponent<
 			Content: this.props.content,
 			loading: false,
 		}
-		console.log(this.props)
 	}
 
 	render(){

@@ -56,23 +56,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "appInfo", function() { return _appInfo__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 /* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @system */ "./system/index.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @interfaces */ "./interfaces/index.ts");
+/* harmony import */ var _system_contentStore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @system/contentStore */ "./system/contentStore.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @interfaces */ "./interfaces/index.ts");
+/* harmony import */ var _utils_promiseFunction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/promiseFunction */ "./utils/promiseFunction.ts");
 
 
 
 
-// import content from "./content";
-// const content = requiredContent(appInfo.uid, require("./content/").default);
+
+
+var getContent = Object(_utils_promiseFunction__WEBPACK_IMPORTED_MODULE_4__["promiseFunction"])(function getContent() {
+    return Promise.all(/*! import() | apps/calculator/content */[__webpack_require__.e("app/components"), __webpack_require__.e("apps/calculator/content")]).then(__webpack_require__.bind(null, /*! ./content */ "./apps/browser/content/index.tsx")).then(function (content) {
+        return content.default;
+    });
+});
+var content = _system_contentStore__WEBPACK_IMPORTED_MODULE_2__["add"](_appInfo__WEBPACK_IMPORTED_MODULE_0__["default"].uid, getContent);
 function call() {
-    _system__WEBPACK_IMPORTED_MODULE_1__["window"].open({ appInfo: _appInfo__WEBPACK_IMPORTED_MODULE_0__["default"] }, {
+    _system__WEBPACK_IMPORTED_MODULE_1__["window"].open(content, {
         width: 500,
         height: 300,
         // maxWidth: 165,
         // maxHeight: 240,
         // minWidth: 165,
         // minHeight: 240,
-        x: _interfaces__WEBPACK_IMPORTED_MODULE_2__["IPositionRelativeX"].center,
-        y: _interfaces__WEBPACK_IMPORTED_MODULE_2__["IPositionRelativeY"].center,
+        x: _interfaces__WEBPACK_IMPORTED_MODULE_3__["IPositionRelativeX"].center,
+        y: _interfaces__WEBPACK_IMPORTED_MODULE_3__["IPositionRelativeY"].center,
         isMaximized: true,
         resizable: true,
         appInfo: _appInfo__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -129,28 +137,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "appInfo", function() { return _appInfo__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
 /* harmony import */ var _system__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @system */ "./system/index.ts");
-/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @interfaces */ "./interfaces/index.ts");
+/* harmony import */ var _system_contentStore__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @system/contentStore */ "./system/contentStore.ts");
+/* harmony import */ var _interfaces__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @interfaces */ "./interfaces/index.ts");
+/* harmony import */ var _utils_promiseFunction__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @utils/promiseFunction */ "./utils/promiseFunction.ts");
 
 
 
 
-function getContent() {
-    return Promise.all(/*! import() | apps/calculator/content */[__webpack_require__.e("app/components"), __webpack_require__.e("apps/calculator/content")]).then(__webpack_require__.bind(null, /*! ./content */ "./apps/calculator/content/index.tsx")).then(function () {
-        console.log(arguments);
+
+
+var getContent = Object(_utils_promiseFunction__WEBPACK_IMPORTED_MODULE_4__["promiseFunction"])(function getContent() {
+    return Promise.all(/*! import() | apps/calculator/content */[__webpack_require__.e("app/components"), __webpack_require__.e("apps/calculator/content")]).then(__webpack_require__.bind(null, /*! ./content */ "./apps/calculator/content/index.tsx")).then(function (content) {
+        return content.default;
     });
-}
+});
+var content = _system_contentStore__WEBPACK_IMPORTED_MODULE_2__["add"](_appInfo__WEBPACK_IMPORTED_MODULE_0__["default"].uid, getContent);
 function call() {
-    getContent();
-    _system__WEBPACK_IMPORTED_MODULE_1__["window"].open('123', {
+    _system__WEBPACK_IMPORTED_MODULE_1__["window"].open(content, {
         width: 165,
         height: 240,
-        maxWidth: 165,
-        maxHeight: 240,
+        // maxWidth: 165,
+        // maxHeight: 240,
         minWidth: 165,
         minHeight: 240,
-        x: _interfaces__WEBPACK_IMPORTED_MODULE_2__["IPositionRelativeX"].center,
-        y: _interfaces__WEBPACK_IMPORTED_MODULE_2__["IPositionRelativeY"].center,
-        resizable: false,
+        x: _interfaces__WEBPACK_IMPORTED_MODULE_3__["IPositionRelativeX"].center,
+        y: _interfaces__WEBPACK_IMPORTED_MODULE_3__["IPositionRelativeY"].center,
+        resizable: true,
         appInfo: _appInfo__WEBPACK_IMPORTED_MODULE_0__["default"],
     }, function (windowId) {
         console.log(windowId);
@@ -200,31 +212,6 @@ module.exports = __webpack_require__.p + "assets/images/backgrounds/assets/image
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! ./system/index */ "./system/index.ts");
-function testMe() {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, new Promise(function (resolve) {
-                        setTimeout(function () {
-                            resolve('Hello!');
-                        }, 2000);
-                    })];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        });
-    });
-}
-var result = function () {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, testMe()];
-                case 1: return [2 /*return*/, _a.sent()];
-            }
-        });
-    });
-};
-result().then(function (result) { return console.log('result', result); });
 
 
 /***/ })

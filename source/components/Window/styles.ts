@@ -14,7 +14,7 @@ export function children({Box, Header, Body, Buttons, ButtonControl, ResizeBorde
 	return {
 		...children,
 		Box: styled(Box)`
-			transform: scale(${ (props) => props['isVisible'] ? '1' : '0' });
+			transform: scale(${ (props) => isVisible(props) ? '1' : '0' });
 			opacity: ${ boxOpacity };
 			box-shadow: ${(props) => props['inFocus'] ? '0 0 30rem rgba(0, 0, 0, 0.5)' : '0 0 10rem rgba(0, 0, 0, 0.1)'};
 			top: 100rem;
@@ -116,8 +116,11 @@ function buttonStyles(props){
 		}
 	`;
 }
+function isVisible(props){
+	return props['isVisible'] && !props['isMinimized'];
+}
 function boxOpacity(props) {
-	if( props['isVisible'] ){
+	if( isVisible(props) ){
 		if( props['inFocus'] ){
 			return '1';
 		}

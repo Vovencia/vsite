@@ -21,9 +21,19 @@ export class ReducerMethods {
 		return this.state;
 	}
 	setState(obj){
-		this.state = {
-			...this.state,
-			...obj,
+		let changed = false;
+		for(var key in obj){
+			if( obj[key] != this.state[key] ){
+				changed = true;
+				break;
+			}
+		}
+
+		if( changed ){
+			this.state = {
+				...this.state,
+				...obj,
+			}
 		}
 		stateSave("WindowsManager", this.state);
 	}
@@ -35,8 +45,6 @@ export class ReducerMethods {
 			...windowProps,
 			content: this.action.content,
 		}
-
-		console.log('newWindow', newWindow)
 
 		this.setState({
 			opened: this.state.opened.concat(newWindow)
